@@ -1,0 +1,767 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AppDesportiva.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ATS-Project</a> &gt; <a href="index.source.html" class="el_package">Projeto</a> &gt; <span class="el_source">AppDesportiva.java</span></div><h1>AppDesportiva.java</h1><pre class="source lang-java linenums">package Projeto;
+import java.io.*;
+import java.time.*;
+
+/**
+ * Classe AppDesportiva, que corresponde ao controller
+ *
+ * @author Grupo10
+ * @version 10/05/24
+ * Notas versão :
+ */
+public class AppDesportiva
+{
+    private GestorDesportivo model;
+    private Menu menuInicial, menuSetup, menuSimulacao, menuEstatisticas;
+    private LocalDate dataAtual;
+<span class="nc" id="L17">    private static String[] opcoesInicial = {&quot;Menu Inicial&quot;,&quot;Carregar estado&quot;, &quot;Novo estado&quot;, &quot;Sair&quot;};</span>
+<span class="nc" id="L18">    private static String[] opcoesSetup = {&quot;Menu Setup&quot;,&quot;Adicionar utilizador&quot;,&quot;Visualizar utilizador&quot;, &quot;Adicionar atividade&quot;, &quot;Registar execução de atividade&quot;, &quot;Adicionar atividade e registar execução&quot;,&quot;Visualizar atividade&quot;, &quot;Adicionar plano de treino&quot;, &quot;Registar execução de plano de treino&quot;, &quot;Adicionar plano de treino e registar execução&quot;,&quot;Visualizar plano de treino&quot;, &quot;Iniciar simulação&quot;, &quot;Guardar estado&quot;, &quot;Guardar e sair&quot;,&quot;Sair sem guardar&quot;};</span>
+<span class="nc" id="L19">    private static String[] opcoesSimulacao = {&quot;Menu Simulação&quot;, &quot;Avançar tempo&quot;,&quot;Consultar recordes&quot;, &quot;Consultar estatísticas&quot;, &quot;Mostrar todas as informações (todos os utilizadores e as suas atividades e planos de treino executados)&quot;, &quot;Voltar ao setup&quot;};</span>
+<span class="nc" id="L20">    private static String[] opcoesEstatisticas = {&quot;Estatísticas&quot;,&quot;Utilizador com mais calorias gastas&quot;, &quot;Utilizador com mais atividades realizadas&quot;, &quot;Atividade mais realizada&quot;, &quot;Total de kilómetros percorridos&quot;, &quot;Metros de altimetria acumulados&quot;, &quot;Plano de treino mais exigente&quot;, &quot;Atividades de um utilizador&quot;, &quot;Voltar&quot;};</span>
+    private String path;
+    
+    /**
+     * Construtor de AppDesportiva
+     */
+    public AppDesportiva()
+<span class="nc" id="L27">    {</span>
+<span class="nc" id="L28">        this.model = new GestorDesportivo();</span>
+<span class="nc" id="L29">        this.menuInicial = new Menu(AppDesportiva.opcoesInicial);</span>
+<span class="nc" id="L30">        this.menuSetup = new Menu(AppDesportiva.opcoesSetup);</span>
+<span class="nc" id="L31">        this.menuSimulacao = new Menu(AppDesportiva.opcoesSimulacao);</span>
+<span class="nc" id="L32">        this.menuEstatisticas = new Menu(AppDesportiva.opcoesEstatisticas);</span>
+<span class="nc" id="L33">        this.dataAtual = LocalDate.now();</span>
+<span class="nc" id="L34">        this.runInicial();</span>
+<span class="nc" id="L35">    }</span>
+    
+    /**
+     * Construtor de AppDesportiva quando é passado o nome do ficheiro a carregar
+     * @param nome do ficheiro
+     */
+    public AppDesportiva(String ficheiro)
+<span class="nc" id="L42">    {</span>
+<span class="nc" id="L43">        this.model = new GestorDesportivo();</span>
+<span class="nc" id="L44">        this.menuInicial = new Menu(AppDesportiva.opcoesInicial);</span>
+<span class="nc" id="L45">        this.menuSetup = new Menu(AppDesportiva.opcoesSetup);</span>
+<span class="nc" id="L46">        this.menuSimulacao = new Menu(AppDesportiva.opcoesSimulacao);</span>
+<span class="nc" id="L47">        this.menuEstatisticas = new Menu(AppDesportiva.opcoesEstatisticas);</span>
+<span class="nc" id="L48">        this.dataAtual = LocalDate.now();</span>
+        try{
+<span class="nc" id="L50">            this.model = this.model.carregaEstado(ficheiro);</span>
+<span class="nc" id="L51">            System.out.println(&quot;\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n&quot;);</span>
+<span class="nc" id="L52">            menuInicial.pedeString(&quot;Dados carregados com sucesso.\nEnter para continuar&quot;);</span>
+<span class="nc" id="L53">            this.model.estadoAtualizado();</span>
+<span class="nc" id="L54">            this.path = ficheiro;</span>
+<span class="nc" id="L55">            this.runSetup();</span>
+        }
+<span class="nc" id="L57">        catch (ClassNotFoundException clExc){</span>
+<span class="nc" id="L58">            System.out.println(&quot;\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n&quot;);</span>
+<span class="nc" id="L59">            menuInicial.pedeString(&quot;Não foi possível carregar os dados do ficheiro.\nEnter para continuar&quot;);</span>
+<span class="nc" id="L60">            this.runInicial();</span>
+        }
+<span class="nc" id="L62">        catch (IOException ioExc){</span>
+<span class="nc" id="L63">            System.out.println(&quot;\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n&quot;);</span>
+<span class="nc" id="L64">            menuInicial.pedeString(&quot;Não foi possível aceder ao ficheiro.\nEnter para continuar&quot;);</span>
+<span class="nc" id="L65">            this.runInicial();</span>
+<span class="nc" id="L66">        }</span>
+<span class="nc" id="L67">    }</span>
+    
+    /**
+     * Método auxiliar carregaDados
+     * @param menu atual
+     */
+    private int carregaDados(Menu menuAtual){
+<span class="nc" id="L74">        System.out.println(&quot;\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n&quot;);</span>
+<span class="nc" id="L75">        String ficheiro = menuAtual.pedeString(&quot;Insira o nome do ficheiro a carregar&quot;);</span>
+        try{
+<span class="nc" id="L77">            this.model = this.model.carregaEstado(ficheiro);</span>
+<span class="nc" id="L78">            this.model.estadoAtualizado();</span>
+<span class="nc" id="L79">            menuAtual.pedeString(&quot;Dados carregados com sucesso.\nEnter para continuar&quot;);</span>
+<span class="nc" id="L80">            this.path=ficheiro;</span>
+<span class="nc" id="L81">            return 0;</span>
+        }
+<span class="nc" id="L83">        catch (ClassNotFoundException clExc){</span>
+<span class="nc" id="L84">            menuAtual.pedeString(&quot;Não foi possível carregar os dados do ficheiro.\nEnter para continuar&quot;);</span>
+        }
+<span class="nc" id="L86">        catch (IOException ioExc){</span>
+<span class="nc" id="L87">            menuAtual.pedeString(&quot;Não foi possível aceder ao ficheiro.\nEnter para continuar&quot;);</span>
+<span class="nc" id="L88">        }</span>
+<span class="nc" id="L89">        return 1;</span>
+    }
+    
+    /**
+     * Método auxiliar guardaDados
+     * @param menu atual
+     */
+    private int guardaDados(Menu menuAtual){
+<span class="nc" id="L97">        System.out.println(&quot;\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n&quot;);</span>
+        try {
+<span class="nc" id="L99">            this.model.guardaEstado(this.path);</span>
+<span class="nc" id="L100">            menuAtual.pedeString(&quot;Estado guardado com sucesso.\nEnter para continuar&quot;);</span>
+<span class="nc" id="L101">            return 0;</span>
+        }
+<span class="nc" id="L103">        catch (IOException e){</span>
+<span class="nc" id="L104">            menuAtual.pedeString(&quot;Não foi possível aceder ao ficheiro.\nEnter para continuar&quot;);</span>
+        }
+<span class="nc" id="L106">        return 1;</span>
+    }
+    
+    /**
+     * Método auxiliar adicionaUser
+     * @param menu atual
+     */
+    private void adicionaUser(Menu menuAtual){
+<span class="nc" id="L114">        System.out.println(&quot;\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n&quot;);</span>
+<span class="nc" id="L115">        String nome = menuAtual.pedeString(&quot;Insira o nome do utilizador&quot;);</span>
+<span class="nc" id="L116">        String morada = menuAtual.pedeString(&quot;Insira a morada do utilizador&quot;);</span>
+<span class="nc" id="L117">        String email = menuAtual.pedeString(&quot;Insira o email do utilizador&quot;);</span>
+<span class="nc" id="L118">        int freqCardiaca = menuAtual.pedeInt(&quot;Insira a frequência cardíaca média do utilizador&quot;);</span>
+<span class="nc" id="L119">        int peso = menuAtual.pedeInt(&quot;Insira o peso do utilizador (em kilos)&quot;);</span>
+<span class="nc" id="L120">        int altura = menuAtual.pedeInt(&quot;Insira a altura do utilizador (em centímetros)&quot;);</span>
+<span class="nc" id="L121">        LocalDate dataNascimento = menuAtual.pedeData(&quot;Insira a data de nascimento do utilizador (dia/mês/ano)&quot;);</span>
+<span class="nc" id="L122">        char genero = menuAtual.pedeString(&quot;Insira o género do utilizador: M ou F&quot;).charAt(0);</span>
+<span class="nc bnc" id="L123" title="All 4 branches missed.">        while(genero!='M'&amp;&amp;genero!='F'){</span>
+<span class="nc" id="L124">            genero = menuAtual.pedeString(&quot;Insira o género do utilizador: M ou F&quot;).charAt(0);</span>
+        }
+<span class="nc" id="L126">        int tipo = menuAtual.pedeInt(&quot;Insira o tipo de utilizador:\n1: Utilizador amador\n2: Utilizador praticante ocasional\n3: Utilizador profissional&quot;);</span>
+<span class="nc bnc" id="L127" title="All 4 branches missed.">        while(tipo&lt;1||tipo&gt;3){</span>
+<span class="nc" id="L128">            tipo = menuAtual.pedeInt(&quot;Insira o tipo de utilizador:\n1: Utilizador amador\n2: Utilizador praticante ocasional\n3: Utilizador profissional&quot;);</span>
+        }
+<span class="nc" id="L130">        int cod = model.addUtilizador(nome, morada, email, freqCardiaca, peso, altura, dataNascimento, genero, tipo);</span>
+<span class="nc" id="L131">        System.out.print(&quot;Utilizador adicionado com sucesso.\nCódigo do utilizador adicionado: &quot;);</span>
+<span class="nc" id="L132">        System.out.println(cod);</span>
+<span class="nc" id="L133">        menuAtual.pedeString(&quot;Enter para continuar&quot;);</span>
+<span class="nc" id="L134">    }</span>
+    
+    private void mostraUser(Menu menuAtual){
+<span class="nc" id="L137">        System.out.println(&quot;\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n&quot;);</span>
+<span class="nc" id="L138">        int codigo = menuAtual.pedeInt(&quot;Insira o codigo do utilizador&quot;);</span>
+<span class="nc" id="L139">        String s = model.showUtilizador(codigo);</span>
+<span class="nc" id="L140">        System.out.println(&quot;\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n&quot;);</span>
+<span class="nc" id="L141">        System.out.print(s);</span>
+<span class="nc" id="L142">        menuAtual.pedeString(&quot;Enter para continuar&quot;);</span>
+<span class="nc" id="L143">    }</span>
+    
+    private void mostraAtividade(Menu menuAtual){
+<span class="nc" id="L146">        System.out.println(&quot;\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n&quot;);</span>
+<span class="nc" id="L147">        int codigo = menuAtual.pedeInt(&quot;Insira o codigo da atividade&quot;);</span>
+<span class="nc" id="L148">        String s = model.showAtividade(codigo);</span>
+<span class="nc" id="L149">        System.out.println(&quot;\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n&quot;);</span>
+<span class="nc" id="L150">        System.out.print(s);</span>
+<span class="nc" id="L151">        menuAtual.pedeString(&quot;Enter para continuar&quot;);</span>
+<span class="nc" id="L152">    }</span>
+    
+    private void mostraPlanoTreino(Menu menuAtual){
+<span class="nc" id="L155">        System.out.println(&quot;\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n&quot;);</span>
+<span class="nc" id="L156">        int codigo = menuAtual.pedeInt(&quot;Insira o codigo do plano de treino&quot;);</span>
+<span class="nc" id="L157">        String s = model.showPlanoTreino(codigo);</span>
+<span class="nc" id="L158">        System.out.println(&quot;\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n&quot;);</span>
+<span class="nc" id="L159">        System.out.print(s);</span>
+<span class="nc" id="L160">        menuAtual.pedeString(&quot;Enter para continuar&quot;);</span>
+<span class="nc" id="L161">    }</span>
+    
+    /**
+     * Método auxiliar addAtividade
+     * @param menu atual
+     */
+    private int addAtividade(Menu menuAtual){
+<span class="nc" id="L168">        System.out.println(&quot;\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n&quot;);</span>
+<span class="nc" id="L169">        int tipoAtiv = menuAtual.pedeInt(&quot;Insira o tipo da atividade:\n1: Corrida\n2: Ciclismo\n3: Trail\n4: Btt\n5: Flexões\n6: Abdominais\n7: Leg Press\n8: Bench Press\n9: Bicep Curls&quot;);</span>
+<span class="nc bnc" id="L170" title="All 4 branches missed.">        if(tipoAtiv&lt;1||tipoAtiv&gt;9){</span>
+<span class="nc" id="L171">            tipoAtiv = menuAtual.pedeInt(&quot;Insira o tipo da atividade:\n1: Corrida\n2: Ciclismo\n3: Trail\n4: Btt\n5: Flexões\n6: Abdominais\n7: Leg Press\n8: Bench Press\n9: Bicep Curls&quot;);</span>
+        }
+<span class="nc" id="L173">        LocalDateTime realizacao = menuAtual.pedeDataHora(&quot;Insira a data e hora de realização (dia/mês/ano horas:minutos:segundos)&quot;);</span>
+<span class="nc" id="L174">        LocalTime tempo = menuAtual.pedeTempo(&quot;Insira o tempo de realização horas:minutos:segundos&quot;);</span>
+<span class="nc" id="L175">        int freq = menuAtual.pedeInt(&quot;Insira a frequência cardíaca média durante a realização&quot;);</span>
+        int id;
+<span class="nc bnc" id="L177" title="All 2 branches missed.">        if(tipoAtiv&lt;=4){</span>
+<span class="nc" id="L178">                double dist = menuAtual.pedeDouble(&quot;Insira a distância percorrida (em metros)&quot;);</span>
+<span class="nc bnc" id="L179" title="All 2 branches missed.">                if(tipoAtiv&lt;=2) id = this.model.addAtivDist(realizacao, tempo, freq, dist, tipoAtiv);</span>
+                else{
+<span class="nc" id="L181">                    double alt = menuAtual.pedeDouble(&quot;Insira os metros de altimetria&quot;);</span>
+<span class="nc" id="L182">                    id = this.model.addAtivDistAlt(realizacao, tempo, freq, dist, alt, tipoAtiv);</span>
+                }
+<span class="nc" id="L184">        }</span>
+        else{
+<span class="nc" id="L186">                int reps = menuAtual.pedeInt(&quot;Insira o número de repetições&quot;);</span>
+<span class="nc bnc" id="L187" title="All 2 branches missed.">                if(tipoAtiv&lt;=6) id = this.model.addAtivRep(realizacao, tempo, freq, reps, tipoAtiv);</span>
+                else{
+<span class="nc" id="L189">                    double peso = menuAtual.pedeDouble(&quot;Insira o peso utilizado (em kilos)&quot;);</span>
+<span class="nc" id="L190">                    id = this.model.addAtivRepsPeso(realizacao, tempo, freq, reps, peso, tipoAtiv);</span>
+                }
+        }
+<span class="nc" id="L193">        System.out.print(&quot;Atividade adicionada com sucesso.\nCódigo da atividade adicionada: &quot;);</span>
+<span class="nc" id="L194">        System.out.println(id);</span>
+<span class="nc" id="L195">        menuSetup.pedeString(&quot;Enter para continuar&quot;);</span>
+<span class="nc" id="L196">        return id;</span>
+    }
+    
+    /**
+     * Método auxiliar registaAtividade
+     * @param menu atual
+     */
+    private void registaAtividade(Menu menuAtual){
+<span class="nc" id="L204">        System.out.println(&quot;\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n&quot;);</span>
+<span class="nc" id="L205">        int codUtilizador = menuAtual.pedeInt(&quot;Insira o código do utilizador&quot;);</span>
+<span class="nc bnc" id="L206" title="All 2 branches missed.">        if (!model.existeUtilizador(codUtilizador)){</span>
+<span class="nc" id="L207">                menuAtual.pedeString(&quot;Utilizador não existe.\nEnter para continuar&quot;);</span>
+<span class="nc" id="L208">                return;</span>
+        }
+<span class="nc" id="L210">        int codAtividade = menuAtual.pedeInt(&quot;Insira o código da atividade&quot;);</span>
+<span class="nc bnc" id="L211" title="All 2 branches missed.">        if (!model.existeAtividade(codAtividade)){</span>
+<span class="nc" id="L212">                menuAtual.pedeString(&quot;Atividade não existe.\nEnter para continuar&quot;);</span>
+<span class="nc" id="L213">                return;</span>
+        }
+<span class="nc" id="L215">        model.registaAtividade(codUtilizador, codAtividade);</span>
+<span class="nc" id="L216">        menuAtual.pedeString(&quot;Atividade registada com sucesso.\nEnter para continuar&quot;);</span>
+<span class="nc" id="L217">    }</span>
+    
+    /**
+     * Método auxiliar addRegistaAtividade
+     * @param menu atual
+     */
+    private int addRegistaAtividade(Menu menuAtual){
+<span class="nc" id="L224">        System.out.println(&quot;\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n&quot;);</span>
+<span class="nc" id="L225">        int id = addAtividade(menuAtual);</span>
+<span class="nc" id="L226">        int codUtilizador = menuAtual.pedeInt(&quot;Insira o código do utilizador&quot;);</span>
+<span class="nc bnc" id="L227" title="All 2 branches missed.">        while (!model.existeUtilizador(codUtilizador)){</span>
+<span class="nc" id="L228">                menuAtual.pedeString(&quot;Utilizador não existe.\nEnter para continuar&quot;);</span>
+<span class="nc" id="L229">                return 0;</span>
+        }
+<span class="nc" id="L231">        menuAtual.pedeString(&quot;Atividade registada com sucesso.\nEnter para continuar&quot;);</span>
+<span class="nc" id="L232">        model.registaAtividade(codUtilizador, id);</span>
+<span class="nc" id="L233">        return id;</span>
+    }
+    
+    /**
+     * Método auxiliar adicionaAtividadePlano
+     */
+    private void adicionaAtividadePlano(Menu menuAtual, int id_plano, LocalDate data){
+<span class="nc" id="L240">        System.out.println(&quot;\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n&quot;);</span>
+<span class="nc" id="L241">        int tipoAtiv = menuAtual.pedeInt(&quot;Insira o tipo da atividade:\n1: Corrida\n2: Ciclismo\n3: Trail\n4: Btt\n5: Flexões\n6: Abdominais\n7: Leg Press\n8: Bench Press\n9: Bicep Curls&quot;);</span>
+<span class="nc bnc" id="L242" title="All 4 branches missed.">        if(tipoAtiv&lt;1||tipoAtiv&gt;9){</span>
+<span class="nc" id="L243">            tipoAtiv = menuAtual.pedeInt(&quot;Insira o tipo da atividade:\n1: Corrida\n2: Ciclismo\n3: Trail\n4: Btt\n5: Flexões\n6: Abdominais\n7: Leg Press\n8: Bench Press\n9: Bicep Curls&quot;);</span>
+        }
+<span class="nc" id="L245">        LocalDateTime realizacao = menuAtual.pedeDataHora(&quot;Insira a data e hora de realização (dia/mês/ano horas:minutos:segundos)&quot;);</span>
+<span class="nc bnc" id="L246" title="All 4 branches missed.">        while(realizacao.isBefore(data.atStartOfDay())||realizacao.isAfter(data.plusWeeks(1).atTime(23,59))){</span>
+<span class="nc" id="L247">            realizacao = menuAtual.pedeDataHora(&quot;Data de realização tem de estar na semana do plano de treino&quot;);</span>
+        }
+<span class="nc" id="L249">        LocalTime tempo = menuAtual.pedeTempo(&quot;Insira o tempo de realização horas:minutos:segundos&quot;);</span>
+<span class="nc" id="L250">        int freq = menuAtual.pedeInt(&quot;Insira a frequência cardíaca média durante a realização&quot;);</span>
+<span class="nc" id="L251">        int iter = menuAtual.pedeInt(&quot;Insira o número de iterações da atividade&quot;);</span>
+<span class="nc bnc" id="L252" title="All 2 branches missed.">        if(tipoAtiv&lt;=4){</span>
+<span class="nc" id="L253">                double dist = menuAtual.pedeDouble(&quot;Insira a distância percorrida (em metros)&quot;);</span>
+<span class="nc bnc" id="L254" title="All 2 branches missed.">                if(tipoAtiv&lt;=2) this.model.addAtivDistPlano(id_plano, iter, realizacao, tempo, freq, dist, tipoAtiv);</span>
+                else{
+<span class="nc" id="L256">                    double alt = menuAtual.pedeDouble(&quot;Insira os metros de altimetria&quot;);</span>
+<span class="nc" id="L257">                    this.model.addAtivDistAltPlano(id_plano, iter, realizacao, tempo, freq, dist, alt, tipoAtiv);</span>
+                }
+<span class="nc" id="L259">        }</span>
+        else{
+<span class="nc" id="L261">                int reps = menuAtual.pedeInt(&quot;Insira o número de repetições&quot;);</span>
+<span class="nc bnc" id="L262" title="All 2 branches missed.">                if(tipoAtiv&lt;=6) this.model.addAtivRepPlano(id_plano, iter,realizacao, tempo, freq, reps, tipoAtiv);</span>
+                else{
+<span class="nc" id="L264">                    double peso = menuAtual.pedeDouble(&quot;Insira o peso utilizado (em kilos)&quot;);</span>
+<span class="nc" id="L265">                    this.model.addAtivRepsPesoPlano(id_plano, iter,realizacao, tempo, freq, reps, peso, tipoAtiv);</span>
+                }
+        }
+<span class="nc" id="L268">        menuAtual.pedeString(&quot;Atividade adicionada com sucesso.\nEnter para continuar&quot;);</span>
+<span class="nc" id="L269">    }</span>
+    
+    private int addPlano(Menu menuAtual){
+<span class="nc" id="L272">        System.out.println(&quot;\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n&quot;);</span>
+<span class="nc" id="L273">        LocalDate dataRealizacao = menuAtual.pedeData(&quot;Insira a data de início do plano de treino (segunda feira)&quot;);</span>
+<span class="nc bnc" id="L274" title="All 2 branches missed.">        while(dataRealizacao.getDayOfWeek()!=DayOfWeek.MONDAY){</span>
+<span class="nc" id="L275">            dataRealizacao = menuAtual.pedeData(&quot;Insira a data de início do plano de treino (segunda feira)&quot;);</span>
+        }
+<span class="nc" id="L277">        int id = this.model.addPlanoTreino(dataRealizacao);</span>
+<span class="nc" id="L278">        int nAtividades = menuAtual.pedeInt(&quot;Insira o número de atividades a colocar no plano de treino&quot;);</span>
+<span class="nc bnc" id="L279" title="All 2 branches missed.">        while(nAtividades&gt;0){</span>
+<span class="nc" id="L280">            this.adicionaAtividadePlano(menuAtual, id, dataRealizacao);</span>
+<span class="nc" id="L281">            nAtividades--;</span>
+        }
+<span class="nc" id="L283">        System.out.print(&quot;Plano de treino adicionado com sucesso.\nCódigo do plano adicionado: &quot;);</span>
+<span class="nc" id="L284">        System.out.println(id);</span>
+<span class="nc" id="L285">        menuSetup.pedeString(&quot;Enter para continuar&quot;);</span>
+<span class="nc" id="L286">        return id;</span>
+    }
+    
+    private void registaPlano(Menu menuAtual){
+<span class="nc" id="L290">        System.out.println(&quot;\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n&quot;);</span>
+<span class="nc" id="L291">        int codUtilizador = menuAtual.pedeInt(&quot;Insira o código do utilizador&quot;);</span>
+<span class="nc bnc" id="L292" title="All 2 branches missed.">        if (!model.existeUtilizador(codUtilizador)){</span>
+<span class="nc" id="L293">                menuAtual.pedeString(&quot;Utilizador não existe.\nEnter para continuar&quot;);</span>
+<span class="nc" id="L294">                return;</span>
+        }
+<span class="nc" id="L296">        int codPlano = menuAtual.pedeInt(&quot;Insira o código do plano de treino&quot;);</span>
+<span class="nc bnc" id="L297" title="All 2 branches missed.">        if (!model.existePlano(codPlano)){</span>
+<span class="nc" id="L298">                menuAtual.pedeString(&quot;Plano de treino não existe.\nEnter para continuar&quot;);</span>
+<span class="nc" id="L299">                return;</span>
+        }
+<span class="nc" id="L301">        model.registaPlanoTreino(codUtilizador, codPlano);</span>
+<span class="nc" id="L302">        menuAtual.pedeString(&quot;Plano de treino registado com sucesso.\nEnter para continuar&quot;);</span>
+<span class="nc" id="L303">    }</span>
+    
+    /**
+     * Método auxiliar addRegistaPlano
+     * @param menu atual
+     */
+    private int addRegistaPlano(Menu menuAtual){
+<span class="nc" id="L310">        System.out.println(&quot;\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n&quot;);</span>
+<span class="nc" id="L311">        int codUtilizador = menuAtual.pedeInt(&quot;Insira o código do utilizador&quot;);</span>
+<span class="nc bnc" id="L312" title="All 2 branches missed.">        if (!model.existeUtilizador(codUtilizador)){</span>
+<span class="nc" id="L313">                menuAtual.pedeString(&quot;Utilizador não existe.\nEnter para continuar&quot;);</span>
+<span class="nc" id="L314">                return 0;</span>
+        }
+<span class="nc" id="L316">        int id = addPlano(menuAtual);</span>
+<span class="nc" id="L317">        model.registaPlanoTreino(codUtilizador, id);</span>
+<span class="nc" id="L318">        return id;</span>
+    }
+
+    private boolean existeAtiv(int ativ[],int tipo){
+<span class="nc" id="L322">        boolean res = false;</span>
+        int i;
+<span class="nc bnc" id="L324" title="All 2 branches missed.">        for (i=0; i&lt;ativ.length; i++){</span>
+<span class="nc bnc" id="L325" title="All 2 branches missed.">            if(ativ[i] == tipo){</span>
+<span class="nc" id="L326">                res= true;</span>
+<span class="nc" id="L327">                break;</span>
+            }
+        }
+<span class="nc" id="L330">        return res;</span>
+    }
+    
+    /**
+     * Método geraPlanoTreino()
+     * Não acabado
+     */
+    private void geraPlanoTreino(){
+<span class="nc" id="L338">            System.out.println(&quot;\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n&quot;);</span>
+<span class="nc" id="L339">            int codUtilizador = menuSetup.pedeInt(&quot;Insira o código do utilizador&quot;);</span>
+<span class="nc bnc" id="L340" title="All 2 branches missed.">            while (!model.existeUtilizador(codUtilizador)){</span>
+<span class="nc" id="L341">                menuSetup.pedeString(&quot;Utilizador não existe.\nEnter para continuar&quot;);</span>
+            }
+<span class="nc" id="L343">            int ativ[] = new int[9];</span>
+<span class="nc" id="L344">            int i = 0;</span>
+<span class="nc" id="L345">            int tipoAtiv = menuSetup.pedeInt(&quot;Insira o tipo de atividade a incluir:\n1: Corrida\n2: Ciclismo\n3: Trail\n4: Btt\n5: Flexões\n6: Abdominais\n7: Leg Press\n8: Bench Press\n9: Bicep Curls&quot;);</span>
+<span class="nc bnc" id="L346" title="All 4 branches missed.">            while(tipoAtiv&lt;1||tipoAtiv&gt;9){</span>
+<span class="nc" id="L347">                tipoAtiv = menuSetup.pedeInt(&quot;Insira o tipo de atividade a incluir:\n1: Corrida\n2: Ciclismo\n3: Trail\n4: Btt\n5: Flexões\n6: Abdominais\n7: Leg Press\n8: Bench Press\n9: Bicep Curls&quot;);</span>
+            }
+<span class="nc bnc" id="L349" title="All 2 branches missed.">            while(tipoAtiv!=0){</span>
+<span class="nc" id="L350">                ativ[i] = tipoAtiv; i++;</span>
+<span class="nc" id="L351">                tipoAtiv = menuSetup.pedeInt(&quot;Insira o tipo de atividade (não repetida) a incluir:\n1: Corrida\n2: Ciclismo\n3: Trail\n4: Btt\n5: Flexões\n6: Abdominais\n7: Leg Press\n8: Bench Press\n9: Bicep Curls\n0: Nenhum&quot;);</span>
+<span class="nc bnc" id="L352" title="All 6 branches missed.">                while(tipoAtiv&lt;0||tipoAtiv&gt;9 &amp;&amp; !existeAtiv(ativ, tipoAtiv) ){</span>
+<span class="nc" id="L353">                        tipoAtiv = menuSetup.pedeInt(&quot;Insira o tipo de atividade (não repetida) a incluir:\n1: Corrida\n2: Ciclismo\n3: Trail\n4: Btt\n5: Flexões\n6: Abdominais\n7: Leg Press\n8: Bench Press\n9: Bicep Curls\n0: Nenhum&quot;);</span>
+                }
+            }
+<span class="nc" id="L356">            int maxAtivDia = menuSetup.pedeInt(&quot;Insira o número máximo de atividades por dia&quot;);            </span>
+<span class="nc" id="L357">            int ativPorSemana = menuSetup.pedeInt(&quot;Insira o número de atividades a realizar por semana&quot;);        </span>
+<span class="nc" id="L358">            double consumoCaloricoMinimo = menuSetup.pedeDouble(&quot;Insira o consumo calórico mínimo pretendido&quot;); </span>
+<span class="nc" id="L359">            LocalDate dataRealizacao = menuSetup.pedeData(&quot;Insira a data de início do plano de treino (segunda feira)&quot;);</span>
+<span class="nc bnc" id="L360" title="All 2 branches missed.">            while(dataRealizacao.getDayOfWeek()!=DayOfWeek.MONDAY){</span>
+<span class="nc" id="L361">                dataRealizacao = menuSetup.pedeData(&quot;Insira a data de início do plano de treino (segunda feira)&quot;);</span>
+            }
+<span class="nc" id="L363">            this.model.geraPlanoTreinoUtilizador(codUtilizador, ativ, maxAtivDia, ativPorSemana, consumoCaloricoMinimo, dataRealizacao);</span>
+<span class="nc" id="L364">            menuSetup.pedeString(&quot;Plano de treino gerado com sucesso.\nEnter para continuar&quot;);</span>
+<span class="nc" id="L365">    }</span>
+    
+    public void estatisticaEntreDatas(int op){
+        LocalDate dataInicial;
+        LocalDate dataFinal;
+<span class="nc" id="L370">        int d = 0;</span>
+<span class="nc bnc" id="L371" title="All 4 branches missed.">        while(d!=1&amp;&amp;d!=2){</span>
+<span class="nc" id="L372">            d = this.menuEstatisticas.pedeInt(&quot;1: Desde sempre\n2: Entre datas&quot;);</span>
+        }
+<span class="nc bnc" id="L374" title="All 2 branches missed.">        if(d==1){</span>
+<span class="nc" id="L375">            dataInicial = LocalDate.MIN;</span>
+<span class="nc" id="L376">            dataFinal = this.dataAtual;</span>
+        }
+        else{
+<span class="nc" id="L379">            dataInicial = this.menuEstatisticas.pedeData(&quot;Insira data inicial (dia/mês/ano)&quot;);</span>
+<span class="nc" id="L380">            dataFinal = this.menuEstatisticas.pedeData(&quot;Insira data final (dia/mês/ano)&quot;);</span>
+        }
+<span class="nc" id="L382">        System.out.println(&quot;\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n&quot;);</span>
+<span class="nc bnc" id="L383" title="All 4 branches missed.">        switch (op){</span>
+                case 1:
+<span class="nc" id="L385">                Utilizador res = this.model.maisCaloriasGastas(dataInicial,dataFinal);</span>
+<span class="nc" id="L386">                System.out.println(res.toString());</span>
+<span class="nc" id="L387">                break;</span>
+            case 2:
+<span class="nc" id="L389">                Utilizador user = this.model.maisAtividades(dataInicial,dataFinal);</span>
+<span class="nc" id="L390">                System.out.println(user.toString());</span>
+<span class="nc" id="L391">                break;</span>
+            case 6:
+<span class="nc" id="L393">                PlanoTreino plano = this.model.planoTreinoMaisCalorias(dataFinal);</span>
+<span class="nc bnc" id="L394" title="All 2 branches missed.">                if (plano != null)</span>
+<span class="nc" id="L395">                System.out.println(plano.toString());</span>
+                break;
+        }
+<span class="nc" id="L398">        menuEstatisticas.pedeString(&quot;Enter para continuar&quot;);</span>
+<span class="nc" id="L399">    }</span>
+    
+    public void estatisticaUtilizadorEntreDatas(int op){
+<span class="nc" id="L402">        int codUser = menuEstatisticas.pedeInt(&quot;Insira o código do utilizador&quot;);</span>
+<span class="nc bnc" id="L403" title="All 2 branches missed.">        if (!model.existeUtilizador(codUser)){</span>
+<span class="nc" id="L404">                menuEstatisticas.pedeString(&quot;Utilizador não existe.\nEnter para continuar&quot;);</span>
+<span class="nc" id="L405">                return;</span>
+        }
+        LocalDate dataInicial;
+        LocalDate dataFinal;
+<span class="nc" id="L409">        int d = 0;</span>
+<span class="nc bnc" id="L410" title="All 4 branches missed.">        while(d!=1&amp;&amp;d!=2){</span>
+<span class="nc" id="L411">            d = this.menuEstatisticas.pedeInt(&quot;1: Desde sempre\n2: Entre datas&quot;);</span>
+        }
+<span class="nc bnc" id="L413" title="All 2 branches missed.">        if(d==1){</span>
+<span class="nc" id="L414">            dataInicial = LocalDate.MIN;</span>
+<span class="nc" id="L415">            dataFinal = this.dataAtual;</span>
+        }
+        else{
+<span class="nc" id="L418">            dataInicial = this.menuEstatisticas.pedeData(&quot;Insira data inicial (dia/mês/ano)&quot;);</span>
+<span class="nc" id="L419">            dataFinal = this.menuEstatisticas.pedeData(&quot;Insira data final (dia/mês/ano)&quot;);</span>
+        }
+<span class="nc" id="L421">        System.out.println(&quot;\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n&quot;);</span>
+<span class="nc bnc" id="L422" title="All 3 branches missed.">        switch (op){</span>
+            case 4:
+<span class="nc" id="L424">                double kms = model.kmsPercorridos(codUser, dataInicial, dataFinal);</span>
+<span class="nc" id="L425">                System.out.print(kms);</span>
+<span class="nc" id="L426">                System.out.println(&quot; kilómetros\n&quot;);</span>
+<span class="nc" id="L427">                break;</span>
+            case 5:
+<span class="nc" id="L429">                double metros = model.metrosAltimetria(codUser, dataInicial, dataFinal);</span>
+<span class="nc" id="L430">                System.out.print(metros);</span>
+<span class="nc" id="L431">                System.out.println(&quot; metros\n&quot;);</span>
+                break;
+        }
+<span class="nc" id="L434">        menuEstatisticas.pedeString(&quot;Enter para continuar&quot;);</span>
+<span class="nc" id="L435">    }</span>
+    
+    /**
+     * Método runInicial, que executa o menu inicial, lê e trata as opções escolhidas
+     */
+    public void runInicial(){
+<span class="nc" id="L441">        menuInicial.runMenu();</span>
+<span class="nc" id="L442">        int op = menuInicial.getOpcao();</span>
+<span class="nc bnc" id="L443" title="All 2 branches missed.">        while (op!=0){</span>
+<span class="nc bnc" id="L444" title="All 3 branches missed.">            switch (op){ </span>
+                case 1 :   //opção &quot;Carregar estado&quot;
+<span class="nc" id="L446">                    int carregar = this.carregaDados(menuInicial);</span>
+<span class="nc bnc" id="L447" title="All 2 branches missed.">                    if (carregar == 1) break;</span>
+<span class="nc" id="L448">                    int ext = this.runSetup();</span>
+<span class="nc bnc" id="L449" title="All 2 branches missed.">                    if (ext==1) op=0;</span>
+<span class="nc" id="L450">                    op=0;</span>
+<span class="nc" id="L451">                    break;</span>
+                case 2 :    //opção &quot;Novo estado&quot;
+<span class="nc" id="L453">                    String ficheiro = menuInicial.pedeString(&quot;Insira o nome do ficheiro onde guardar o estado&quot;);</span>
+<span class="nc" id="L454">                    this.path=ficheiro;</span>
+                    try {
+<span class="nc" id="L456">                        this.model.guardaEstado(this.path);</span>
+                    }
+<span class="nc" id="L458">                    catch (IOException e){</span>
+<span class="nc" id="L459">                        menuInicial.pedeString(&quot;Não foi possível aceder ao ficheiro.\nEnter para continuar&quot;);</span>
+<span class="nc" id="L460">                        break;</span>
+<span class="nc" id="L461">                    }</span>
+<span class="nc" id="L462">                    int exit = this.runSetup();</span>
+<span class="nc bnc" id="L463" title="All 2 branches missed.">                    if (exit==1) op=0;</span>
+                    break;
+            }
+<span class="nc bnc" id="L466" title="All 2 branches missed.">            if(op!=0){</span>
+<span class="nc" id="L467">                menuInicial.runMenu();</span>
+<span class="nc" id="L468">                op = menuInicial.getOpcao();</span>
+            }
+        }
+<span class="nc" id="L471">        System.out.println(&quot;\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n&quot;);</span>
+<span class="nc" id="L472">        System.out.println(&quot;Programa encerrado&quot;);</span>
+<span class="nc" id="L473">    }</span>
+    
+    /**
+     * Método runSetup, que executa o menu onde são adicionados os utilizadores, atividades e planos de treino
+     */
+    public int runSetup(){
+<span class="nc" id="L479">        menuSetup.runMenu();</span>
+<span class="nc" id="L480">        int op = menuSetup.getOpcao();</span>
+<span class="nc bnc" id="L481" title="All 2 branches missed.">        while (op!=0){ </span>
+<span class="nc bnc" id="L482" title="All 14 branches missed.">            switch (op){</span>
+                case 1 :    //opção &quot;Adicionar utilizador&quot;
+<span class="nc" id="L484">                    this.adicionaUser(menuSetup);</span>
+<span class="nc" id="L485">                    break;</span>
+                case 2 :
+<span class="nc" id="L487">                    this.mostraUser(menuSetup);</span>
+<span class="nc" id="L488">                    break;</span>
+                case 3 :    //opção &quot;Adicionar atividade&quot;
+<span class="nc" id="L490">                    this.addAtividade(menuSetup);</span>
+<span class="nc" id="L491">                    break;</span>
+                case 4 :    //opção &quot;Registar execução de atividade&quot;
+<span class="nc" id="L493">                    this.registaAtividade(menuSetup);</span>
+<span class="nc" id="L494">                    break;</span>
+                case 5 :    //opção &quot;Adicionar atividade e registar execução&quot;
+<span class="nc" id="L496">                    this.addRegistaAtividade(menuSetup);</span>
+<span class="nc" id="L497">                    break;</span>
+                case 6 :
+<span class="nc" id="L499">                    this.mostraAtividade(menuSetup);</span>
+<span class="nc" id="L500">                    break;</span>
+                case 7 :    //opção &quot;Adicionar plano de treino&quot;
+<span class="nc" id="L502">                    this.addPlano(menuSetup);</span>
+<span class="nc" id="L503">                    break;</span>
+                case 8 :    //opção &quot;Registar execução de plano de treino&quot;
+<span class="nc" id="L505">                    this.registaPlano(menuSetup);</span>
+<span class="nc" id="L506">                    break;</span>
+                case 9 :    //opção &quot;Adicionar plano de treino e registar execução&quot;
+<span class="nc" id="L508">                    int codPlano = this.addRegistaPlano(menuSetup);</span>
+<span class="nc" id="L509">                    break;</span>
+                case 10 :
+<span class="nc" id="L511">                    this.mostraPlanoTreino(menuSetup);</span>
+<span class="nc" id="L512">                    break;</span>
+                case 11 :    //opção &quot;Iniciar simulação&quot;
+<span class="nc" id="L514">                    int d = 0;</span>
+<span class="nc bnc" id="L515" title="All 4 branches missed.">                    while(d!=1&amp;&amp;d!=2){</span>
+<span class="nc" id="L516">                        d = this.menuSetup.pedeInt(&quot;1: Escolher data\n2: Utilizar data do sistema&quot;);</span>
+                    }
+<span class="nc bnc" id="L518" title="All 2 branches missed.">                    if(d==1) this.dataAtual = this.menuSetup.pedeData(&quot;Insira a data (dia/mês/ano)&quot;);</span>
+<span class="nc" id="L519">                    this.model.atualizaInfo(this.dataAtual);</span>
+<span class="nc" id="L520">                    this.runSimulacao();</span>
+<span class="nc" id="L521">                    break;</span>
+                case 12 :    //opção &quot;Guardar estado&quot;
+<span class="nc" id="L523">                    this.guardaDados(menuSetup);</span>
+<span class="nc" id="L524">                    break;</span>
+                case 13 :    //opção &quot;Guardar e sair&quot;
+<span class="nc" id="L526">                    int guardar = this.guardaDados(menuSetup);</span>
+<span class="nc bnc" id="L527" title="All 2 branches missed.">                    if (guardar == 1) break;</span>
+<span class="nc" id="L528">                    op=0;</span>
+                    break;
+            }
+<span class="nc bnc" id="L531" title="All 2 branches missed.">            if(op!=0){</span>
+<span class="nc" id="L532">                menuSetup.runMenu();</span>
+<span class="nc" id="L533">                op = menuSetup.getOpcao();</span>
+            }
+        }
+<span class="nc" id="L536">        System.out.println(&quot;\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n&quot;);</span>
+<span class="nc" id="L537">        System.out.println(&quot;Programa encerrado&quot;);</span>
+<span class="nc" id="L538">        return 1;</span>
+    }
+    
+    /**
+     * Método runSimulacao que executa o menu depois de iniciada a simulação
+     */
+    public void runSimulacao(){
+<span class="nc" id="L545">        menuSimulacao.runMenu();</span>
+<span class="nc" id="L546">        System.out.print(&quot;Data atual da simulação: &quot;);</span>
+<span class="nc" id="L547">        System.out.println(this.dataAtual.toString());</span>
+<span class="nc" id="L548">        int op = menuSimulacao.getOpcao();</span>
+<span class="nc bnc" id="L549" title="All 2 branches missed.">        while (op!=0){</span>
+<span class="nc bnc" id="L550" title="All 5 branches missed.">            switch (op){</span>
+                case 1 :    //opção &quot;Avançar tempo&quot;
+<span class="nc" id="L552">                    int d = 0;</span>
+<span class="nc bnc" id="L553" title="All 4 branches missed.">                    while(d!=1&amp;&amp;d!=2){</span>
+<span class="nc" id="L554">                        d = this.menuSimulacao.pedeInt(&quot;1: Escolher data para a qual avançar\n2: Inserir número de dias a avançar&quot;);</span>
+                    }
+<span class="nc bnc" id="L556" title="All 2 branches missed.">                    if(d==1) this.dataAtual = this.menuSimulacao.pedeData(&quot;Insira a data (dia/mês/ano)&quot;);</span>
+<span class="nc" id="L557">                    else this.dataAtual = this.dataAtual.plusDays(this.menuSimulacao.pedeInt(&quot;Insira o número de dias a avançar&quot;));</span>
+<span class="nc" id="L558">                    this.model.atualizaInfo(this.dataAtual);</span>
+<span class="nc" id="L559">                    break;</span>
+                case 2 :    //opção &quot;Consultar recordes&quot;
+<span class="nc" id="L561">                    System.out.println(&quot;\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n&quot;);</span>
+<span class="nc" id="L562">                    int tipoAtiv = menuSimulacao.pedeInt(&quot;Insira o tipo da atividade:\n1: Corrida\n2: Ciclismo\n3: Trail\n4: Btt\n5: Flexões\n6: Abdominais\n7: Leg Press\n8: Bench Press\n9: Bicep Curls&quot;);</span>
+<span class="nc bnc" id="L563" title="All 4 branches missed.">                    if(tipoAtiv&lt;1||tipoAtiv&gt;9){</span>
+<span class="nc" id="L564">                        tipoAtiv = menuSimulacao.pedeInt(&quot;Insira o tipo da atividade:\n1: Corrida\n2: Ciclismo\n3: Trail\n4: Btt\n5: Flexões\n6: Abdominais\n7: Leg Press\n8: Bench Press\n9: Bicep Curls&quot;);</span>
+                    }
+                    Class&lt;?&gt; classe;
+                    double calorias;
+                    double kms;
+                    int tempo;
+                    double velocidade;
+                    double altimetria;
+                    int rep;
+                    double peso;
+<span class="nc bnc" id="L574" title="All 10 branches missed.">                    switch(tipoAtiv) {</span>
+                        case 1:
+<span class="nc" id="L576">                            System.out.println(&quot;\nRecords das atividades do tipo Corrida:&quot;);</span>
+<span class="nc" id="L577">                            System.out.print(&quot;-&gt; o maior numero de calorias numa atividade deste tipo: &quot;);</span>
+<span class="nc" id="L578">                            classe = Corrida.class;</span>
+<span class="nc" id="L579">                            calorias = model.recordMaisCalorias(classe);</span>
+<span class="nc" id="L580">                            System.out.println(calorias);</span>
+<span class="nc" id="L581">                            System.out.print(&quot;-&gt; o maior numero de kms percorridos numa atividade deste tipo: &quot;);</span>
+<span class="nc" id="L582">                            kms = model.recordMaisDistancia(classe);</span>
+<span class="nc" id="L583">                            System.out.println(kms);</span>
+<span class="nc" id="L584">                            System.out.print(&quot;-&gt; o maior numero de segundos passados a executar uma atividade deste tipo: &quot;);</span>
+<span class="nc" id="L585">                            tempo = model.recordMaisTempo(classe);</span>
+<span class="nc" id="L586">                            System.out.println(tempo);</span>
+<span class="nc" id="L587">                            System.out.print(&quot;-&gt; a maior velocidade media numa atividade deste tipo: &quot;);</span>
+<span class="nc" id="L588">                            velocidade = model.recordMaisVelocidade(classe);</span>
+<span class="nc" id="L589">                            System.out.println(velocidade);</span>
+<span class="nc" id="L590">                            menuSimulacao.pedeString(&quot;\nEnter para continuar&quot;);</span>
+<span class="nc" id="L591">                            break;</span>
+                        case 2:
+<span class="nc" id="L593">                            System.out.println(&quot;\nRecords das atividades do tipo Ciclismo:&quot;);</span>
+<span class="nc" id="L594">                            System.out.print(&quot;-&gt; o maior numero de calorias gastas numa atividade deste tipo: &quot;);</span>
+<span class="nc" id="L595">                            classe = Ciclismo.class;</span>
+<span class="nc" id="L596">                            calorias = model.recordMaisCalorias(classe);</span>
+<span class="nc" id="L597">                            System.out.println(calorias);</span>
+<span class="nc" id="L598">                            System.out.print(&quot;-&gt; o maior numero de kms percorridos numa atividade deste tipo: &quot;);</span>
+<span class="nc" id="L599">                            kms = model.recordMaisDistancia(classe);</span>
+<span class="nc" id="L600">                            System.out.println(kms);</span>
+<span class="nc" id="L601">                            System.out.print(&quot;-&gt; o maior numero de segundos passados a executar uma atividade deste tipo: &quot;);</span>
+<span class="nc" id="L602">                            tempo = model.recordMaisTempo(classe);</span>
+<span class="nc" id="L603">                            System.out.println(tempo);</span>
+<span class="nc" id="L604">                            System.out.print(&quot;-&gt; a maior velocidade media numa atividade deste tipo: &quot;);</span>
+<span class="nc" id="L605">                            velocidade = model.recordMaisVelocidade(classe);</span>
+<span class="nc" id="L606">                            System.out.println(velocidade);</span>
+<span class="nc" id="L607">                            menuSimulacao.pedeString(&quot;\nEnter para continuar&quot;);</span>
+<span class="nc" id="L608">                            break;</span>
+                        case 3:
+<span class="nc" id="L610">                            System.out.println(&quot;\nRecords das atividades do tipo Trail:&quot;); </span>
+<span class="nc" id="L611">                            System.out.print(&quot;-&gt; o maior numero de calorias gastas numa atividade deste tipo: &quot;);</span>
+<span class="nc" id="L612">                            classe = Trail.class;</span>
+<span class="nc" id="L613">                            calorias = model.recordMaisCalorias(classe);</span>
+<span class="nc" id="L614">                            System.out.println(calorias);</span>
+<span class="nc" id="L615">                            System.out.print(&quot;-&gt; o maior numero de kms percorridos numa atividade deste tipo: &quot;);</span>
+<span class="nc" id="L616">                            kms = model.recordMaisDistancia(classe);</span>
+<span class="nc" id="L617">                            System.out.println(kms);</span>
+<span class="nc" id="L618">                            System.out.print(&quot;-&gt; o maior numero de segundos passados a executar uma atividade deste tipo: &quot;);</span>
+<span class="nc" id="L619">                            tempo = model.recordMaisTempo(classe);</span>
+<span class="nc" id="L620">                            System.out.println(tempo);</span>
+<span class="nc" id="L621">                            System.out.print(&quot;-&gt; a maior altimetria numa atividade deste tipo: &quot;);</span>
+<span class="nc" id="L622">                            altimetria = model.recordMaiorAltimetria(classe);</span>
+<span class="nc" id="L623">                            System.out.println(altimetria);</span>
+<span class="nc" id="L624">                            menuSimulacao.pedeString(&quot;\nEnter para continuar&quot;);</span>
+<span class="nc" id="L625">                            break;</span>
+                        case 4:
+<span class="nc" id="L627">                            System.out.println(&quot;\nRecords das atividades do tipo Btt:&quot;);</span>
+<span class="nc" id="L628">                            System.out.print(&quot;-&gt; o maior numero de calorias gastas numa atividade deste tipo: &quot;);</span>
+<span class="nc" id="L629">                            classe = Btt.class;</span>
+<span class="nc" id="L630">                            calorias = model.recordMaisCalorias(classe);</span>
+<span class="nc" id="L631">                            System.out.println(calorias);</span>
+<span class="nc" id="L632">                            System.out.print(&quot;-&gt; o maior numero de kms percorridos numa atividade deste tipo: &quot;);</span>
+<span class="nc" id="L633">                            kms = model.recordMaisDistancia(classe);</span>
+<span class="nc" id="L634">                            System.out.println(kms);</span>
+<span class="nc" id="L635">                            System.out.print(&quot;-&gt; o maior numero de segundos passados a executar uma atividade deste tipo: &quot;);</span>
+<span class="nc" id="L636">                            tempo = model.recordMaisTempo(classe);</span>
+<span class="nc" id="L637">                            System.out.println(tempo);</span>
+<span class="nc" id="L638">                            System.out.print(&quot;-&gt; a maior altimetria numa atividade deste tipo: &quot;);</span>
+<span class="nc" id="L639">                            altimetria = model.recordMaiorAltimetria(classe);</span>
+<span class="nc" id="L640">                            System.out.println(altimetria);</span>
+<span class="nc" id="L641">                            menuSimulacao.pedeString(&quot;\nEnter para continuar&quot;);</span>
+<span class="nc" id="L642">                            break;</span>
+                        case 5:
+<span class="nc" id="L644">                            System.out.println(&quot;\nRecords das atividades do tipo Flexoes:&quot;);</span>
+<span class="nc" id="L645">                            System.out.print(&quot;-&gt; o maior numero de calorias gastas numa atividade deste tipo: &quot;);</span>
+<span class="nc" id="L646">                            classe = Flexoes.class;</span>
+<span class="nc" id="L647">                            calorias = model.recordMaisCalorias(classe);</span>
+<span class="nc" id="L648">                            System.out.println(calorias);</span>
+<span class="nc" id="L649">                            System.out.print(&quot;-&gt; o maior numero de repeticoes numa atividade deste tipo: &quot;);</span>
+<span class="nc" id="L650">                            rep = model.recordMaisRepeticoes(classe);</span>
+<span class="nc" id="L651">                            System.out.println(rep);</span>
+<span class="nc" id="L652">                            menuSimulacao.pedeString(&quot;\nEnter para continuar&quot;);</span>
+<span class="nc" id="L653">                            break;</span>
+                        case 6:
+<span class="nc" id="L655">                            System.out.println(&quot;\nRecords das atividades do tipo Abdominais:&quot;);</span>
+<span class="nc" id="L656">                            System.out.print(&quot;-&gt; o maior numero de calorias gastas numa atividade deste tipo: &quot;);</span>
+<span class="nc" id="L657">                            classe = Abdominais.class;</span>
+<span class="nc" id="L658">                            calorias = model.recordMaisCalorias(classe);</span>
+<span class="nc" id="L659">                            System.out.println(calorias);</span>
+<span class="nc" id="L660">                            System.out.print(&quot;-&gt; o maior numero de repeticoes numa atividade deste tipo: &quot;);</span>
+<span class="nc" id="L661">                            rep = model.recordMaisRepeticoes(classe);</span>
+<span class="nc" id="L662">                            System.out.println(rep);</span>
+<span class="nc" id="L663">                            menuSimulacao.pedeString(&quot;\nEnter para continuar&quot;);</span>
+<span class="nc" id="L664">                            break;</span>
+                        case 7:
+<span class="nc" id="L666">                            System.out.println(&quot;\nRecords das atividades do tipo Leg Press:&quot;);</span>
+<span class="nc" id="L667">                            System.out.print(&quot;-&gt; o maior numero de calorias gastas numa atividade deste tipo: &quot;);</span>
+<span class="nc" id="L668">                            classe = LegPress.class;</span>
+<span class="nc" id="L669">                            calorias = model.recordMaisCalorias(classe);</span>
+<span class="nc" id="L670">                            System.out.println(calorias);</span>
+<span class="nc" id="L671">                            menuSimulacao.pedeString(&quot;\nEnter para continuar&quot;);</span>
+<span class="nc" id="L672">                            break;</span>
+<span class="nc" id="L673">                        case 8:System.out.println(&quot;\nRecords das atividades do tipo Bench Press:&quot;);</span>
+<span class="nc" id="L674">                            System.out.print(&quot;-&gt; o maior numero de calorias gastas numa atividade deste tipo: &quot;);</span>
+<span class="nc" id="L675">                            classe = BenchPress.class;</span>
+<span class="nc" id="L676">                            calorias = model.recordMaisCalorias(classe);</span>
+<span class="nc" id="L677">                            System.out.println(calorias);</span>
+<span class="nc" id="L678">                            System.out.print(&quot;-&gt; o maior numero de repeticoes numa atividade deste tipo: &quot;);</span>
+<span class="nc" id="L679">                            rep = model.recordMaisRepeticoes(classe);</span>
+<span class="nc" id="L680">                            System.out.println(rep);</span>
+<span class="nc" id="L681">                            System.out.print(&quot;-&gt; o maior peso usado numa atividade deste tipo: &quot;);</span>
+<span class="nc" id="L682">                            peso = model.recordMaisPeso(classe);</span>
+<span class="nc" id="L683">                            System.out.println(peso);</span>
+<span class="nc" id="L684">                            menuSimulacao.pedeString(&quot;\nEnter para continuar&quot;);</span>
+<span class="nc" id="L685">                            break;</span>
+                        case 9:
+<span class="nc" id="L687">                            System.out.println(&quot;\nRecords das atividades do tipo Bicep Curls:&quot;);</span>
+<span class="nc" id="L688">                            System.out.print(&quot;-&gt; o maior numero de calorias gastas numa atividade deste tipo: &quot;);</span>
+<span class="nc" id="L689">                            classe = BicepCurls.class;</span>
+<span class="nc" id="L690">                            calorias = model.recordMaisCalorias(classe);</span>
+<span class="nc" id="L691">                            System.out.println(calorias);</span>
+<span class="nc" id="L692">                            System.out.print(&quot;-&gt; o maior numero de repeticoes numa atividade deste tipo: &quot;);</span>
+<span class="nc" id="L693">                            rep = model.recordMaisRepeticoes(classe);</span>
+<span class="nc" id="L694">                            System.out.println(rep);</span>
+<span class="nc" id="L695">                            System.out.print(&quot;-&gt; o maior peso usado numa atividade deste tipo: &quot;);</span>
+<span class="nc" id="L696">                            peso = model.recordMaisPeso(classe);</span>
+<span class="nc" id="L697">                            System.out.println(peso);</span>
+<span class="nc" id="L698">                            menuSimulacao.pedeString(&quot;\nEnter para continuar&quot;);</span>
+                            break;
+                    }
+<span class="nc" id="L701">                    break;</span>
+                case 3 :    //opção &quot;Consultar estatísticas&quot;
+<span class="nc" id="L703">                    this.runQueries();</span>
+<span class="nc" id="L704">                    break;</span>
+                case 4 :    //opção &quot;Mostrar todas as informações&quot;
+<span class="nc" id="L706">                    System.out.println(&quot;\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n&quot;);</span>
+<span class="nc" id="L707">                    String str = this.model.mostraInfo();</span>
+<span class="nc" id="L708">                    System.out.println(str);</span>
+<span class="nc" id="L709">                    menuSimulacao.pedeString(&quot;Enter para continuar&quot;);</span>
+                    break;
+            }
+<span class="nc" id="L712">            menuSimulacao.runMenu();</span>
+<span class="nc" id="L713">            op = menuSimulacao.getOpcao();</span>
+        }
+<span class="nc" id="L715">    }</span>
+    
+    /**
+     * Método runQueries que executa o menu de estatísticas
+     */
+    public void runQueries(){
+<span class="nc" id="L721">        this.menuEstatisticas.runMenu();</span>
+<span class="nc" id="L722">        int op = this.menuEstatisticas.getOpcao();</span>
+<span class="nc bnc" id="L723" title="All 2 branches missed.">        while (op!=0){</span>
+<span class="nc bnc" id="L724" title="All 8 branches missed.">            switch (op){</span>
+                case 1 :    //opção &quot;Utilizador com mais calorias gastas&quot;
+<span class="nc" id="L726">                    this.estatisticaEntreDatas(op);</span>
+<span class="nc" id="L727">                    break;</span>
+                case 2 :    //opção &quot;Utilizador com mais atividades realizadas&quot;
+<span class="nc" id="L729">                    this.estatisticaEntreDatas(op);</span>
+<span class="nc" id="L730">                    break;</span>
+                case 3 :    //opção &quot;Atividade mais realizada&quot;
+<span class="nc" id="L732">                    String resposta = this.model.atividadeMaisRealizada();</span>
+<span class="nc" id="L733">                    System.out.println(resposta);</span>
+<span class="nc" id="L734">                    menuEstatisticas.pedeString(&quot;Enter para continuar&quot;);</span>
+<span class="nc" id="L735">                    break;</span>
+                case 4 :    //opção &quot;Total de kilómetros percorridos&quot;
+<span class="nc" id="L737">                    this.estatisticaUtilizadorEntreDatas(op);</span>
+<span class="nc" id="L738">                    break;</span>
+                case 5 :    //opção &quot;Metros de altimetria acumulados&quot;
+<span class="nc" id="L740">                    this.estatisticaUtilizadorEntreDatas(op);</span>
+<span class="nc" id="L741">                    break;</span>
+                case 6 :    //opção &quot;Plano de treino mais exigente&quot;
+<span class="nc" id="L743">                    this.estatisticaEntreDatas(op);</span>
+<span class="nc" id="L744">                    break;</span>
+                case 7 :    //opção &quot;Atividades de um utilizador&quot;
+<span class="nc" id="L746">                    int codUser = menuEstatisticas.pedeInt(&quot;Insira o código do utilizador&quot;);</span>
+<span class="nc bnc" id="L747" title="All 2 branches missed.">                    if (!model.existeUtilizador(codUser)){</span>
+<span class="nc" id="L748">                        menuEstatisticas.pedeString(&quot;Utilizador não existe.\nEnter para continuar&quot;);</span>
+<span class="nc" id="L749">                        break;</span>
+                    }
+<span class="nc" id="L751">                    int d = 0;</span>
+<span class="nc bnc" id="L752" title="All 4 branches missed.">                    while(d!=1&amp;&amp;d!=2){</span>
+<span class="nc" id="L753">                        d = this.menuSetup.pedeInt(&quot;1: Mostrar atividades já realizadas\n2: Mostrar todas as atividades&quot;);</span>
+                    }
+                    String res;
+<span class="nc bnc" id="L756" title="All 2 branches missed.">                    if (d==1) res = this.model.atividadesExecutadasUtilizador(codUser);</span>
+<span class="nc" id="L757">                    else res = this.model.atividadesUtilizador(codUser);</span>
+<span class="nc" id="L758">                    System.out.print(res);</span>
+<span class="nc" id="L759">                    menuEstatisticas.pedeString(&quot;Enter para continuar&quot;);</span>
+                    break;
+            }
+<span class="nc" id="L762">            menuEstatisticas.runMenu();</span>
+<span class="nc" id="L763">            op = menuEstatisticas.getOpcao();</span>
+        }
+<span class="nc" id="L765">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

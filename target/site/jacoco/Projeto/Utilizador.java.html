@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Utilizador.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ATS-Project</a> &gt; <a href="index.source.html" class="el_package">Projeto</a> &gt; <span class="el_source">Utilizador.java</span></div><h1>Utilizador.java</h1><pre class="source lang-java linenums">package Projeto;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.Set;
+import java.util.TreeSet;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.stream.Collectors;
+import java.util.function.Predicate;
+import java.util.function.BiFunction;
+import java.util.function.Function;
+import java.io.*;
+
+/**
+ * Classe Utilizador - classe abstrata que engloba os vários utilizadores da aplicação
+ *
+ * @author Grupo10
+ * @version 27/04/24
+ * Notas versão: --
+ */
+public abstract class Utilizador implements Serializable
+{
+    // variáveis de classe
+<span class="fc" id="L26">    private static int proximoCodigo = 1;</span>
+    // variáveis de instância
+    private int codUtilizador;
+    private String nome;
+    private String morada;
+    private String email;
+    private int freqCardiaca;
+    private double peso;
+    private int altura;
+    private LocalDate dataNascimento;
+    private char genero;
+    private Set&lt;PlanoTreino&gt; atividadesPlanoTreino;
+    private Set&lt;Atividade&gt; atividadesIsoladas;
+
+    /**
+     * Construtores de Utilizador
+     */
+
+    /**
+     * Construtor vazio
+     */
+    public Utilizador()
+<span class="fc" id="L48">    {</span>
+<span class="fc" id="L49">        this.codUtilizador = 0;</span>
+<span class="fc" id="L50">        this.nome = &quot;&quot;;</span>
+<span class="fc" id="L51">        this.morada = &quot;&quot;;</span>
+<span class="fc" id="L52">        this.email = &quot;&quot;;</span>
+<span class="fc" id="L53">        this.freqCardiaca = 0;</span>
+<span class="fc" id="L54">        this.peso = 0;</span>
+<span class="fc" id="L55">        this.altura = 0;</span>
+<span class="fc" id="L56">        this.dataNascimento = LocalDate.now();</span>
+<span class="fc" id="L57">        this.genero = 0;</span>
+<span class="fc" id="L58">        this.atividadesPlanoTreino = new TreeSet&lt;PlanoTreino&gt;();</span>
+<span class="fc" id="L59">        this.atividadesIsoladas = new TreeSet&lt;Atividade&gt;();</span>
+<span class="fc" id="L60">    }</span>
+
+    /**
+     * Construtor parametrizado
+     */
+    public Utilizador(String nome, String morada, String email, int freqCardiaca, int peso, int altura, LocalDate dataNascimento, char genero)
+<span class="fc" id="L66">    {</span>
+<span class="fc" id="L67">        this.codUtilizador = proximoCodigo++;</span>
+<span class="fc" id="L68">        this.nome = nome;</span>
+<span class="fc" id="L69">        this.morada = morada;</span>
+<span class="fc" id="L70">        this.email = email;</span>
+<span class="fc" id="L71">        this.freqCardiaca = freqCardiaca;</span>
+<span class="fc" id="L72">        this.peso = peso;</span>
+<span class="fc" id="L73">        this.altura = altura;</span>
+<span class="fc" id="L74">        this.dataNascimento = dataNascimento;</span>
+<span class="fc" id="L75">        this.genero = genero;</span>
+<span class="fc" id="L76">        this.atividadesPlanoTreino = new TreeSet&lt;PlanoTreino&gt;();</span>
+<span class="fc" id="L77">        this.atividadesIsoladas = new TreeSet&lt;Atividade&gt;();</span>
+<span class="fc" id="L78">    }</span>
+    
+    public Utilizador(Utilizador umUtilizador, LocalDate dataInicio, LocalDate dataFim)
+<span class="nc" id="L81">    {</span>
+<span class="nc" id="L82">        this.codUtilizador = umUtilizador.getCodUtilizador();</span>
+<span class="nc" id="L83">        this.nome = umUtilizador.getNome();</span>
+<span class="nc" id="L84">        this.morada = umUtilizador.getMorada();</span>
+<span class="nc" id="L85">        this.email = umUtilizador.getEmail();</span>
+<span class="nc" id="L86">        this.freqCardiaca = umUtilizador.getFreqCardiaca();</span>
+<span class="nc" id="L87">        this.peso = umUtilizador.getPeso();</span>
+<span class="nc" id="L88">        this.altura = umUtilizador.getAltura();</span>
+<span class="nc" id="L89">        this.dataNascimento = umUtilizador.getDataNascimento();</span>
+<span class="nc" id="L90">        this.genero = umUtilizador.getGenero();</span>
+<span class="nc" id="L91">        this.atividadesPlanoTreino = new TreeSet&lt;PlanoTreino&gt;();</span>
+<span class="nc" id="L92">        List&lt;PlanoTreino&gt; planos = umUtilizador.planosTreinos(dataInicio, dataFim);</span>
+<span class="nc" id="L93">        this.atividadesPlanoTreino.addAll(planos);</span>
+<span class="nc" id="L94">        this.atividadesIsoladas = new TreeSet&lt;Atividade&gt;();</span>
+<span class="nc" id="L95">        Predicate&lt;Atividade&gt; p = atividade -&gt; true;</span>
+<span class="nc" id="L96">        List&lt;Atividade&gt; atividadesIsoladas = umUtilizador.atividadesIsoladas(dataInicio,dataFim,p);</span>
+<span class="nc" id="L97">        this.atividadesIsoladas.addAll(atividadesIsoladas);</span>
+<span class="nc" id="L98">    }</span>
+
+    /**
+     * Construtor de cópia
+     */
+    public Utilizador(Utilizador umUtilizador)
+<span class="nc" id="L104">    {</span>
+<span class="nc" id="L105">        this.codUtilizador = umUtilizador.getCodUtilizador();</span>
+<span class="nc" id="L106">        this.nome = umUtilizador.getNome();</span>
+<span class="nc" id="L107">        this.morada = umUtilizador.getMorada();</span>
+<span class="nc" id="L108">        this.email = umUtilizador.getEmail();</span>
+<span class="nc" id="L109">        this.freqCardiaca = umUtilizador.getFreqCardiaca();</span>
+<span class="nc" id="L110">        this.peso = umUtilizador.getPeso();</span>
+<span class="nc" id="L111">        this.altura = umUtilizador.getAltura();</span>
+<span class="nc" id="L112">        this.dataNascimento = umUtilizador.getDataNascimento();</span>
+<span class="nc" id="L113">        this.genero = umUtilizador.getGenero();</span>
+<span class="nc" id="L114">        this.atividadesPlanoTreino = new TreeSet&lt;PlanoTreino&gt;(); //cópia</span>
+<span class="nc bnc" id="L115" title="All 2 branches missed.">        for (PlanoTreino plano : umUtilizador.getAtividadesPlanoTreino()) {</span>
+<span class="nc" id="L116">            this.atividadesPlanoTreino.add(plano);</span>
+<span class="nc" id="L117">        }</span>
+<span class="nc" id="L118">        this.atividadesIsoladas = new TreeSet&lt;Atividade&gt;(); //cópia</span>
+<span class="nc bnc" id="L119" title="All 2 branches missed.">        for (Atividade atividade : umUtilizador.getAtividadesIsoladas()) {</span>
+<span class="nc" id="L120">            this.atividadesIsoladas.add(atividade);</span>
+<span class="nc" id="L121">        }</span>
+<span class="nc" id="L122">    }</span>
+    
+    /**
+     * Getters e setters
+     */
+
+    public int getCodUtilizador() {
+<span class="nc" id="L129">        return this.codUtilizador;</span>
+    }
+
+    public String getNome() {
+<span class="fc" id="L133">        return this.nome;</span>
+    }
+
+    public String getMorada() {
+<span class="fc" id="L137">        return this.morada;</span>
+    }
+
+    public String getEmail() {
+<span class="fc" id="L141">        return this.email;</span>
+    }
+
+    public int getFreqCardiaca() {
+<span class="fc" id="L145">        return this.freqCardiaca;</span>
+    }
+
+    public double getPeso() {
+<span class="fc" id="L149">        return this.peso;</span>
+    }
+
+    public int getAltura() {
+<span class="fc" id="L153">        return this.altura;</span>
+    }
+
+    public LocalDate getDataNascimento() {
+<span class="fc" id="L157">        return this.dataNascimento;</span>
+    }
+
+    public char getGenero() {
+<span class="fc" id="L161">        return this.genero;</span>
+    }
+
+    public void setCodUtilizador(int codUtilizador) {
+<span class="nc" id="L165">        this.codUtilizador = codUtilizador;</span>
+<span class="nc" id="L166">    }</span>
+
+    public void setNome(String nome) {
+<span class="fc" id="L169">        this.nome = nome;</span>
+<span class="fc" id="L170">    }</span>
+
+    public void setMorada(String morada) {
+<span class="fc" id="L173">        this.morada = morada;</span>
+<span class="fc" id="L174">    }</span>
+
+    public void setEmail(String email) {
+<span class="fc" id="L177">        this.email = email;</span>
+<span class="fc" id="L178">    }</span>
+
+    public void setFreqCardiaca(int freqCardiaca) {
+<span class="fc" id="L181">        this.freqCardiaca = freqCardiaca;</span>
+<span class="fc" id="L182">    }</span>
+
+    public void setPeso(double peso) {
+<span class="fc" id="L185">        this.peso = peso;</span>
+<span class="fc" id="L186">    }</span>
+
+    public void setAltura(int altura) {
+<span class="fc" id="L189">        this.altura = altura;</span>
+<span class="fc" id="L190">    }</span>
+
+    public void setDataNascimento(LocalDate dataNascimento) {
+<span class="fc" id="L193">        this.dataNascimento = dataNascimento;</span>
+<span class="fc" id="L194">    }</span>
+
+    public void setGenero(char genero) {
+<span class="fc" id="L197">        this.genero = genero;</span>
+<span class="fc" id="L198">    }</span>
+    
+    public List&lt;Atividade&gt; getAtividadesIsoladas () {
+<span class="fc" id="L201">        return this.atividadesIsoladas</span>
+<span class="fc" id="L202">        .stream()</span>
+<span class="fc" id="L203">        .map(a -&gt; (Atividade) a.clone())</span>
+<span class="fc" id="L204">        .collect(Collectors.toList());</span>
+    }
+    
+    public List&lt;PlanoTreino&gt; getAtividadesPlanoTreino () {
+<span class="nc" id="L208">        return this.atividadesPlanoTreino</span>
+<span class="nc" id="L209">        .stream()</span>
+<span class="nc" id="L210">        .map(p -&gt; (PlanoTreino) p.clone())</span>
+<span class="nc" id="L211">        .collect(Collectors.toList());</span>
+    }
+    
+    public void setProximoCodigo(int proximoCodigo) {
+<span class="nc" id="L215">        this.proximoCodigo = proximoCodigo;</span>
+<span class="nc" id="L216">    }</span>
+    
+    public void addAtividade(Atividade atividade){
+<span class="fc" id="L219">        Atividade adicionar = (Atividade) atividade.clone();</span>
+<span class="fc" id="L220">        this.atividadesIsoladas.add(adicionar);</span>
+<span class="fc" id="L221">    }</span>
+    
+    public void addPlanoTreino(PlanoTreino plano){
+<span class="nc" id="L224">       PlanoTreino adicionar = (PlanoTreino) plano.clone();</span>
+<span class="nc" id="L225">       this.atividadesPlanoTreino.add(adicionar);</span>
+<span class="nc" id="L226">    }</span>
+    
+    public PlanoTreino getPlanoTreinoId(int id_plano){
+<span class="nc" id="L229">        PlanoTreino res = new PlanoTreino();</span>
+<span class="nc bnc" id="L230" title="All 2 branches missed.">        for(PlanoTreino plano : this.atividadesPlanoTreino){</span>
+<span class="nc bnc" id="L231" title="All 2 branches missed.">            if(plano.getCodPlano()==id_plano){</span>
+<span class="nc" id="L232">                res = (PlanoTreino) plano.clone();</span>
+<span class="nc" id="L233">                break;</span>
+            }
+<span class="nc" id="L235">        }</span>
+<span class="nc" id="L236">        return res;</span>
+    }
+    
+    public void addAtividadePlanoTreino(int id_plano, Atividade atividade, int iteracoes){
+<span class="nc" id="L240">        this.getPlanoTreinoId(id_plano).addAtividade(atividade, iteracoes);</span>
+<span class="nc" id="L241">    }</span>
+    
+    /** 
+     * Numero de calorias gastas pelo utilizador
+     * Requisito 3.2
+     * ponto 1
+        */
+    public double totalCaloriasDispendidas (LocalDate dataInicial, LocalDate dataFinal) {
+<span class="nc" id="L249">        Predicate&lt;Atividade&gt; p = atividade -&gt; true;</span>
+<span class="nc" id="L250">        Utilizador u = this;</span>
+<span class="nc" id="L251">        Function&lt;Atividade,Double&gt; f = atividade -&gt; atividade.consumoCalorias(u);</span>
+<span class="nc" id="L252">        List&lt;Double&gt; calorias = infoDasAtividadesNumPeriodoQueRespeitamP(dataInicial, dataFinal, p, f);</span>
+<span class="nc" id="L253">        double total_calorias = calorias.stream().mapToDouble(h -&gt; h).sum();</span>
+<span class="nc" id="L254">        return total_calorias;</span>
+    }
+   
+    /** 
+     * Numero de atividades do utilizador
+     * Requisito 3.2
+     * ponto 2
+        */
+    public int numeroAtividades (LocalDate dataInicial, LocalDate dataFinal) {
+<span class="nc" id="L263">        Predicate&lt;Atividade&gt; p = atividade -&gt; true;</span>
+<span class="nc" id="L264">        List&lt;Atividade&gt; atividades = atividadesNumPeriodoQueRespeitamP(dataInicial, dataFinal, p);</span>
+<span class="nc" id="L265">        return atividades.size();</span>
+    }
+   
+    /**
+     * Requisito 3.2
+     * ponto 4
+        */
+    public double allKmsDistancia (LocalDate dataInicial, LocalDate dataFinal) {
+<span class="nc" id="L273">        Predicate&lt;Atividade&gt; p = atividade -&gt; atividade instanceof AtivDistancia;</span>
+<span class="nc" id="L274">        Function&lt;Atividade,Double&gt; f = atividade -&gt; ((AtivDistancia) atividade).getDistancia();</span>
+<span class="nc" id="L275">        List&lt;Double&gt; distancias = infoDasAtividadesNumPeriodoQueRespeitamP(dataInicial, dataFinal, p, f);</span>
+<span class="nc" id="L276">        double distancia_metros = distancias.stream().mapToDouble(h-&gt;h).sum();</span>
+<span class="nc" id="L277">        return distancia_metros/1000;</span>
+    }
+    
+    /**
+     * Requisito 3.2
+     * ponto 5
+       */
+    public double allMetrosAltimetria(LocalDate dataInicial, LocalDate dataFinal) {
+<span class="nc" id="L285">        Predicate&lt;Atividade&gt; p = atividade -&gt; atividade instanceof AtivDistAltimetria;</span>
+<span class="nc" id="L286">        Function&lt;Atividade,Double&gt; f = atividade -&gt; ((AtivDistAltimetria) atividade).getAltimetria();</span>
+<span class="nc" id="L287">        List&lt;Double&gt; altimetrias = infoDasAtividadesNumPeriodoQueRespeitamP(dataInicial, dataFinal, p, f);</span>
+<span class="nc" id="L288">        return altimetrias.stream().mapToDouble(h-&gt;h).sum();</span>
+    }
+      
+    /**
+     * Requisito 3.2
+     * ponto 7
+       */
+    public List&lt;Atividade&gt; allAtividades(LocalDate dataInicial, LocalDate dataFinal){
+<span class="nc" id="L296">        Predicate&lt;Atividade&gt; p = atividade -&gt; true;</span>
+<span class="nc" id="L297">        List&lt;Atividade&gt; atividades = atividadesNumPeriodoQueRespeitamP(LocalDate.MIN,LocalDate.MAX,p);</span>
+<span class="nc" id="L298">        return atividades;</span>
+    }
+    
+    public &lt;R&gt; List&lt;R&gt; infoDasAtividadesUtilizadorNumPeriodoQueRespeitamP(LocalDate dataInicio, LocalDate dataFim, Predicate&lt;Atividade&gt; p, BiFunction&lt;Atividade,Utilizador,R&gt; f, Utilizador u){
+<span class="nc" id="L302">        List&lt;Atividade&gt; atividades = atividadesNumPeriodoQueRespeitamP(dataInicio, dataFim, p);</span>
+        
+<span class="nc" id="L304">        List&lt;R&gt; infoDasAtividades = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L305" title="All 2 branches missed.">        for(Atividade atividade: atividades) {</span>
+<span class="nc" id="L306">            infoDasAtividades.add(f.apply(atividade,u));</span>
+<span class="nc" id="L307">        }</span>
+<span class="nc" id="L308">        return infoDasAtividades;</span>
+    }
+    
+    public &lt;R&gt; List&lt;R&gt; infoDasAtividadesNumPeriodoQueRespeitamP(LocalDate dataInicio, LocalDate dataFim, Predicate&lt;Atividade&gt; p, Function&lt;Atividade,R&gt; f){
+<span class="nc" id="L312">        List&lt;Atividade&gt; atividades = atividadesNumPeriodoQueRespeitamP(dataInicio, dataFim, p);</span>
+        
+<span class="nc" id="L314">        List&lt;R&gt; infoDasAtividades = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L315" title="All 2 branches missed.">        for(Atividade atividade: atividades) {</span>
+<span class="nc" id="L316">            infoDasAtividades.add(f.apply(atividade));</span>
+<span class="nc" id="L317">        }</span>
+<span class="nc" id="L318">        return infoDasAtividades;</span>
+    }
+    
+    public List&lt;Atividade&gt; atividadesNumPeriodoQueRespeitamP (LocalDate dataInicio, LocalDate dataFim, Predicate&lt;Atividade&gt; p){
+<span class="nc" id="L322">        List&lt;Atividade&gt; atividades = new ArrayList&lt;Atividade&gt;();</span>
+<span class="nc" id="L323">        List&lt;Atividade&gt; atividadesIsoladas = this.atividadesIsoladas(dataInicio,dataFim,p);</span>
+<span class="nc" id="L324">        atividades.addAll(atividadesIsoladas);</span>
+        
+<span class="nc" id="L326">        List&lt;PlanoTreino&gt; planosTreino = this.atividadesPlanoTreino</span>
+<span class="nc" id="L327">        .stream()</span>
+<span class="nc bnc" id="L328" title="All 4 branches missed.">        .filter(planoTreino -&gt; planoTreino.getDataRealizacao().minusDays(7).compareTo(dataInicio) &gt;= 0 &amp;&amp; planoTreino.getDataRealizacao().compareTo(dataFim) &lt;= 0)</span>
+<span class="nc" id="L329">        .collect(Collectors.toList());</span>
+        
+<span class="nc bnc" id="L331" title="All 2 branches missed.">        for(PlanoTreino planoTreino : planosTreino){</span>
+            
+<span class="nc" id="L333">            List&lt;Atividade&gt; atividadesPlanoTreino = planoTreino.atividadesQueRespeitamP(dataInicio, dataFim, p);</span>
+            
+<span class="nc" id="L335">            atividades.addAll(atividadesPlanoTreino);</span>
+            
+<span class="nc" id="L337">        }</span>
+        
+<span class="nc" id="L339">        return atividades;</span>
+    }
+    
+    public PlanoTreino planoTreinoMaisCalorias (LocalDate dataInicio, LocalDate dataFim) {
+<span class="nc" id="L343">        return (PlanoTreino) this.atividadesPlanoTreino</span>
+<span class="nc" id="L344">        .stream()</span>
+<span class="nc bnc" id="L345" title="All 4 branches missed.">        .filter(planoTreino -&gt; planoTreino.getDataRealizacao().compareTo(dataInicio) &gt;= 0 &amp;&amp; planoTreino.getDataRealizacao().plusDays(7).compareTo(dataFim) &lt;= 0)</span>
+<span class="nc bnc" id="L346" title="All 2 branches missed.">        .reduce((p1, p2) -&gt; p1.caloriasDispendidas(this) &gt; p2.caloriasDispendidas(this) ? p1 : p2)</span>
+<span class="nc" id="L347">        .orElse(null).clone();</span>
+    }
+    
+    public List&lt;Atividade&gt; atividadesIsoladas(LocalDate dataInicio, LocalDate dataFim, Predicate&lt;Atividade&gt; p) {
+<span class="nc" id="L351">        LocalDateTime data_inicial = LocalDateTime.of(dataInicio, LocalTime.MIDNIGHT);</span>
+<span class="nc" id="L352">        LocalDateTime data_final = LocalDateTime.of(dataFim, LocalTime.MIDNIGHT);</span>
+<span class="nc" id="L353">        return this.atividadesIsoladas</span>
+<span class="nc" id="L354">        .stream()</span>
+<span class="nc bnc" id="L355" title="All 6 branches missed.">        .filter(atividade -&gt; p.test(atividade) &amp;&amp; atividade.getDataRealizacao().compareTo(data_inicial) &gt;= 0 &amp;&amp; atividade.getDataRealizacao().compareTo(data_final) &lt;= 0)</span>
+<span class="nc" id="L356">        .map(atividade -&gt; (Atividade) atividade.clone())</span>
+<span class="nc" id="L357">        .collect(Collectors.toList());</span>
+    }
+    
+    public List&lt;PlanoTreino&gt; planosTreinos(LocalDate dataInicio, LocalDate dataFim) {
+<span class="nc" id="L361">        return this.atividadesPlanoTreino</span>
+<span class="nc" id="L362">        .stream()</span>
+<span class="nc bnc" id="L363" title="All 4 branches missed.">        .filter(planoTreino -&gt; planoTreino.getDataRealizacao().minusDays(7).compareTo(dataInicio) &gt;= 0 &amp;&amp; planoTreino.getDataRealizacao().compareTo(dataFim) &lt;= 0)</span>
+<span class="nc" id="L364">        .map(planoTreino -&gt; (PlanoTreino) planoTreino.planoTreinoNumPeriodo(dataInicio,dataFim))</span>
+<span class="nc" id="L365">        .collect(Collectors.toList());</span>
+    }
+    
+    public abstract Object utilizadorNumPeriodo(LocalDate dataInicio, LocalDate dataFim);
+    /**
+     * Metodo que calcula a idade de um utilizador
+     * 
+     * @return idade do utilizador
+     */
+    public int getIdade() {
+<span class="fc" id="L375">        return LocalDate.now().getYear() - this.dataNascimento.getYear();</span>
+    }
+
+    /**
+     * Método que calcula o fator multiplicativo de um utilizador, utilizado no cálculo do consumo de calorias durante a realização de uma atividade
+     *
+     * @param  utilizador  utilizador
+     * @return    fator multiplicativo do utilizador
+     */
+    public abstract double getFatorMultiplicativo();
+
+    /**
+     * Metodo que calcula o BMR - basal metabolic rate, calorias gastas num dia em repouso - de um utilizador, utilizado no calculo do consumo de calorias durante a realizaçao de uma atividade
+     * 
+     * @param utilizador utilizador
+     * @return BMR do utilizador
+     */
+    public double getBMR() {
+<span class="fc" id="L393">        double bmr = 0;</span>
+<span class="fc" id="L394">        char genero = this.getGenero();</span>
+<span class="pc bpc" id="L395" title="3 of 4 branches missed.">        int s = genero == 'M' ? 5 : (genero == 'F' ? -161 : 0);</span>
+<span class="fc" id="L396">        bmr = 10*this.getPeso() + 6.25*this.getAltura() + 5*this.getIdade() + s;</span>
+<span class="fc" id="L397">        return bmr;</span>
+    }
+    
+    /**
+     * Método toString
+     */
+    public String toString() {
+<span class="nc" id="L404">        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(&quot;dd/MM/yyyy&quot;);</span>
+<span class="nc" id="L405">        StringBuilder sb = new StringBuilder();</span>
+<span class="nc" id="L406">        sb.append(&quot;Utilizador\nCodigo de Utilizador: &quot;);</span>
+<span class="nc" id="L407">        sb.append(this.codUtilizador);</span>
+<span class="nc" id="L408">        sb.append(&quot;\nNome: &quot;);</span>
+<span class="nc" id="L409">        sb.append(this.nome);</span>
+<span class="nc" id="L410">        sb.append(&quot;\nMorada: &quot;);</span>
+<span class="nc" id="L411">        sb.append(this.morada);</span>
+<span class="nc" id="L412">        sb.append(&quot;\nEmail: &quot;);</span>
+<span class="nc" id="L413">        sb.append(this.email);</span>
+<span class="nc" id="L414">        sb.append(&quot;\nFrequencia Cardiaca: &quot;);</span>
+<span class="nc" id="L415">        sb.append(this.freqCardiaca);</span>
+<span class="nc" id="L416">        sb.append(&quot; bpm\nPeso: &quot;);</span>
+<span class="nc" id="L417">        sb.append(this.peso);</span>
+<span class="nc" id="L418">        sb.append(&quot; kilos\nAltura: &quot;);</span>
+<span class="nc" id="L419">        sb.append(this.altura);</span>
+<span class="nc" id="L420">        sb.append(&quot; centimetros\nData de nascimento &quot;);</span>
+<span class="nc" id="L421">        sb.append(this.dataNascimento.format(formatter));</span>
+<span class="nc" id="L422">        sb.append(&quot;\nIdade: &quot;);</span>
+<span class="nc" id="L423">        sb.append(this.getIdade());</span>
+<span class="nc" id="L424">        sb.append(&quot; anos\nGenero: &quot;);</span>
+<span class="nc" id="L425">        sb.append(this.genero);</span>
+<span class="nc" id="L426">        sb.append(&quot;\nAtividades: \n&quot;);</span>
+<span class="nc bnc" id="L427" title="All 2 branches missed.">        for (Atividade a : this.atividadesIsoladas){</span>
+<span class="nc" id="L428">            sb.append(a.toString());</span>
+<span class="nc" id="L429">        }</span>
+<span class="nc" id="L430">        sb.append(&quot;\nPlanos de treino: \n&quot;);</span>
+<span class="nc bnc" id="L431" title="All 2 branches missed.">        for (PlanoTreino p : this.atividadesPlanoTreino){</span>
+<span class="nc" id="L432">            sb.append(p.toString());</span>
+<span class="nc" id="L433">        }</span>
+<span class="nc" id="L434">        return (sb.toString());</span>
+    }
+    
+    /**
+     * Método equals
+     */
+    public boolean equals(Object o){
+<span class="nc bnc" id="L441" title="All 2 branches missed.">        if (this==o) return true;</span>
+<span class="nc bnc" id="L442" title="All 4 branches missed.">        if ((o==null)||(this.getClass()!=o.getClass())) return false;</span>
+<span class="nc" id="L443">        Utilizador a = (Utilizador) o;</span>
+<span class="nc bnc" id="L444" title="All 2 branches missed.">        return ((this.codUtilizador == (a.getCodUtilizador()))</span>
+<span class="nc bnc" id="L445" title="All 2 branches missed.">        &amp;&amp; (this.nome == (a.getNome()))</span>
+<span class="nc bnc" id="L446" title="All 2 branches missed.">        &amp;&amp; (this.morada == (a.getMorada()))</span>
+<span class="nc bnc" id="L447" title="All 2 branches missed.">        &amp;&amp; (this.email == (a.getEmail()))</span>
+<span class="nc bnc" id="L448" title="All 2 branches missed.">        &amp;&amp; (this.freqCardiaca == (a.getFreqCardiaca()))</span>
+<span class="nc bnc" id="L449" title="All 2 branches missed.">        &amp;&amp; (this.peso == (a.getPeso()))</span>
+<span class="nc bnc" id="L450" title="All 2 branches missed.">        &amp;&amp; (this.altura == (a.getAltura()))</span>
+<span class="nc bnc" id="L451" title="All 2 branches missed.">        &amp;&amp; ((this.dataNascimento).equals(a.getDataNascimento()))</span>
+<span class="nc bnc" id="L452" title="All 2 branches missed.">        &amp;&amp; (this.genero == (a.getGenero())));</span>
+    }
+    
+    /**
+     * Método clone, deve ser implementado pelas sub-classes
+     */
+    public abstract Object clone();
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

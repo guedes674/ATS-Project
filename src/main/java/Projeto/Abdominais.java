@@ -29,7 +29,9 @@ public class Abdominais extends AtivRepeticoes
      */
     public Abdominais(LocalDateTime realizacao, LocalTime tempo, int freqCardiaca, int repeticoes)
     {
+
         super(realizacao, tempo, freqCardiaca, repeticoes);
+        System.out.println("----------------------------------------------DENTRO CLASSE ABDOMINAIS-------------------------------------------------------");
     }
     
     /**

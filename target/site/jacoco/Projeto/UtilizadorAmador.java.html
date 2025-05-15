@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UtilizadorAmador.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ATS-Project</a> &gt; <a href="index.source.html" class="el_package">Projeto</a> &gt; <span class="el_source">UtilizadorAmador.java</span></div><h1>UtilizadorAmador.java</h1><pre class="source lang-java linenums">package Projeto;
+import java.time.LocalDate;
+
+/**
+ * Classe UtilizadorAmador - classe que engloba todos os utilizadores que sao atletas amadores.
+ *
+ * @author Grupo10
+ * @version 09/05/24
+ * Notas Versão : --
+ */
+public class UtilizadorAmador extends Utilizador
+{
+    private static final double fatorMultiplicativo = 1;
+    
+    /**
+     * Construtor vazio
+     */
+    public UtilizadorAmador()
+    {
+<span class="nc" id="L20">        super();</span>
+<span class="nc" id="L21">    }</span>
+    
+    /**
+     * Construtor parametrizado
+     */
+    public UtilizadorAmador(String nome, String morada, String email, int freqCardiaca, int peso, int altura, LocalDate dataNascimento, char genero)
+    {
+<span class="nc" id="L28">        super(nome,morada,email,freqCardiaca,peso,altura,dataNascimento,genero);</span>
+<span class="nc" id="L29">    }</span>
+    
+    /**
+     * Construtor de cópia
+     */
+    public UtilizadorAmador(UtilizadorAmador u) {
+<span class="nc" id="L35">        super(u);</span>
+<span class="nc" id="L36">    }</span>
+    
+    public UtilizadorAmador(UtilizadorAmador u, LocalDate i, LocalDate f) {
+<span class="nc" id="L39">        super(u,i,f);</span>
+<span class="nc" id="L40">    }</span>
+    
+    /**
+     * Método que calcula o fator multiplicativo de um utilizador amador
+     *
+     * @param
+     * @return    fatorMultiplicativo
+     */
+    public double getFatorMultiplicativo()
+    {
+<span class="nc" id="L50">        return UtilizadorAmador.fatorMultiplicativo;</span>
+    }
+    
+    public String toString(){
+<span class="nc" id="L54">        StringBuilder sb = new StringBuilder();</span>
+<span class="nc" id="L55">        sb.append(super.toString());</span>
+<span class="nc" id="L56">        sb.append(&quot;\nTipo de Utilizador: Amador\n&quot;);</span>
+<span class="nc" id="L57">        return (sb.toString());</span>
+    }
+    
+    /**
+     * Método equals
+     */
+    public boolean equals(Object o) {
+<span class="nc bnc" id="L64" title="All 2 branches missed.">        if (this==o) return true;</span>
+<span class="nc bnc" id="L65" title="All 4 branches missed.">        if ((o==null) || (this.getClass() != o.getClass())) return false;</span>
+<span class="nc" id="L66">        UtilizadorAmador b = (UtilizadorAmador) o;</span>
+<span class="nc" id="L67">        return (super.equals(b));</span>
+    }
+    
+    /**
+     * Método clone
+     */
+    public Object clone(){
+<span class="nc" id="L74">        UtilizadorAmador t = new UtilizadorAmador(this);</span>
+<span class="nc" id="L75">        return t;</span>
+    }
+    
+    public Object utilizadorNumPeriodo(LocalDate dataInicio, LocalDate dataFim) {
+<span class="nc" id="L79">        UtilizadorAmador t = new UtilizadorAmador (this, dataInicio, dataFim);</span>
+<span class="nc" id="L80">        return t;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

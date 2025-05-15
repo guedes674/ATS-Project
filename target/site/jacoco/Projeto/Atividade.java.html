@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Atividade.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ATS-Project</a> &gt; <a href="index.source.html" class="el_package">Projeto</a> &gt; <span class="el_source">Atividade.java</span></div><h1>Atividade.java</h1><pre class="source lang-java linenums">package Projeto;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.io.*;
+
+/**
+ * Classe Atividade - classe abstrata que engloba os vários tipos de atividades desportivas
+ *
+ * @author Grupo10
+ * @version 09/05/24
+ * Notas versão : --
+ */
+public abstract class Atividade implements Comparable&lt;Atividade&gt;, Serializable
+{
+    //variáveis de calsse
+<span class="fc" id="L17">    private static int proximoCodAtividade = 1;</span>
+    // variáveis de instância
+    private int codAtividade;
+    private LocalDateTime dataRealizacao; 
+    private LocalTime tempo;
+    private int freqCardiaca;
+
+    /**
+     * Construtores de Atividade
+     *
+     * Atividade é uma classe abstrata, logo, os construtores só vão ser invocados pelas suas sub-classes nos seus próprios construtores, e não para criar instâncias de Atividade
+     */
+    
+    /**
+     * Construtor vazio
+     */
+    public Atividade()
+<span class="fc" id="L34">    {</span>
+<span class="fc" id="L35">        this.codAtividade = Atividade.proximoCodAtividade++;</span>
+<span class="fc" id="L36">        this.dataRealizacao = LocalDateTime.now();</span>
+<span class="fc" id="L37">        this.tempo = LocalTime.of(0,0);</span>
+<span class="fc" id="L38">        this.freqCardiaca = 0;</span>
+<span class="fc" id="L39">    }</span>
+    
+    /**
+     * Construtor parametrizado
+     */
+    public Atividade(LocalDateTime realizacao, LocalTime tempo, int freqCardiaca)
+<span class="fc" id="L45">    {</span>
+<span class="fc" id="L46">        this.codAtividade = Atividade.proximoCodAtividade++;</span>
+<span class="fc" id="L47">        this.dataRealizacao = realizacao;</span>
+<span class="fc" id="L48">        this.tempo = tempo;</span>
+<span class="fc" id="L49">        this.freqCardiaca = freqCardiaca;</span>
+<span class="fc" id="L50">    }</span>
+    
+    /**
+     * Construtor de cópia
+     */
+    public Atividade(Atividade umaAtividade)
+<span class="fc" id="L56">    {</span>
+<span class="fc" id="L57">        this.codAtividade = umaAtividade.getCodAtividade();</span>
+<span class="fc" id="L58">        this.dataRealizacao = umaAtividade.getDataRealizacao();</span>
+<span class="fc" id="L59">        this.tempo = umaAtividade.getTempo();</span>
+<span class="fc" id="L60">        this.freqCardiaca = umaAtividade.getFreqCardiaca();</span>
+<span class="fc" id="L61">    }</span>
+    
+    public void setProximoCodigo(int proximoCodigo) {
+<span class="nc" id="L64">        Atividade.proximoCodAtividade = proximoCodigo;</span>
+<span class="nc" id="L65">    }</span>
+    // Getters e setters
+
+    public int getCodAtividade(){
+<span class="fc" id="L69">        return this.codAtividade;</span>
+    }
+
+    public LocalDateTime getDataRealizacao(){
+<span class="fc" id="L73">        return this.dataRealizacao;</span>
+    }
+
+    public LocalTime getTempo(){
+<span class="fc" id="L77">        return this.tempo;</span>
+    }
+
+    public int getFreqCardiaca(){
+<span class="fc" id="L81">        return this.freqCardiaca;</span>
+    }
+    
+    public void setDataRealizacao(LocalDateTime dataRealizacao){
+<span class="fc" id="L85">        this.dataRealizacao = dataRealizacao;</span>
+<span class="fc" id="L86">    }</span>
+
+    public void setTempo(LocalTime tempo){
+<span class="fc" id="L89">        this.tempo = tempo;</span>
+<span class="fc" id="L90">    }</span>
+    
+    public void setFreqCardiaca(int freqCardiaca){
+<span class="fc" id="L93">        this.freqCardiaca = freqCardiaca;</span>
+<span class="fc" id="L94">    }</span>
+
+    /**
+     * Método que calcula o consumo de calorias de uma atividade, da maneira definida para essa atividade - deve ser implementado pelas sub-classes
+     *
+     * @param  utilizador  utilizador que realiza a atividade
+     * @return    consumo de calorias da atividade
+     */
+    public abstract double consumoCalorias(Utilizador utilizador);
+
+    /**
+     * Método que calcula um fator de intensidade pela razão entre a frequência cardíaca a que é feita a atividade e a frequência cardíaca normal
+     * 
+     * @param utilizador utilizador que realiza a atividade
+     * @return fator de intensidade da frequência cardíaca realizada durante a atividade
+     */
+    public double getFatorFreqCardiaca(Utilizador utilizador){
+<span class="fc" id="L111">        double razaoFreqCardiaca = utilizador.getFreqCardiaca() / this.freqCardiaca;</span>
+<span class="fc" id="L112">        return (razaoFreqCardiaca - 2) * 0.4; //cada unidade da razão aumenta o fator em 0.4</span>
+    }
+
+    public abstract Atividade geraAtividade(Utilizador utilizador, double consumoCalorias);
+
+    /**
+     * Método toString, deve ser implementado pelas sub-classes
+     */
+    public String toString() {
+<span class="nc" id="L121">        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(&quot;dd/MM/yyyy HH:mm:ss&quot;);</span>
+<span class="nc" id="L122">        StringBuilder sb = new StringBuilder();</span>
+<span class="nc" id="L123">        sb.append(&quot;Atividade\nId: &quot;);</span>
+<span class="nc" id="L124">        sb.append(this.codAtividade);</span>
+<span class="nc" id="L125">        sb.append(&quot;\nData e hora: &quot;);</span>
+<span class="nc" id="L126">        sb.append(this.dataRealizacao.format(formatter));</span>
+<span class="nc" id="L127">        sb.append(&quot;\nDuraçao: &quot;);</span>
+<span class="nc" id="L128">        sb.append(this.tempo);</span>
+<span class="nc" id="L129">        sb.append(&quot;\nFrequencia Cardiaca: &quot;);</span>
+<span class="nc" id="L130">        sb.append(this.freqCardiaca);</span>
+<span class="nc" id="L131">        sb.append(&quot; bpm&quot;);</span>
+<span class="nc" id="L132">        return (sb.toString());</span>
+    }
+
+    /**
+     * Método equals
+     */
+    public boolean equals(Object o){
+<span class="pc bpc" id="L139" title="1 of 2 branches missed.">        if (this==o) return true;</span>
+<span class="pc bpc" id="L140" title="2 of 4 branches missed.">        if ((o==null)||(this.getClass()!=o.getClass())) return false;</span>
+<span class="fc" id="L141">        Atividade a = (Atividade) o;</span>
+<span class="pc bpc" id="L142" title="3 of 6 branches missed.">        return (((this.tempo).equals(a.getTempo()))&amp;&amp;(this.freqCardiaca ==a.getFreqCardiaca()) &amp;&amp; ((this.dataRealizacao).equals(a.getDataRealizacao())));</span>
+    }
+
+    /**
+     * Método clone, deve ser implementado pelas sub-classes
+     */
+    public abstract Object clone();
+
+    /**
+     * Método compareTo
+     */
+    public int compareTo(Atividade a){
+<span class="fc" id="L154">        int res = this.dataRealizacao.compareTo(a.getDataRealizacao());</span>
+<span class="pc bpc" id="L155" title="1 of 2 branches missed.">        if (res == 0) res = this.codAtividade - a.getCodAtividade();</span>
+<span class="fc" id="L156">        return res;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

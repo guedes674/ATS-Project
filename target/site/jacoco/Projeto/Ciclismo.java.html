@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Ciclismo.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ATS-Project</a> &gt; <a href="index.source.html" class="el_package">Projeto</a> &gt; <span class="el_source">Ciclismo.java</span></div><h1>Ciclismo.java</h1><pre class="source lang-java linenums">package Projeto;
+import java.time.*;
+
+/**
+ * Classe Ciclismo
+ *
+ * @author Grupo10
+ * @version 09/05/24
+ * Notas versão : --
+ */
+public class Ciclismo extends AtivDistancia
+{
+    // variáveis de classe
+    private static final double MET = 6;
+    /**
+     * Construtores de Ciclismo
+     */
+    
+    /**
+     * Construtor vazio
+     */
+    public Ciclismo()
+    {
+<span class="fc" id="L24">        super();</span>
+<span class="fc" id="L25">    }</span>
+    
+    /**
+     * Construtor parametrizado
+     */
+    public Ciclismo(LocalDateTime realizacao, LocalTime tempo, int freqCardiaca, double distancia)
+    {
+<span class="fc" id="L32">        super(realizacao, tempo, freqCardiaca, distancia);</span>
+<span class="fc" id="L33">    }</span>
+    
+    /**
+     * Construtor de cópia
+     */
+    public Ciclismo(Ciclismo ciclismo)
+    {
+<span class="fc" id="L40">        super(ciclismo);</span>
+<span class="fc" id="L41">    }</span>
+    
+    /**
+     * Método que calcula o consumo de calorias de um treino de ciclismo
+     *
+     * @param  utilizador  utilizador que realiza o treino
+     * @return    consumo de calorias do treino
+     */
+    public double consumoCalorias(Utilizador utilizador){
+<span class="nc" id="L50">        double consumoCalorias = Ciclismo.MET * (utilizador.getFatorMultiplicativo() + this.getFatorVelocidade(10.5, 0.11) + this.getFatorFreqCardiaca(utilizador)) </span>
+<span class="nc" id="L51">                                              * utilizador.getBMR() / (24 * 60 * 60)</span>
+<span class="nc" id="L52">                                              * this.getTempo().toSecondOfDay();</span>
+<span class="nc" id="L53">            return consumoCalorias;</span>
+    }
+
+    public Atividade geraAtividade(Utilizador utilizador, double consumoCalorias){
+<span class="nc" id="L57">        Atividade a = new Ciclismo();</span>
+<span class="nc" id="L58">        double tempoDouble = consumoCalorias / (Ciclismo.MET * (utilizador.getBMR() / (24 * 60 * 60)) * utilizador.getFatorMultiplicativo());</span>
+<span class="nc" id="L59">        int tempo = (int) tempoDouble;</span>
+<span class="nc" id="L60">        double distancia = tempo * 10.5;</span>
+<span class="nc" id="L61">        LocalTime t = LocalTime.MIN.plusSeconds(tempo);</span>
+<span class="nc" id="L62">        a.setTempo(t);</span>
+<span class="nc" id="L63">        a.setFreqCardiaca(0);</span>
+<span class="nc" id="L64">        ((AtivDistancia)a).setDistancia(distancia);</span>
+<span class="nc" id="L65">        return a;</span>
+    }
+
+    /**
+     * Método toString
+     */
+    public String toString(){
+<span class="nc" id="L72">        StringBuilder sb = new StringBuilder();</span>
+<span class="nc" id="L73">        sb.append(super.toString());</span>
+<span class="nc" id="L74">        sb.append(&quot;\nTipo de atividade: Ciclismo\n&quot;);</span>
+<span class="nc" id="L75">        return (sb.toString());</span>
+    }
+
+    /**
+     * Método equals
+     */
+    public boolean equals(Object o){
+<span class="pc bpc" id="L82" title="1 of 2 branches missed.">        if (this==o) return true;</span>
+<span class="pc bpc" id="L83" title="2 of 4 branches missed.">        if ((o==null)||(this.getClass()!=o.getClass())) return false;</span>
+<span class="fc" id="L84">        Ciclismo c = (Ciclismo) o;</span>
+<span class="fc" id="L85">        return (super.equals(c));</span>
+    }
+    
+    /**
+     * Método clone
+     */
+    public Object clone(){
+<span class="fc" id="L92">        Ciclismo c = new Ciclismo(this);</span>
+<span class="fc" id="L93">        return c;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AtivDistAltimetria.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ATS-Project</a> &gt; <a href="index.source.html" class="el_package">Projeto</a> &gt; <span class="el_source">AtivDistAltimetria.java</span></div><h1>AtivDistAltimetria.java</h1><pre class="source lang-java linenums">package Projeto;
+import java.time.*;
+
+
+/**
+ * Classe AtivDistAltimetria - classe abstrata que engloba as atividades em que é preciso saber a distância percorrida e a altimetria
+ *
+ * @author Grupo10
+ * @version 09/05/24
+ * Notas versão : --
+ */
+public abstract class AtivDistAltimetria extends AtivDistancia
+{
+    // variáveis de instância
+    private double altimetria;
+
+    /**
+     * Construtores de AtivDistAltimetria
+     * 
+     * AtivDistAltimetria é uma classe abstrata, logo, os construtores só vão ser invocados pelas suas sub-classes nos seus próprios construtores, e não para criar instâncias de AtivDistAltimetria
+     */
+
+    /**
+     * Construtor vazio
+     */
+    public AtivDistAltimetria()
+    {
+<span class="nc" id="L28">        super();</span>
+<span class="nc" id="L29">        this.altimetria = 0.0;</span>
+<span class="nc" id="L30">    }</span>
+
+    /**
+     * Construtor parametrizado
+     */
+    public AtivDistAltimetria(LocalDateTime realizacao, LocalTime tempo, int freqCardiaca, double distancia, double altimetria)
+    {
+<span class="nc" id="L37">        super(realizacao, tempo, freqCardiaca, distancia);</span>
+<span class="nc" id="L38">        this.altimetria = altimetria;</span>
+<span class="nc" id="L39">    }</span>
+
+    /**
+     * Construtor de cópia
+     */
+    public AtivDistAltimetria(AtivDistAltimetria umaAtivDistAltimetria)
+    {
+<span class="nc" id="L46">        super(umaAtivDistAltimetria);</span>
+<span class="nc" id="L47">        this.altimetria = umaAtivDistAltimetria.getAltimetria();</span>
+<span class="nc" id="L48">    }</span>
+    
+    //Getters e setters
+
+    public double getAltimetria() {
+<span class="nc" id="L53">        return this.altimetria;</span>
+    }
+
+    public void setAltimetria(double altimetria) {
+<span class="nc" id="L57">        this.altimetria = altimetria;</span>
+<span class="nc" id="L58">    }</span>
+
+    /**
+     * Método que calcula o fator de intensidade pela altimetria da atividade
+     * 
+     * 
+     * @return fator de intensidade da altimetria a que é realizada a atividade
+     */
+    public double getFatorAltimetria(){
+<span class="nc" id="L67">        return this.altimetria * 0.0005;</span>
+    }
+
+    /**
+     * Método equals
+     */
+    public boolean equals(Object o) {
+<span class="nc bnc" id="L74" title="All 2 branches missed.">        if (this==o) return true;</span>
+<span class="nc bnc" id="L75" title="All 4 branches missed.">        if ((o==null) || (this.getClass() != o.getClass())) return false;</span>
+<span class="nc" id="L76">        AtivDistAltimetria a = (AtivDistAltimetria) o;</span>
+<span class="nc bnc" id="L77" title="All 4 branches missed.">        return ((super.equals(a)) &amp;&amp; (this.altimetria == a.getAltimetria()));</span>
+    }
+    
+    /**
+     * Método toString, deve ser implementado pelas sub-classes
+     */
+    public String toString() {
+<span class="nc" id="L84">        StringBuilder sb = new StringBuilder();</span>
+<span class="nc" id="L85">        sb.append(super.toString());</span>
+<span class="nc" id="L86">        sb.append(&quot;\nAltimetria: &quot;);</span>
+<span class="nc" id="L87">        sb.append(this.altimetria);</span>
+<span class="nc" id="L88">        sb.append(&quot; metros&quot;);</span>
+<span class="nc" id="L89">        return (sb.toString());</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

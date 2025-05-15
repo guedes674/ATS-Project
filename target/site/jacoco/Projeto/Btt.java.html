@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Btt.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ATS-Project</a> &gt; <a href="index.source.html" class="el_package">Projeto</a> &gt; <span class="el_source">Btt.java</span></div><h1>Btt.java</h1><pre class="source lang-java linenums">package Projeto;
+import java.time.*;
+import java.util.function.Function;
+import java.util.function.Predicate;
+
+/**
+ * Classe Btt
+ *
+ * @author Grupo10
+ * @version 09/05/24
+ * Notas versão : --
+ */
+public class Btt extends AtivDistAltimetria implements Hard
+{
+    // variáveis de classe
+    private static final double MET = 10;
+    /**
+     * Construtores de Btt
+     */
+    
+    /**
+     * Construtor vazio
+     */
+    public Btt()
+    {
+<span class="nc" id="L26">        super();</span>
+<span class="nc" id="L27">    }</span>
+    
+    /**
+     * Construtor parametrizado
+     */
+    public Btt(LocalDateTime realizacao, LocalTime tempo, int freqCardiaca, double distancia, double altimetria)
+    {
+<span class="nc" id="L34">        super(realizacao, tempo, freqCardiaca, distancia, altimetria);</span>
+<span class="nc" id="L35">    }</span>
+    
+    /**
+     * Construtor de cópia
+     */
+    public Btt(Btt btt)
+    {
+<span class="nc" id="L42">        super(btt);</span>
+<span class="nc" id="L43">    }</span>
+    
+    public double getFatorHard() {
+<span class="nc" id="L46">        double hard = 1.05;</span>
+<span class="nc bnc" id="L47" title="All 2 branches missed.">        if (this.getAltimetria() &gt; 1000) {</span>
+<span class="nc" id="L48">            hard+=0.10;</span>
+<span class="nc bnc" id="L49" title="All 2 branches missed.">            if (this.getAltimetria() &gt; 2000) hard+=0.10;</span>
+        }
+<span class="nc" id="L51">        return hard;</span>
+    }
+    
+    /**
+     * Método que calcula o consumo de calorias de um treino de BTT
+     *
+     * @param  utilizador  utilizador que realiza o treino
+     * @return    consumo de calorias do treino
+     */
+    public double consumoCalorias(Utilizador utilizador){
+<span class="nc" id="L61">        double consumoCalorias = Btt.MET * (utilizador.getFatorMultiplicativo() + this.getFatorVelocidade(10.5, 0.11) + this.getFatorFreqCardiaca(utilizador) + this.getFatorAltimetria()) </span>
+<span class="nc" id="L62">                                         * utilizador.getBMR() / (24 * 60 * 60) * this.getFatorHard()</span>
+<span class="nc" id="L63">                                         * this.getTempo().toSecondOfDay();</span>
+<span class="nc" id="L64">        return consumoCalorias;</span>
+    }
+
+    public Atividade geraAtividade(Utilizador utilizador, double consumoCalorias){
+<span class="nc" id="L68">        Atividade a = new Btt();</span>
+<span class="nc" id="L69">        Predicate&lt;Atividade&gt; p = at -&gt; at instanceof BicepCurls;</span>
+<span class="nc" id="L70">        Function&lt;Atividade,Double&gt; f = at -&gt; ((Btt)at).getAltimetria();</span>
+<span class="nc" id="L71">        double maxAltimetria = utilizador.infoDasAtividadesNumPeriodoQueRespeitamP(LocalDate.MIN, LocalDate.MAX, p, f)</span>
+<span class="nc bnc" id="L72" title="All 2 branches missed.">                                         .stream().reduce((p1,p2) -&gt; p1 &gt; p2 ? p1 : p2).orElse(0.0);</span>
+<span class="nc" id="L73">        double altimetria = maxAltimetria * 0.8;</span>
+<span class="nc" id="L74">        double fatorAltimetria = altimetria * 0.0005;</span>
+<span class="nc" id="L75">        double tempoDouble = consumoCalorias / (Btt.MET * (utilizador.getBMR() / (24 * 60 * 60)) * (utilizador.getFatorMultiplicativo() + fatorAltimetria));</span>
+<span class="nc" id="L76">        int tempo = (int) tempoDouble;</span>
+<span class="nc" id="L77">        double distancia = tempo * 10.5;</span>
+<span class="nc" id="L78">        LocalTime t = LocalTime.MIN.plusSeconds(tempo);</span>
+<span class="nc" id="L79">        a.setTempo(t);</span>
+<span class="nc" id="L80">        a.setFreqCardiaca(0);</span>
+<span class="nc" id="L81">        ((AtivDistancia)a).setDistancia(distancia);</span>
+<span class="nc" id="L82">        ((AtivDistAltimetria)a).setAltimetria(altimetria);</span>
+<span class="nc" id="L83">        return a;</span>
+    }
+
+    /**
+     * Método toString
+     */
+    public String toString(){
+<span class="nc" id="L90">        StringBuilder sb = new StringBuilder();</span>
+<span class="nc" id="L91">        sb.append(super.toString());</span>
+<span class="nc" id="L92">        sb.append(&quot;\nTipo de atividade: BTT\n&quot;);</span>
+<span class="nc" id="L93">        return (sb.toString());</span>
+    }
+    
+    /**
+     * Método equals
+     */
+    public boolean equals(Object o) {
+<span class="nc bnc" id="L100" title="All 2 branches missed.">        if (this==o) return true;</span>
+<span class="nc bnc" id="L101" title="All 4 branches missed.">        if ((o==null) || (this.getClass() != o.getClass())) return false;</span>
+<span class="nc" id="L102">        Btt b = (Btt) o;</span>
+<span class="nc" id="L103">        return (super.equals(b));</span>
+    }
+    
+    /**
+     * Método clone
+     */
+    public Object clone(){
+<span class="nc" id="L110">        Btt b = new Btt(this);</span>
+<span class="nc" id="L111">        return b;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>
