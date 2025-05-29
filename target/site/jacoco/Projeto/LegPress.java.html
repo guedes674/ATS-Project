@@ -23,24 +23,24 @@ public class LegPress extends AtivRepsPeso
      */
     public LegPress()
     {
-<span class="nc" id="L26">        super();</span>
-<span class="nc" id="L27">    }</span>
+<span class="fc" id="L26">        super();</span>
+<span class="fc" id="L27">    }</span>
     
     /**
      * Construtor parametrizado
      */
     public LegPress(LocalDateTime realizacao, LocalTime tempo, int freqCardiaca, int repeticoes, double peso)
     {
-<span class="nc" id="L34">        super(realizacao, tempo, freqCardiaca, repeticoes, peso);</span>
-<span class="nc" id="L35">    }</span>
+<span class="fc" id="L34">        super(realizacao, tempo, freqCardiaca, repeticoes, peso);</span>
+<span class="fc" id="L35">    }</span>
     
     /**
      * Construtor de cópia
      */
     public LegPress(LegPress legPress)
     {
-<span class="nc" id="L42">        super(legPress);</span>
-<span class="nc" id="L43">    }</span>
+<span class="fc" id="L42">        super(legPress);</span>
+<span class="fc" id="L43">    }</span>
     
     /**
      * Método que calcula o consumo de calorias de uma série de leg press
@@ -49,60 +49,60 @@ public class LegPress extends AtivRepsPeso
      * @return    consumo de calorias do treino
      */
     public double consumoCalorias(Utilizador utilizador){
-<span class="nc" id="L52">        double consumoCalorias = LegPress.MET * (utilizador.getFatorMultiplicativo() + this.getFatorRepeticoes(0.5, 0.2) + this.getFatorPeso(utilizador, 1, 0.2) + this.getFatorFreqCardiaca(utilizador)) </span>
-<span class="nc" id="L53">                                              * utilizador.getBMR() / (24 * 60 * 60)</span>
-<span class="nc" id="L54">                                              * this.getTempo().toSecondOfDay();</span>
-<span class="nc" id="L55">        return consumoCalorias;</span>
+<span class="fc" id="L52">        double consumoCalorias = LegPress.MET * (utilizador.getFatorMultiplicativo() + this.getFatorRepeticoes(0.5, 0.2) + this.getFatorPeso(utilizador, 1, 0.2) + this.getFatorFreqCardiaca(utilizador)) </span>
+<span class="fc" id="L53">                                              * utilizador.getBMR() / (24 * 60 * 60)</span>
+<span class="fc" id="L54">                                              * this.getTempo().toSecondOfDay();</span>
+<span class="fc" id="L55">        return consumoCalorias;</span>
     }
 
     public Atividade geraAtividade(Utilizador utilizador, double consumoCalorias){
-<span class="nc" id="L59">        Atividade a = new LegPress();</span>
-<span class="nc" id="L60">        Predicate&lt;Atividade&gt; p = at -&gt; at instanceof LegPress;</span>
-<span class="nc" id="L61">        Function&lt;Atividade,Double&gt; f = at -&gt; ((LegPress)at).getPeso();</span>
-<span class="nc" id="L62">        double maxPeso = utilizador.infoDasAtividadesNumPeriodoQueRespeitamP(LocalDate.MIN, LocalDate.MAX, p, f)</span>
-<span class="nc bnc" id="L63" title="All 2 branches missed.">                                   .stream().reduce((p1,p2) -&gt; p1 &gt; p2 ? p1 : p2).orElse(0.0);</span>
-<span class="nc bnc" id="L64" title="All 2 branches missed.">        double peso = maxPeso == 0 ? utilizador.getPeso() : maxPeso * 0.8;</span>
-<span class="nc" id="L65">        maxPeso *= 0.8;</span>
-<span class="nc" id="L66">        maxPeso /= utilizador.getPeso();</span>
-<span class="nc" id="L67">        double fatorPeso = (maxPeso - 1) * 0.2;</span>
-<span class="nc bnc" id="L68" title="All 2 branches missed.">        if (fatorPeso &lt; 0) fatorPeso = 0;</span>
-<span class="nc" id="L69">        double tempoDouble = consumoCalorias / (LegPress.MET * (utilizador.getBMR() / (24 * 60 * 60)) * (utilizador.getFatorMultiplicativo() + fatorPeso));</span>
-<span class="nc" id="L70">        int tempo = (int) tempoDouble;</span>
-<span class="nc" id="L71">        double reps = tempo * 0.25;</span>
-<span class="nc" id="L72">        LocalTime t = LocalTime.MIN.plusSeconds(tempo);</span>
-<span class="nc" id="L73">        a.setTempo(t);</span>
-<span class="nc" id="L74">        a.setFreqCardiaca(0);</span>
-<span class="nc" id="L75">        ((AtivRepeticoes)a).setRepeticoes((int)reps);</span>
-<span class="nc" id="L76">        ((AtivRepsPeso)a).setPeso(peso);</span>
-<span class="nc" id="L77">        return a;</span>
+<span class="fc" id="L59">        Atividade a = new LegPress();</span>
+<span class="pc" id="L60">        Predicate&lt;Atividade&gt; p = at -&gt; at instanceof LegPress;</span>
+<span class="pc" id="L61">        Function&lt;Atividade,Double&gt; f = at -&gt; ((LegPress)at).getPeso();</span>
+<span class="fc" id="L62">        double maxPeso = utilizador.infoDasAtividadesNumPeriodoQueRespeitamP(LocalDate.MIN, LocalDate.MAX, p, f)</span>
+<span class="pc bnc" id="L63" title="All 2 branches missed.">                                   .stream().reduce((p1,p2) -&gt; p1 &gt; p2 ? p1 : p2).orElse(0.0);</span>
+<span class="pc bpc" id="L64" title="1 of 2 branches missed.">        double peso = maxPeso == 0 ? utilizador.getPeso() : maxPeso * 0.8;</span>
+<span class="fc" id="L65">        maxPeso *= 0.8;</span>
+<span class="fc" id="L66">        maxPeso /= utilizador.getPeso();</span>
+<span class="fc" id="L67">        double fatorPeso = (maxPeso - 1) * 0.2;</span>
+<span class="fc bfc" id="L68" title="All 2 branches covered.">        if (fatorPeso &lt; 0) fatorPeso = 0;</span>
+<span class="fc" id="L69">        double tempoDouble = consumoCalorias / (LegPress.MET * (utilizador.getBMR() / (24 * 60 * 60)) * (utilizador.getFatorMultiplicativo() + fatorPeso));</span>
+<span class="fc" id="L70">        int tempo = (int) tempoDouble;</span>
+<span class="fc" id="L71">        double reps = tempo * 0.25;</span>
+<span class="fc" id="L72">        LocalTime t = LocalTime.MIN.plusSeconds(tempo);</span>
+<span class="fc" id="L73">        a.setTempo(t);</span>
+<span class="fc" id="L74">        a.setFreqCardiaca(0);</span>
+<span class="fc" id="L75">        ((AtivRepeticoes)a).setRepeticoes((int)reps);</span>
+<span class="fc" id="L76">        ((AtivRepsPeso)a).setPeso(peso);</span>
+<span class="fc" id="L77">        return a;</span>
     }
 
     /**
      * Método toString
      */
     public String toString(){
-<span class="nc" id="L84">        StringBuilder sb = new StringBuilder();</span>
-<span class="nc" id="L85">        sb.append(super.toString());</span>
-<span class="nc" id="L86">        sb.append(&quot;\nTipo de atividade: Leg press\n&quot;);</span>
-<span class="nc" id="L87">        return (sb.toString());</span>
+<span class="fc" id="L84">        StringBuilder sb = new StringBuilder();</span>
+<span class="fc" id="L85">        sb.append(super.toString());</span>
+<span class="fc" id="L86">        sb.append(&quot;\nTipo de atividade: Leg press\n&quot;);</span>
+<span class="fc" id="L87">        return (sb.toString());</span>
     }
     
     /**
      * Método equals
      */
     public boolean equals(Object o) {
-<span class="nc bnc" id="L94" title="All 2 branches missed.">        if (this==o) return true;</span>
-<span class="nc bnc" id="L95" title="All 4 branches missed.">        if ((o==null) || (this.getClass() != o.getClass())) return false;</span>
-<span class="nc" id="L96">        LegPress l = (LegPress) o;</span>
-<span class="nc" id="L97">        return (super.equals(l));</span>
+<span class="fc bfc" id="L94" title="All 2 branches covered.">        if (this==o) return true;</span>
+<span class="fc bfc" id="L95" title="All 4 branches covered.">        if ((o==null) || (this.getClass() != o.getClass())) return false;</span>
+<span class="fc" id="L96">        LegPress l = (LegPress) o;</span>
+<span class="fc" id="L97">        return (super.equals(l));</span>
     }
     
     /**
      * Método clone
      */
     public Object clone(){
-<span class="nc" id="L104">        LegPress l = new LegPress(this);</span>
-<span class="nc" id="L105">        return l;</span>
+<span class="fc" id="L104">        LegPress l = new LegPress(this);</span>
+<span class="fc" id="L105">        return l;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

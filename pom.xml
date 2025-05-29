@@ -199,6 +199,7 @@
         <configuration>
           <source>1.8</source>
           <target>1.8</target>
+          <extraArgs> -Duse_separate_classloader=false </extraArgs>
         </configuration>
       </plugin>
 

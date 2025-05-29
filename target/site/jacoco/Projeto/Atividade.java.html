@@ -30,8 +30,8 @@ public abstract class Atividade implements Comparable&lt;Atividade&gt;, Serializ
     /**
      * Construtor vazio
      */
-    public Atividade()
-<span class="fc" id="L34">    {</span>
+<span class="fc" id="L33">    public Atividade()</span>
+    {
 <span class="fc" id="L35">        this.codAtividade = Atividade.proximoCodAtividade++;</span>
 <span class="fc" id="L36">        this.dataRealizacao = LocalDateTime.now();</span>
 <span class="fc" id="L37">        this.tempo = LocalTime.of(0,0);</span>
@@ -41,8 +41,8 @@ public abstract class Atividade implements Comparable&lt;Atividade&gt;, Serializ
     /**
      * Construtor parametrizado
      */
-    public Atividade(LocalDateTime realizacao, LocalTime tempo, int freqCardiaca)
-<span class="fc" id="L45">    {</span>
+<span class="fc" id="L44">    public Atividade(LocalDateTime realizacao, LocalTime tempo, int freqCardiaca)</span>
+    {
 <span class="fc" id="L46">        this.codAtividade = Atividade.proximoCodAtividade++;</span>
 <span class="fc" id="L47">        this.dataRealizacao = realizacao;</span>
 <span class="fc" id="L48">        this.tempo = tempo;</span>
@@ -52,8 +52,8 @@ public abstract class Atividade implements Comparable&lt;Atividade&gt;, Serializ
     /**
      * Construtor de cópia
      */
-    public Atividade(Atividade umaAtividade)
-<span class="fc" id="L56">    {</span>
+<span class="fc" id="L55">    public Atividade(Atividade umaAtividade)</span>
+    {
 <span class="fc" id="L57">        this.codAtividade = umaAtividade.getCodAtividade();</span>
 <span class="fc" id="L58">        this.dataRealizacao = umaAtividade.getDataRealizacao();</span>
 <span class="fc" id="L59">        this.tempo = umaAtividade.getTempo();</span>
@@ -61,8 +61,8 @@ public abstract class Atividade implements Comparable&lt;Atividade&gt;, Serializ
 <span class="fc" id="L61">    }</span>
     
     public void setProximoCodigo(int proximoCodigo) {
-<span class="nc" id="L64">        Atividade.proximoCodAtividade = proximoCodigo;</span>
-<span class="nc" id="L65">    }</span>
+<span class="fc" id="L64">        Atividade.proximoCodAtividade = proximoCodigo;</span>
+<span class="fc" id="L65">    }</span>
     // Getters e setters
 
     public int getCodAtividade(){
@@ -118,18 +118,18 @@ public abstract class Atividade implements Comparable&lt;Atividade&gt;, Serializ
      * Método toString, deve ser implementado pelas sub-classes
      */
     public String toString() {
-<span class="nc" id="L121">        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(&quot;dd/MM/yyyy HH:mm:ss&quot;);</span>
-<span class="nc" id="L122">        StringBuilder sb = new StringBuilder();</span>
-<span class="nc" id="L123">        sb.append(&quot;Atividade\nId: &quot;);</span>
-<span class="nc" id="L124">        sb.append(this.codAtividade);</span>
-<span class="nc" id="L125">        sb.append(&quot;\nData e hora: &quot;);</span>
-<span class="nc" id="L126">        sb.append(this.dataRealizacao.format(formatter));</span>
-<span class="nc" id="L127">        sb.append(&quot;\nDuraçao: &quot;);</span>
-<span class="nc" id="L128">        sb.append(this.tempo);</span>
-<span class="nc" id="L129">        sb.append(&quot;\nFrequencia Cardiaca: &quot;);</span>
-<span class="nc" id="L130">        sb.append(this.freqCardiaca);</span>
-<span class="nc" id="L131">        sb.append(&quot; bpm&quot;);</span>
-<span class="nc" id="L132">        return (sb.toString());</span>
+<span class="fc" id="L121">        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(&quot;dd/MM/yyyy HH:mm:ss&quot;);</span>
+<span class="fc" id="L122">        StringBuilder sb = new StringBuilder();</span>
+<span class="fc" id="L123">        sb.append(&quot;Atividade\nId: &quot;);</span>
+<span class="fc" id="L124">        sb.append(this.codAtividade);</span>
+<span class="fc" id="L125">        sb.append(&quot;\nData e hora: &quot;);</span>
+<span class="fc" id="L126">        sb.append(this.dataRealizacao.format(formatter));</span>
+<span class="fc" id="L127">        sb.append(&quot;\nDuraçao: &quot;);</span>
+<span class="fc" id="L128">        sb.append(this.tempo);</span>
+<span class="fc" id="L129">        sb.append(&quot;\nFrequencia Cardiaca: &quot;);</span>
+<span class="fc" id="L130">        sb.append(this.freqCardiaca);</span>
+<span class="fc" id="L131">        sb.append(&quot; bpm&quot;);</span>
+<span class="fc" id="L132">        return (sb.toString());</span>
     }
 
     /**
@@ -139,7 +139,7 @@ public abstract class Atividade implements Comparable&lt;Atividade&gt;, Serializ
 <span class="pc bpc" id="L139" title="1 of 2 branches missed.">        if (this==o) return true;</span>
 <span class="pc bpc" id="L140" title="2 of 4 branches missed.">        if ((o==null)||(this.getClass()!=o.getClass())) return false;</span>
 <span class="fc" id="L141">        Atividade a = (Atividade) o;</span>
-<span class="pc bpc" id="L142" title="3 of 6 branches missed.">        return (((this.tempo).equals(a.getTempo()))&amp;&amp;(this.freqCardiaca ==a.getFreqCardiaca()) &amp;&amp; ((this.dataRealizacao).equals(a.getDataRealizacao())));</span>
+<span class="fc bfc" id="L142" title="All 6 branches covered.">        return (((this.tempo).equals(a.getTempo()))&amp;&amp;(this.freqCardiaca ==a.getFreqCardiaca()) &amp;&amp; ((this.dataRealizacao).equals(a.getDataRealizacao())));</span>
     }
 
     /**
@@ -152,7 +152,7 @@ public abstract class Atividade implements Comparable&lt;Atividade&gt;, Serializ
      */
     public int compareTo(Atividade a){
 <span class="fc" id="L154">        int res = this.dataRealizacao.compareTo(a.getDataRealizacao());</span>
-<span class="pc bpc" id="L155" title="1 of 2 branches missed.">        if (res == 0) res = this.codAtividade - a.getCodAtividade();</span>
+<span class="fc bfc" id="L155" title="All 2 branches covered.">        if (res == 0) res = this.codAtividade - a.getCodAtividade();</span>
 <span class="fc" id="L156">        return res;</span>
     }
 }

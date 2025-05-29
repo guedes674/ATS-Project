@@ -14,38 +14,38 @@ public class AppDesportiva
     private GestorDesportivo model;
     private Menu menuInicial, menuSetup, menuSimulacao, menuEstatisticas;
     private LocalDate dataAtual;
-<span class="nc" id="L17">    private static String[] opcoesInicial = {&quot;Menu Inicial&quot;,&quot;Carregar estado&quot;, &quot;Novo estado&quot;, &quot;Sair&quot;};</span>
-<span class="nc" id="L18">    private static String[] opcoesSetup = {&quot;Menu Setup&quot;,&quot;Adicionar utilizador&quot;,&quot;Visualizar utilizador&quot;, &quot;Adicionar atividade&quot;, &quot;Registar execução de atividade&quot;, &quot;Adicionar atividade e registar execução&quot;,&quot;Visualizar atividade&quot;, &quot;Adicionar plano de treino&quot;, &quot;Registar execução de plano de treino&quot;, &quot;Adicionar plano de treino e registar execução&quot;,&quot;Visualizar plano de treino&quot;, &quot;Iniciar simulação&quot;, &quot;Guardar estado&quot;, &quot;Guardar e sair&quot;,&quot;Sair sem guardar&quot;};</span>
-<span class="nc" id="L19">    private static String[] opcoesSimulacao = {&quot;Menu Simulação&quot;, &quot;Avançar tempo&quot;,&quot;Consultar recordes&quot;, &quot;Consultar estatísticas&quot;, &quot;Mostrar todas as informações (todos os utilizadores e as suas atividades e planos de treino executados)&quot;, &quot;Voltar ao setup&quot;};</span>
-<span class="nc" id="L20">    private static String[] opcoesEstatisticas = {&quot;Estatísticas&quot;,&quot;Utilizador com mais calorias gastas&quot;, &quot;Utilizador com mais atividades realizadas&quot;, &quot;Atividade mais realizada&quot;, &quot;Total de kilómetros percorridos&quot;, &quot;Metros de altimetria acumulados&quot;, &quot;Plano de treino mais exigente&quot;, &quot;Atividades de um utilizador&quot;, &quot;Voltar&quot;};</span>
+<span class="fc" id="L17">    private static String[] opcoesInicial = {&quot;Menu Inicial&quot;,&quot;Carregar estado&quot;, &quot;Novo estado&quot;, &quot;Sair&quot;};</span>
+<span class="fc" id="L18">    private static String[] opcoesSetup = {&quot;Menu Setup&quot;,&quot;Adicionar utilizador&quot;,&quot;Visualizar utilizador&quot;, &quot;Adicionar atividade&quot;, &quot;Registar execução de atividade&quot;, &quot;Adicionar atividade e registar execução&quot;,&quot;Visualizar atividade&quot;, &quot;Adicionar plano de treino&quot;, &quot;Registar execução de plano de treino&quot;, &quot;Adicionar plano de treino e registar execução&quot;,&quot;Visualizar plano de treino&quot;, &quot;Iniciar simulação&quot;, &quot;Guardar estado&quot;, &quot;Guardar e sair&quot;,&quot;Sair sem guardar&quot;};</span>
+<span class="fc" id="L19">    private static String[] opcoesSimulacao = {&quot;Menu Simulação&quot;, &quot;Avançar tempo&quot;,&quot;Consultar recordes&quot;, &quot;Consultar estatísticas&quot;, &quot;Mostrar todas as informações (todos os utilizadores e as suas atividades e planos de treino executados)&quot;, &quot;Voltar ao setup&quot;};</span>
+<span class="fc" id="L20">    private static String[] opcoesEstatisticas = {&quot;Estatísticas&quot;,&quot;Utilizador com mais calorias gastas&quot;, &quot;Utilizador com mais atividades realizadas&quot;, &quot;Atividade mais realizada&quot;, &quot;Total de kilómetros percorridos&quot;, &quot;Metros de altimetria acumulados&quot;, &quot;Plano de treino mais exigente&quot;, &quot;Atividades de um utilizador&quot;, &quot;Voltar&quot;};</span>
     private String path;
     
     /**
      * Construtor de AppDesportiva
      */
-    public AppDesportiva()
-<span class="nc" id="L27">    {</span>
-<span class="nc" id="L28">        this.model = new GestorDesportivo();</span>
-<span class="nc" id="L29">        this.menuInicial = new Menu(AppDesportiva.opcoesInicial);</span>
-<span class="nc" id="L30">        this.menuSetup = new Menu(AppDesportiva.opcoesSetup);</span>
-<span class="nc" id="L31">        this.menuSimulacao = new Menu(AppDesportiva.opcoesSimulacao);</span>
-<span class="nc" id="L32">        this.menuEstatisticas = new Menu(AppDesportiva.opcoesEstatisticas);</span>
-<span class="nc" id="L33">        this.dataAtual = LocalDate.now();</span>
-<span class="nc" id="L34">        this.runInicial();</span>
-<span class="nc" id="L35">    }</span>
+<span class="fc" id="L26">    public AppDesportiva()</span>
+    {
+<span class="fc" id="L28">        this.model = new GestorDesportivo();</span>
+<span class="fc" id="L29">        this.menuInicial = new Menu(AppDesportiva.opcoesInicial);</span>
+<span class="fc" id="L30">        this.menuSetup = new Menu(AppDesportiva.opcoesSetup);</span>
+<span class="fc" id="L31">        this.menuSimulacao = new Menu(AppDesportiva.opcoesSimulacao);</span>
+<span class="fc" id="L32">        this.menuEstatisticas = new Menu(AppDesportiva.opcoesEstatisticas);</span>
+<span class="fc" id="L33">        this.dataAtual = LocalDate.now();</span>
+<span class="fc" id="L34">        this.runInicial();</span>
+<span class="fc" id="L35">    }</span>
     
     /**
      * Construtor de AppDesportiva quando é passado o nome do ficheiro a carregar
      * @param nome do ficheiro
      */
-    public AppDesportiva(String ficheiro)
-<span class="nc" id="L42">    {</span>
-<span class="nc" id="L43">        this.model = new GestorDesportivo();</span>
-<span class="nc" id="L44">        this.menuInicial = new Menu(AppDesportiva.opcoesInicial);</span>
-<span class="nc" id="L45">        this.menuSetup = new Menu(AppDesportiva.opcoesSetup);</span>
-<span class="nc" id="L46">        this.menuSimulacao = new Menu(AppDesportiva.opcoesSimulacao);</span>
-<span class="nc" id="L47">        this.menuEstatisticas = new Menu(AppDesportiva.opcoesEstatisticas);</span>
-<span class="nc" id="L48">        this.dataAtual = LocalDate.now();</span>
+<span class="fc" id="L41">    public AppDesportiva(String ficheiro)</span>
+    {
+<span class="fc" id="L43">        this.model = new GestorDesportivo();</span>
+<span class="fc" id="L44">        this.menuInicial = new Menu(AppDesportiva.opcoesInicial);</span>
+<span class="fc" id="L45">        this.menuSetup = new Menu(AppDesportiva.opcoesSetup);</span>
+<span class="fc" id="L46">        this.menuSimulacao = new Menu(AppDesportiva.opcoesSimulacao);</span>
+<span class="fc" id="L47">        this.menuEstatisticas = new Menu(AppDesportiva.opcoesEstatisticas);</span>
+<span class="fc" id="L48">        this.dataAtual = LocalDate.now();</span>
         try{
 <span class="nc" id="L50">            this.model = this.model.carregaEstado(ficheiro);</span>
 <span class="nc" id="L51">            System.out.println(&quot;\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n&quot;);</span>
@@ -53,17 +53,17 @@ public class AppDesportiva
 <span class="nc" id="L53">            this.model.estadoAtualizado();</span>
 <span class="nc" id="L54">            this.path = ficheiro;</span>
 <span class="nc" id="L55">            this.runSetup();</span>
-        }
+<span class="nc" id="L56">        }</span>
 <span class="nc" id="L57">        catch (ClassNotFoundException clExc){</span>
 <span class="nc" id="L58">            System.out.println(&quot;\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n&quot;);</span>
 <span class="nc" id="L59">            menuInicial.pedeString(&quot;Não foi possível carregar os dados do ficheiro.\nEnter para continuar&quot;);</span>
 <span class="nc" id="L60">            this.runInicial();</span>
         }
-<span class="nc" id="L62">        catch (IOException ioExc){</span>
-<span class="nc" id="L63">            System.out.println(&quot;\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n&quot;);</span>
-<span class="nc" id="L64">            menuInicial.pedeString(&quot;Não foi possível aceder ao ficheiro.\nEnter para continuar&quot;);</span>
+<span class="fc" id="L62">        catch (IOException ioExc){</span>
+<span class="fc" id="L63">            System.out.println(&quot;\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n&quot;);</span>
+<span class="fc" id="L64">            menuInicial.pedeString(&quot;Não foi possível aceder ao ficheiro.\nEnter para continuar&quot;);</span>
 <span class="nc" id="L65">            this.runInicial();</span>
-<span class="nc" id="L66">        }</span>
+        }
 <span class="nc" id="L67">    }</span>
     
     /**
@@ -71,7 +71,7 @@ public class AppDesportiva
      * @param menu atual
      */
     private int carregaDados(Menu menuAtual){
-<span class="nc" id="L74">        System.out.println(&quot;\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n&quot;);</span>
+<span class="fc" id="L74">        System.out.println(&quot;\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n&quot;);</span>
 <span class="nc" id="L75">        String ficheiro = menuAtual.pedeString(&quot;Insira o nome do ficheiro a carregar&quot;);</span>
         try{
 <span class="nc" id="L77">            this.model = this.model.carregaEstado(ficheiro);</span>
@@ -85,7 +85,7 @@ public class AppDesportiva
         }
 <span class="nc" id="L86">        catch (IOException ioExc){</span>
 <span class="nc" id="L87">            menuAtual.pedeString(&quot;Não foi possível aceder ao ficheiro.\nEnter para continuar&quot;);</span>
-<span class="nc" id="L88">        }</span>
+        }
 <span class="nc" id="L89">        return 1;</span>
     }
     
@@ -367,14 +367,14 @@ public class AppDesportiva
     public void estatisticaEntreDatas(int op){
         LocalDate dataInicial;
         LocalDate dataFinal;
-<span class="nc" id="L370">        int d = 0;</span>
-<span class="nc bnc" id="L371" title="All 4 branches missed.">        while(d!=1&amp;&amp;d!=2){</span>
+<span class="fc" id="L370">        int d = 0;</span>
+<span class="pc bnc" id="L371" title="All 4 branches missed.">        while(d!=1&amp;&amp;d!=2){</span>
 <span class="nc" id="L372">            d = this.menuEstatisticas.pedeInt(&quot;1: Desde sempre\n2: Entre datas&quot;);</span>
         }
 <span class="nc bnc" id="L374" title="All 2 branches missed.">        if(d==1){</span>
 <span class="nc" id="L375">            dataInicial = LocalDate.MIN;</span>
 <span class="nc" id="L376">            dataFinal = this.dataAtual;</span>
-        }
+<span class="nc" id="L377">        }</span>
         else{
 <span class="nc" id="L379">            dataInicial = this.menuEstatisticas.pedeData(&quot;Insira data inicial (dia/mês/ano)&quot;);</span>
 <span class="nc" id="L380">            dataFinal = this.menuEstatisticas.pedeData(&quot;Insira data final (dia/mês/ano)&quot;);</span>
@@ -399,8 +399,8 @@ public class AppDesportiva
 <span class="nc" id="L399">    }</span>
     
     public void estatisticaUtilizadorEntreDatas(int op){
-<span class="nc" id="L402">        int codUser = menuEstatisticas.pedeInt(&quot;Insira o código do utilizador&quot;);</span>
-<span class="nc bnc" id="L403" title="All 2 branches missed.">        if (!model.existeUtilizador(codUser)){</span>
+<span class="fc" id="L402">        int codUser = menuEstatisticas.pedeInt(&quot;Insira o código do utilizador&quot;);</span>
+<span class="pc bpc" id="L403" title="1 of 2 branches missed.">        if (!model.existeUtilizador(codUser)){</span>
 <span class="nc" id="L404">                menuEstatisticas.pedeString(&quot;Utilizador não existe.\nEnter para continuar&quot;);</span>
 <span class="nc" id="L405">                return;</span>
         }
@@ -413,7 +413,7 @@ public class AppDesportiva
 <span class="nc bnc" id="L413" title="All 2 branches missed.">        if(d==1){</span>
 <span class="nc" id="L414">            dataInicial = LocalDate.MIN;</span>
 <span class="nc" id="L415">            dataFinal = this.dataAtual;</span>
-        }
+<span class="nc" id="L416">        }</span>
         else{
 <span class="nc" id="L418">            dataInicial = this.menuEstatisticas.pedeData(&quot;Insira data inicial (dia/mês/ano)&quot;);</span>
 <span class="nc" id="L419">            dataFinal = this.menuEstatisticas.pedeData(&quot;Insira data final (dia/mês/ano)&quot;);</span>
@@ -438,9 +438,9 @@ public class AppDesportiva
      * Método runInicial, que executa o menu inicial, lê e trata as opções escolhidas
      */
     public void runInicial(){
-<span class="nc" id="L441">        menuInicial.runMenu();</span>
-<span class="nc" id="L442">        int op = menuInicial.getOpcao();</span>
-<span class="nc bnc" id="L443" title="All 2 branches missed.">        while (op!=0){</span>
+<span class="fc" id="L441">        menuInicial.runMenu();</span>
+<span class="fc" id="L442">        int op = menuInicial.getOpcao();</span>
+<span class="pc bpc" id="L443" title="1 of 2 branches missed.">        while (op!=0){</span>
 <span class="nc bnc" id="L444" title="All 3 branches missed.">            switch (op){ </span>
                 case 1 :   //opção &quot;Carregar estado&quot;
 <span class="nc" id="L446">                    int carregar = this.carregaDados(menuInicial);</span>
@@ -454,11 +454,11 @@ public class AppDesportiva
 <span class="nc" id="L454">                    this.path=ficheiro;</span>
                     try {
 <span class="nc" id="L456">                        this.model.guardaEstado(this.path);</span>
-                    }
+<span class="nc" id="L457">                    }</span>
 <span class="nc" id="L458">                    catch (IOException e){</span>
 <span class="nc" id="L459">                        menuInicial.pedeString(&quot;Não foi possível aceder ao ficheiro.\nEnter para continuar&quot;);</span>
 <span class="nc" id="L460">                        break;</span>
-<span class="nc" id="L461">                    }</span>
+                    }
 <span class="nc" id="L462">                    int exit = this.runSetup();</span>
 <span class="nc bnc" id="L463" title="All 2 branches missed.">                    if (exit==1) op=0;</span>
                     break;
@@ -468,17 +468,17 @@ public class AppDesportiva
 <span class="nc" id="L468">                op = menuInicial.getOpcao();</span>
             }
         }
-<span class="nc" id="L471">        System.out.println(&quot;\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n&quot;);</span>
-<span class="nc" id="L472">        System.out.println(&quot;Programa encerrado&quot;);</span>
-<span class="nc" id="L473">    }</span>
+<span class="fc" id="L471">        System.out.println(&quot;\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n&quot;);</span>
+<span class="fc" id="L472">        System.out.println(&quot;Programa encerrado&quot;);</span>
+<span class="fc" id="L473">    }</span>
     
     /**
      * Método runSetup, que executa o menu onde são adicionados os utilizadores, atividades e planos de treino
      */
     public int runSetup(){
-<span class="nc" id="L479">        menuSetup.runMenu();</span>
-<span class="nc" id="L480">        int op = menuSetup.getOpcao();</span>
-<span class="nc bnc" id="L481" title="All 2 branches missed.">        while (op!=0){ </span>
+<span class="fc" id="L479">        menuSetup.runMenu();</span>
+<span class="fc" id="L480">        int op = menuSetup.getOpcao();</span>
+<span class="pc bpc" id="L481" title="1 of 2 branches missed.">        while (op!=0){ </span>
 <span class="nc bnc" id="L482" title="All 14 branches missed.">            switch (op){</span>
                 case 1 :    //opção &quot;Adicionar utilizador&quot;
 <span class="nc" id="L484">                    this.adicionaUser(menuSetup);</span>
@@ -533,20 +533,20 @@ public class AppDesportiva
 <span class="nc" id="L533">                op = menuSetup.getOpcao();</span>
             }
         }
-<span class="nc" id="L536">        System.out.println(&quot;\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n&quot;);</span>
-<span class="nc" id="L537">        System.out.println(&quot;Programa encerrado&quot;);</span>
-<span class="nc" id="L538">        return 1;</span>
+<span class="fc" id="L536">        System.out.println(&quot;\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n&quot;);</span>
+<span class="fc" id="L537">        System.out.println(&quot;Programa encerrado&quot;);</span>
+<span class="fc" id="L538">        return 1;</span>
     }
     
     /**
      * Método runSimulacao que executa o menu depois de iniciada a simulação
      */
     public void runSimulacao(){
-<span class="nc" id="L545">        menuSimulacao.runMenu();</span>
-<span class="nc" id="L546">        System.out.print(&quot;Data atual da simulação: &quot;);</span>
-<span class="nc" id="L547">        System.out.println(this.dataAtual.toString());</span>
-<span class="nc" id="L548">        int op = menuSimulacao.getOpcao();</span>
-<span class="nc bnc" id="L549" title="All 2 branches missed.">        while (op!=0){</span>
+<span class="fc" id="L545">        menuSimulacao.runMenu();</span>
+<span class="fc" id="L546">        System.out.print(&quot;Data atual da simulação: &quot;);</span>
+<span class="fc" id="L547">        System.out.println(this.dataAtual.toString());</span>
+<span class="fc" id="L548">        int op = menuSimulacao.getOpcao();</span>
+<span class="pc bpc" id="L549" title="1 of 2 branches missed.">        while (op!=0){</span>
 <span class="nc bnc" id="L550" title="All 5 branches missed.">            switch (op){</span>
                 case 1 :    //opção &quot;Avançar tempo&quot;
 <span class="nc" id="L552">                    int d = 0;</span>
@@ -712,15 +712,15 @@ public class AppDesportiva
 <span class="nc" id="L712">            menuSimulacao.runMenu();</span>
 <span class="nc" id="L713">            op = menuSimulacao.getOpcao();</span>
         }
-<span class="nc" id="L715">    }</span>
+<span class="fc" id="L715">    }</span>
     
     /**
      * Método runQueries que executa o menu de estatísticas
      */
     public void runQueries(){
-<span class="nc" id="L721">        this.menuEstatisticas.runMenu();</span>
-<span class="nc" id="L722">        int op = this.menuEstatisticas.getOpcao();</span>
-<span class="nc bnc" id="L723" title="All 2 branches missed.">        while (op!=0){</span>
+<span class="fc" id="L721">        this.menuEstatisticas.runMenu();</span>
+<span class="fc" id="L722">        int op = this.menuEstatisticas.getOpcao();</span>
+<span class="pc bpc" id="L723" title="1 of 2 branches missed.">        while (op!=0){</span>
 <span class="nc bnc" id="L724" title="All 8 branches missed.">            switch (op){</span>
                 case 1 :    //opção &quot;Utilizador com mais calorias gastas&quot;
 <span class="nc" id="L726">                    this.estatisticaEntreDatas(op);</span>
@@ -762,6 +762,6 @@ public class AppDesportiva
 <span class="nc" id="L762">            menuEstatisticas.runMenu();</span>
 <span class="nc" id="L763">            op = menuEstatisticas.getOpcao();</span>
         }
-<span class="nc" id="L765">    }</span>
+<span class="fc" id="L765">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

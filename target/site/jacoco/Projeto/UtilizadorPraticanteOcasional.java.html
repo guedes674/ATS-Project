@@ -32,12 +32,12 @@ public class UtilizadorPraticanteOcasional extends Utilizador
      * Construtor de cópia
      */
     public UtilizadorPraticanteOcasional(UtilizadorPraticanteOcasional u) {
-<span class="nc" id="L35">        super(u);</span>
-<span class="nc" id="L36">    }</span>
+<span class="fc" id="L35">        super(u);</span>
+<span class="fc" id="L36">    }</span>
     
     public UtilizadorPraticanteOcasional(UtilizadorPraticanteOcasional u, LocalDate i, LocalDate f) {
-<span class="nc" id="L39">        super(u,i,f);</span>
-<span class="nc" id="L40">    }</span>
+<span class="fc" id="L39">        super(u,i,f);</span>
+<span class="fc" id="L40">    }</span>
     
     /**
      * Método que calcula o fator multiplicativo de um utilizador praticante ocasional
@@ -51,33 +51,33 @@ public class UtilizadorPraticanteOcasional extends Utilizador
     }
     
     public String toString(){
-<span class="nc" id="L54">        StringBuilder sb = new StringBuilder();</span>
-<span class="nc" id="L55">        sb.append(super.toString());</span>
-<span class="nc" id="L56">        sb.append(&quot;\nTipo de Utilizador: Praticante Ocasional\n&quot;);</span>
-<span class="nc" id="L57">        return (sb.toString());</span>
+<span class="fc" id="L54">        StringBuilder sb = new StringBuilder();</span>
+<span class="fc" id="L55">        sb.append(super.toString());</span>
+<span class="fc" id="L56">        sb.append(&quot;\nTipo de Utilizador: Praticante Ocasional\n&quot;);</span>
+<span class="fc" id="L57">        return (sb.toString());</span>
     }
     
     /**
      * Método equals
      */
     public boolean equals(Object o) {
-<span class="nc bnc" id="L64" title="All 2 branches missed.">        if (this==o) return true;</span>
-<span class="nc bnc" id="L65" title="All 4 branches missed.">        if ((o==null) || (this.getClass() != o.getClass())) return false;</span>
-<span class="nc" id="L66">        UtilizadorPraticanteOcasional b = (UtilizadorPraticanteOcasional) o;</span>
-<span class="nc" id="L67">        return (super.equals(b));</span>
+<span class="fc bfc" id="L64" title="All 2 branches covered.">        if (this==o) return true;</span>
+<span class="fc bfc" id="L65" title="All 4 branches covered.">        if ((o==null) || (this.getClass() != o.getClass())) return false;</span>
+<span class="fc" id="L66">        UtilizadorPraticanteOcasional b = (UtilizadorPraticanteOcasional) o;</span>
+<span class="fc" id="L67">        return (super.equals(b));</span>
     }
     
     /**
      * Método clone
      */
     public Object clone(){
-<span class="nc" id="L74">        UtilizadorPraticanteOcasional t = new UtilizadorPraticanteOcasional(this);</span>
-<span class="nc" id="L75">        return t;</span>
+<span class="fc" id="L74">        UtilizadorPraticanteOcasional t = new UtilizadorPraticanteOcasional(this);</span>
+<span class="fc" id="L75">        return t;</span>
     }
     
     public Object utilizadorNumPeriodo(LocalDate dataInicio, LocalDate dataFim) {
-<span class="nc" id="L79">        UtilizadorPraticanteOcasional t = new UtilizadorPraticanteOcasional(this,dataInicio,dataFim);</span>
-<span class="nc" id="L80">        return t;</span>
+<span class="fc" id="L79">        UtilizadorPraticanteOcasional t = new UtilizadorPraticanteOcasional(this,dataInicio,dataFim);</span>
+<span class="fc" id="L80">        return t;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

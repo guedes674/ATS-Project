@@ -23,32 +23,32 @@ public class Btt extends AtivDistAltimetria implements Hard
      */
     public Btt()
     {
-<span class="nc" id="L26">        super();</span>
-<span class="nc" id="L27">    }</span>
+<span class="fc" id="L26">        super();</span>
+<span class="fc" id="L27">    }</span>
     
     /**
      * Construtor parametrizado
      */
     public Btt(LocalDateTime realizacao, LocalTime tempo, int freqCardiaca, double distancia, double altimetria)
     {
-<span class="nc" id="L34">        super(realizacao, tempo, freqCardiaca, distancia, altimetria);</span>
-<span class="nc" id="L35">    }</span>
+<span class="fc" id="L34">        super(realizacao, tempo, freqCardiaca, distancia, altimetria);</span>
+<span class="fc" id="L35">    }</span>
     
     /**
      * Construtor de cópia
      */
     public Btt(Btt btt)
     {
-<span class="nc" id="L42">        super(btt);</span>
-<span class="nc" id="L43">    }</span>
+<span class="fc" id="L42">        super(btt);</span>
+<span class="fc" id="L43">    }</span>
     
     public double getFatorHard() {
-<span class="nc" id="L46">        double hard = 1.05;</span>
-<span class="nc bnc" id="L47" title="All 2 branches missed.">        if (this.getAltimetria() &gt; 1000) {</span>
-<span class="nc" id="L48">            hard+=0.10;</span>
-<span class="nc bnc" id="L49" title="All 2 branches missed.">            if (this.getAltimetria() &gt; 2000) hard+=0.10;</span>
+<span class="fc" id="L46">        double hard = 1.05;</span>
+<span class="fc bfc" id="L47" title="All 2 branches covered.">        if (this.getAltimetria() &gt; 1000) {</span>
+<span class="fc" id="L48">            hard+=0.10;</span>
+<span class="fc bfc" id="L49" title="All 2 branches covered.">            if (this.getAltimetria() &gt; 2000) hard+=0.10;</span>
         }
-<span class="nc" id="L51">        return hard;</span>
+<span class="fc" id="L51">        return hard;</span>
     }
     
     /**
@@ -58,57 +58,57 @@ public class Btt extends AtivDistAltimetria implements Hard
      * @return    consumo de calorias do treino
      */
     public double consumoCalorias(Utilizador utilizador){
-<span class="nc" id="L61">        double consumoCalorias = Btt.MET * (utilizador.getFatorMultiplicativo() + this.getFatorVelocidade(10.5, 0.11) + this.getFatorFreqCardiaca(utilizador) + this.getFatorAltimetria()) </span>
-<span class="nc" id="L62">                                         * utilizador.getBMR() / (24 * 60 * 60) * this.getFatorHard()</span>
-<span class="nc" id="L63">                                         * this.getTempo().toSecondOfDay();</span>
-<span class="nc" id="L64">        return consumoCalorias;</span>
+<span class="fc" id="L61">        double consumoCalorias = Btt.MET * (utilizador.getFatorMultiplicativo() + this.getFatorVelocidade(10.5, 0.11) + this.getFatorFreqCardiaca(utilizador) + this.getFatorAltimetria()) </span>
+<span class="fc" id="L62">                                         * utilizador.getBMR() / (24 * 60 * 60) * this.getFatorHard()</span>
+<span class="fc" id="L63">                                         * this.getTempo().toSecondOfDay();</span>
+<span class="fc" id="L64">        return consumoCalorias;</span>
     }
 
     public Atividade geraAtividade(Utilizador utilizador, double consumoCalorias){
-<span class="nc" id="L68">        Atividade a = new Btt();</span>
-<span class="nc" id="L69">        Predicate&lt;Atividade&gt; p = at -&gt; at instanceof BicepCurls;</span>
-<span class="nc" id="L70">        Function&lt;Atividade,Double&gt; f = at -&gt; ((Btt)at).getAltimetria();</span>
-<span class="nc" id="L71">        double maxAltimetria = utilizador.infoDasAtividadesNumPeriodoQueRespeitamP(LocalDate.MIN, LocalDate.MAX, p, f)</span>
-<span class="nc bnc" id="L72" title="All 2 branches missed.">                                         .stream().reduce((p1,p2) -&gt; p1 &gt; p2 ? p1 : p2).orElse(0.0);</span>
-<span class="nc" id="L73">        double altimetria = maxAltimetria * 0.8;</span>
-<span class="nc" id="L74">        double fatorAltimetria = altimetria * 0.0005;</span>
-<span class="nc" id="L75">        double tempoDouble = consumoCalorias / (Btt.MET * (utilizador.getBMR() / (24 * 60 * 60)) * (utilizador.getFatorMultiplicativo() + fatorAltimetria));</span>
-<span class="nc" id="L76">        int tempo = (int) tempoDouble;</span>
-<span class="nc" id="L77">        double distancia = tempo * 10.5;</span>
-<span class="nc" id="L78">        LocalTime t = LocalTime.MIN.plusSeconds(tempo);</span>
-<span class="nc" id="L79">        a.setTempo(t);</span>
-<span class="nc" id="L80">        a.setFreqCardiaca(0);</span>
-<span class="nc" id="L81">        ((AtivDistancia)a).setDistancia(distancia);</span>
-<span class="nc" id="L82">        ((AtivDistAltimetria)a).setAltimetria(altimetria);</span>
-<span class="nc" id="L83">        return a;</span>
+<span class="fc" id="L68">        Atividade a = new Btt();</span>
+<span class="pc" id="L69">        Predicate&lt;Atividade&gt; p = at -&gt; at instanceof BicepCurls;</span>
+<span class="pc" id="L70">        Function&lt;Atividade,Double&gt; f = at -&gt; ((Btt)at).getAltimetria();</span>
+<span class="fc" id="L71">        double maxAltimetria = utilizador.infoDasAtividadesNumPeriodoQueRespeitamP(LocalDate.MIN, LocalDate.MAX, p, f)</span>
+<span class="pc bnc" id="L72" title="All 2 branches missed.">                                         .stream().reduce((p1,p2) -&gt; p1 &gt; p2 ? p1 : p2).orElse(0.0);</span>
+<span class="fc" id="L73">        double altimetria = maxAltimetria * 0.8;</span>
+<span class="fc" id="L74">        double fatorAltimetria = altimetria * 0.0005;</span>
+<span class="fc" id="L75">        double tempoDouble = consumoCalorias / (Btt.MET * (utilizador.getBMR() / (24 * 60 * 60)) * (utilizador.getFatorMultiplicativo() + fatorAltimetria));</span>
+<span class="fc" id="L76">        int tempo = (int) tempoDouble;</span>
+<span class="fc" id="L77">        double distancia = tempo * 10.5;</span>
+<span class="fc" id="L78">        LocalTime t = LocalTime.MIN.plusSeconds(tempo);</span>
+<span class="fc" id="L79">        a.setTempo(t);</span>
+<span class="fc" id="L80">        a.setFreqCardiaca(0);</span>
+<span class="fc" id="L81">        ((AtivDistancia)a).setDistancia(distancia);</span>
+<span class="fc" id="L82">        ((AtivDistAltimetria)a).setAltimetria(altimetria);</span>
+<span class="fc" id="L83">        return a;</span>
     }
 
     /**
      * Método toString
      */
     public String toString(){
-<span class="nc" id="L90">        StringBuilder sb = new StringBuilder();</span>
-<span class="nc" id="L91">        sb.append(super.toString());</span>
-<span class="nc" id="L92">        sb.append(&quot;\nTipo de atividade: BTT\n&quot;);</span>
-<span class="nc" id="L93">        return (sb.toString());</span>
+<span class="fc" id="L90">        StringBuilder sb = new StringBuilder();</span>
+<span class="fc" id="L91">        sb.append(super.toString());</span>
+<span class="fc" id="L92">        sb.append(&quot;\nTipo de atividade: BTT\n&quot;);</span>
+<span class="fc" id="L93">        return (sb.toString());</span>
     }
     
     /**
      * Método equals
      */
     public boolean equals(Object o) {
-<span class="nc bnc" id="L100" title="All 2 branches missed.">        if (this==o) return true;</span>
-<span class="nc bnc" id="L101" title="All 4 branches missed.">        if ((o==null) || (this.getClass() != o.getClass())) return false;</span>
-<span class="nc" id="L102">        Btt b = (Btt) o;</span>
-<span class="nc" id="L103">        return (super.equals(b));</span>
+<span class="fc bfc" id="L100" title="All 2 branches covered.">        if (this==o) return true;</span>
+<span class="fc bfc" id="L101" title="All 4 branches covered.">        if ((o==null) || (this.getClass() != o.getClass())) return false;</span>
+<span class="fc" id="L102">        Btt b = (Btt) o;</span>
+<span class="fc" id="L103">        return (super.equals(b));</span>
     }
     
     /**
      * Método clone
      */
     public Object clone(){
-<span class="nc" id="L110">        Btt b = new Btt(this);</span>
-<span class="nc" id="L111">        return b;</span>
+<span class="fc" id="L110">        Btt b = new Btt(this);</span>
+<span class="fc" id="L111">        return b;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

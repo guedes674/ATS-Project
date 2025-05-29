@@ -44,20 +44,20 @@ test:
 coverage:
 	mvn test jacoco:report
 
-mutation:
-	mvn test org.pitest:pitest-maven:mutationCoverage
-
 # Geração de testes com EvoSuite
 # Certifica-te de que JAVA_HOME aponta para Java 8 antes de executar!
 evosuite-generate:
 	mvn evosuite:generate \
-	    -Dcut=Projeto.Utilizador \
-	    -Dcut=Projeto.Atividade \
-	    -Dcut=Projeto.PlanoTreino
+		-Dcut=Projeto.Utilizador \
+		-Dcut=Projeto.Atividade \
+		-Dcut=Projeto.PlanoTreino
 
 # Exporta os melhores testes gerados
 evosuite-export:
 	mvn evosuite:export
+
+mutation:
+	mvn test org.pitest:pitest-maven:mutationCoverage
 
 clean:
 	mvn clean

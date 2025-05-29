@@ -65,8 +65,8 @@ public abstract class AtivDistancia extends Atividade
      * @return fator de intensidade da velocidade a que é realizada a atividade
      */
     public double getFatorVelocidade(double valorNulo, double valorIncremento){
-<span class="nc" id="L68">        double velocidade = this.distancia / this.getTempo().toSecondOfDay();</span>
-<span class="nc" id="L69">        return (velocidade - valorNulo) * valorIncremento;</span>
+<span class="fc" id="L68">        double velocidade = this.distancia / this.getTempo().toSecondOfDay();</span>
+<span class="fc" id="L69">        return (velocidade - valorNulo) * valorIncremento;</span>
     }
 
     public double getVelocidade(){
@@ -80,19 +80,19 @@ public abstract class AtivDistancia extends Atividade
 <span class="pc bpc" id="L80" title="1 of 2 branches missed.">        if (this==o) return true;</span>
 <span class="pc bpc" id="L81" title="2 of 4 branches missed.">        if ((o==null)||(this.getClass()!=o.getClass())) return false;</span>
 <span class="fc" id="L82">        AtivDistancia a = (AtivDistancia) o;</span>
-<span class="pc bpc" id="L83" title="2 of 4 branches missed.">        return ((super.equals(a))&amp;&amp;(this.distancia==a.getDistancia()));</span>
+<span class="fc bfc" id="L83" title="All 4 branches covered.">        return ((super.equals(a))&amp;&amp;(this.distancia==a.getDistancia()));</span>
     }
     
     /**
      * Método toString, deve ser implementado pelas sub-classes
      */
     public String toString() {
-<span class="nc" id="L90">        StringBuilder sb = new StringBuilder();</span>
-<span class="nc" id="L91">        sb.append(super.toString());</span>
-<span class="nc" id="L92">        sb.append(&quot;\nDistancia: &quot;);</span>
-<span class="nc" id="L93">        sb.append(this.distancia);</span>
-<span class="nc" id="L94">        sb.append(&quot; metros&quot;);</span>
-<span class="nc" id="L95">        return (sb.toString());</span>
+<span class="fc" id="L90">        StringBuilder sb = new StringBuilder();</span>
+<span class="fc" id="L91">        sb.append(super.toString());</span>
+<span class="fc" id="L92">        sb.append(&quot;\nDistancia: &quot;);</span>
+<span class="fc" id="L93">        sb.append(this.distancia);</span>
+<span class="fc" id="L94">        sb.append(&quot; metros&quot;);</span>
+<span class="fc" id="L95">        return (sb.toString());</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

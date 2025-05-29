@@ -17,27 +17,27 @@ public class UtilizadorProfissional extends Utilizador
      */
     public UtilizadorProfissional()
     {
-<span class="nc" id="L20">        super();</span>
-<span class="nc" id="L21">    }</span>
+<span class="fc" id="L20">        super();</span>
+<span class="fc" id="L21">    }</span>
     
     /**
      * Construtor parametrizado
      */
     public UtilizadorProfissional(String nome, String morada, String email, int freqCardiaca, int peso, int altura, LocalDate dataNascimento, char genero)
     {
-<span class="nc" id="L28">        super(nome,morada,email,freqCardiaca,peso,altura,dataNascimento,genero);</span>
-<span class="nc" id="L29">    }</span>
+<span class="fc" id="L28">        super(nome,morada,email,freqCardiaca,peso,altura,dataNascimento,genero);</span>
+<span class="fc" id="L29">    }</span>
     
     /**
      * Construtor de cópia
      */
     public UtilizadorProfissional(UtilizadorProfissional u) {
-<span class="nc" id="L35">        super(u);</span>
-<span class="nc" id="L36">    }</span>
+<span class="fc" id="L35">        super(u);</span>
+<span class="fc" id="L36">    }</span>
     
     public UtilizadorProfissional(UtilizadorProfissional u, LocalDate i, LocalDate f) {
-<span class="nc" id="L39">        super(u,i,f);</span>
-<span class="nc" id="L40">    }</span>
+<span class="fc" id="L39">        super(u,i,f);</span>
+<span class="fc" id="L40">    }</span>
     
     /**
      * Método que calcula o fator multiplicativo de um utilizador profissional
@@ -47,37 +47,37 @@ public class UtilizadorProfissional extends Utilizador
      */
     public double getFatorMultiplicativo()
     {
-<span class="nc" id="L50">        return UtilizadorProfissional.fatorMultiplicativo;</span>
+<span class="fc" id="L50">        return UtilizadorProfissional.fatorMultiplicativo;</span>
     }
     
     public String toString(){
-<span class="nc" id="L54">        StringBuilder sb = new StringBuilder();</span>
-<span class="nc" id="L55">        sb.append(super.toString());</span>
-<span class="nc" id="L56">        sb.append(&quot;\nTipo de Utilizador: Profissional\n&quot;);</span>
-<span class="nc" id="L57">        return (sb.toString());</span>
+<span class="fc" id="L54">        StringBuilder sb = new StringBuilder();</span>
+<span class="fc" id="L55">        sb.append(super.toString());</span>
+<span class="fc" id="L56">        sb.append(&quot;\nTipo de Utilizador: Profissional\n&quot;);</span>
+<span class="fc" id="L57">        return (sb.toString());</span>
     }
     
     /**
      * Método equals
      */
     public boolean equals(Object o) {
-<span class="nc bnc" id="L64" title="All 2 branches missed.">        if (this==o) return true;</span>
-<span class="nc bnc" id="L65" title="All 4 branches missed.">        if ((o==null) || (this.getClass() != o.getClass())) return false;</span>
-<span class="nc" id="L66">        UtilizadorProfissional b = (UtilizadorProfissional) o;</span>
-<span class="nc" id="L67">        return (super.equals(b));</span>
+<span class="fc bfc" id="L64" title="All 2 branches covered.">        if (this==o) return true;</span>
+<span class="fc bfc" id="L65" title="All 4 branches covered.">        if ((o==null) || (this.getClass() != o.getClass())) return false;</span>
+<span class="fc" id="L66">        UtilizadorProfissional b = (UtilizadorProfissional) o;</span>
+<span class="fc" id="L67">        return (super.equals(b));</span>
     }
     
     /**
      * Método clone
      */
     public Object clone(){
-<span class="nc" id="L74">        UtilizadorProfissional t = new UtilizadorProfissional(this);</span>
-<span class="nc" id="L75">        return t;</span>
+<span class="fc" id="L74">        UtilizadorProfissional t = new UtilizadorProfissional(this);</span>
+<span class="fc" id="L75">        return t;</span>
     }
     
     public Object utilizadorNumPeriodo(LocalDate dataInicio, LocalDate dataFim) {
-<span class="nc" id="L79">        UtilizadorProfissional t = new UtilizadorProfissional (this, dataInicio, dataFim);</span>
-<span class="nc" id="L80">        return t;</span>
+<span class="fc" id="L79">        UtilizadorProfissional t = new UtilizadorProfissional (this, dataInicio, dataFim);</span>
+<span class="fc" id="L80">        return t;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

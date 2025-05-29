@@ -21,8 +21,8 @@ public class Abdominais extends AtivRepeticoes
      */
     public Abdominais()
     {
-<span class="nc" id="L24">        super();</span>
-<span class="nc" id="L25">    }</span>
+<span class="fc" id="L24">        super();</span>
+<span class="fc" id="L25">    }</span>
     
     /**
      * Construtor parametrizado
@@ -56,33 +56,33 @@ public class Abdominais extends AtivRepeticoes
     }
 
     public Atividade geraAtividade(Utilizador utilizador, double consumoCalorias){
-<span class="nc" id="L59">        Atividade a = new Abdominais();</span>
-<span class="nc" id="L60">        double tempoDouble = consumoCalorias / (Abdominais.MET * (utilizador.getBMR() / (24 * 60 * 60)) * utilizador.getFatorMultiplicativo());</span>
-<span class="nc" id="L61">        int tempo = (int) tempoDouble;</span>
-<span class="nc" id="L62">        int reps = tempo * 1;</span>
-<span class="nc" id="L63">        LocalTime t = LocalTime.MIN.plusSeconds(tempo);</span>
-<span class="nc" id="L64">        a.setTempo(t);</span>
-<span class="nc" id="L65">        a.setFreqCardiaca(0);</span>
-<span class="nc" id="L66">        ((AtivRepeticoes)a).setRepeticoes(reps);</span>
-<span class="nc" id="L67">        return a;</span>
+<span class="fc" id="L59">        Atividade a = new Abdominais();</span>
+<span class="fc" id="L60">        double tempoDouble = consumoCalorias / (Abdominais.MET * (utilizador.getBMR() / (24 * 60 * 60)) * utilizador.getFatorMultiplicativo());</span>
+<span class="fc" id="L61">        int tempo = (int) tempoDouble;</span>
+<span class="fc" id="L62">        int reps = tempo * 1;</span>
+<span class="fc" id="L63">        LocalTime t = LocalTime.MIN.plusSeconds(tempo);</span>
+<span class="fc" id="L64">        a.setTempo(t);</span>
+<span class="fc" id="L65">        a.setFreqCardiaca(0);</span>
+<span class="fc" id="L66">        ((AtivRepeticoes)a).setRepeticoes(reps);</span>
+<span class="fc" id="L67">        return a;</span>
     }
 
     /**
      * Método toString
      */
     public String toString(){
-<span class="nc" id="L74">        StringBuilder sb = new StringBuilder();</span>
-<span class="nc" id="L75">        sb.append(super.toString());</span>
-<span class="nc" id="L76">        sb.append(&quot;\nTipo de atividade: Abdominais\n&quot;);</span>
-<span class="nc" id="L77">        return (sb.toString());</span>
+<span class="fc" id="L74">        StringBuilder sb = new StringBuilder();</span>
+<span class="fc" id="L75">        sb.append(super.toString());</span>
+<span class="fc" id="L76">        sb.append(&quot;\nTipo de atividade: Abdominais\n&quot;);</span>
+<span class="fc" id="L77">        return (sb.toString());</span>
     }
     
     /**
      * Método equals
      */
     public boolean equals(Object o) {
-<span class="pc bpc" id="L84" title="1 of 2 branches missed.">        if (this==o) return true;</span>
-<span class="pc bpc" id="L85" title="2 of 4 branches missed.">        if ((o==null) || (this.getClass() != o.getClass())) return false;</span>
+<span class="fc bfc" id="L84" title="All 2 branches covered.">        if (this==o) return true;</span>
+<span class="fc bfc" id="L85" title="All 4 branches covered.">        if ((o==null) || (this.getClass() != o.getClass())) return false;</span>
 <span class="fc" id="L86">        Abdominais a = (Abdominais) o;</span>
 <span class="fc" id="L87">        return (super.equals(a));</span>
     }
