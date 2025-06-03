@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: Projeto.BenchPress_ESTest
 -------------------------------------------------------------------------------
-Tests run: 19, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.162 s -- in Projeto.BenchPress_ESTest
+Tests run: 19, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.187 s -- in Projeto.BenchPress_ESTest
