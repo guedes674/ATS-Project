@@ -11,7 +11,7 @@
 | Nome             | Número  |
 | ---------------- | ------- |
 | ??               | A?????  |
-| ??               | A?????  |
+| Oleksii Tantsura | A102131 |
 | Tiago Guedes     | A97369  |
 
 </div>
