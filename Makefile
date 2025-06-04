@@ -4,6 +4,11 @@ compile:
 test:
 	mvn test
 
+test-no-evosuite:
+	mvn clean test -Dtest='!*_ESTest_*' -Dmaven.test.failure.ignore=true
+	mvn jacoco:report
+
+
 coverage:
 	mvn test jacoco:report
 

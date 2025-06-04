@@ -19,7 +19,7 @@ import java.io.*;
 public class PlanoTreino implements Comparable&lt;PlanoTreino&gt;, Serializable
 {   
     // variáveis de classe
-<span class="fc" id="L22">    private static int proximoCodigo = 1;</span>
+<span class="nc" id="L22">    private static int proximoCodigo = 1;</span>
     // variáveis de instância
     private int codPlano;
     private LocalDate dataRealizacao;
@@ -36,141 +36,141 @@ public class PlanoTreino implements Comparable&lt;PlanoTreino&gt;, Serializable
         /**
          * Construtor parameterizado
          */
-<span class="fc" id="L39">        public AtividadeIteracoes(int iteracoes, Atividade atividade){</span>
-<span class="fc" id="L40">            this.iteracoes = iteracoes;</span>
-<span class="fc" id="L41">            this.atividade = atividade;</span>
-<span class="fc" id="L42">        }</span>
+<span class="nc" id="L39">        public AtividadeIteracoes(int iteracoes, Atividade atividade){</span>
+<span class="nc" id="L40">            this.iteracoes = iteracoes;</span>
+<span class="nc" id="L41">            this.atividade = atividade;</span>
+<span class="nc" id="L42">        }</span>
         
-<span class="fc" id="L44">        public AtividadeIteracoes(AtividadeIteracoes a) {</span>
-<span class="fc" id="L45">            this.iteracoes = a.getIteracoes();</span>
-<span class="fc" id="L46">            this.atividade = a.getAtividade();</span>
-<span class="fc" id="L47">        }</span>
+<span class="nc" id="L44">        public AtividadeIteracoes(AtividadeIteracoes a) {</span>
+<span class="nc" id="L45">            this.iteracoes = a.getIteracoes();</span>
+<span class="nc" id="L46">            this.atividade = a.getAtividade();</span>
+<span class="nc" id="L47">        }</span>
     
         public int getIteracoes(){
-<span class="fc" id="L50">            return this.iteracoes;</span>
+<span class="nc" id="L50">            return this.iteracoes;</span>
         }
     
         public Atividade getAtividade(){
-<span class="fc" id="L54">            return (Atividade) this.atividade.clone();</span>
+<span class="nc" id="L54">            return (Atividade) this.atividade.clone();</span>
         }
     
         public void setIteracoes(int iteracoes){
-<span class="fc" id="L58">            this.iteracoes = iteracoes;</span>
-<span class="fc" id="L59">        }</span>
+<span class="nc" id="L58">            this.iteracoes = iteracoes;</span>
+<span class="nc" id="L59">        }</span>
     
         public void setAtividade(Atividade atividade){
-<span class="fc" id="L62">            this.atividade = (Atividade)atividade.clone();</span>
-<span class="fc" id="L63">        }</span>
+<span class="nc" id="L62">            this.atividade = (Atividade)atividade.clone();</span>
+<span class="nc" id="L63">        }</span>
         
         /**
          * clone
          */
         public Object clone() {
-<span class="fc" id="L69">            AtividadeIteracoes c = new AtividadeIteracoes(this);</span>
-<span class="fc" id="L70">            return c;</span>
+<span class="nc" id="L69">            AtividadeIteracoes c = new AtividadeIteracoes(this);</span>
+<span class="nc" id="L70">            return c;</span>
         }
         
         public String toString() {
-<span class="fc" id="L74">            StringBuilder sb = new StringBuilder();</span>
-<span class="fc" id="L75">            sb.append(this.atividade);</span>
-<span class="fc" id="L76">            sb.append(&quot;Iteracoes: &quot;);</span>
-<span class="fc" id="L77">            sb.append(this.iteracoes);</span>
-<span class="fc" id="L78">            sb.append(&quot;\n&quot;);</span>
-<span class="fc" id="L79">            return (sb.toString());</span>
+<span class="nc" id="L74">            StringBuilder sb = new StringBuilder();</span>
+<span class="nc" id="L75">            sb.append(this.atividade);</span>
+<span class="nc" id="L76">            sb.append(&quot;Iteracoes: &quot;);</span>
+<span class="nc" id="L77">            sb.append(this.iteracoes);</span>
+<span class="nc" id="L78">            sb.append(&quot;\n&quot;);</span>
+<span class="nc" id="L79">            return (sb.toString());</span>
         }
         
         /**
          * Método equals
          */
         public boolean equals(Object o){
-<span class="fc bfc" id="L86" title="All 2 branches covered.">            if (this==o) return true;</span>
-<span class="fc bfc" id="L87" title="All 4 branches covered.">            if ((o==null)||(this.getClass()!=o.getClass())) return false;</span>
-<span class="fc" id="L88">            AtividadeIteracoes a = (AtividadeIteracoes) o;</span>
-<span class="fc bfc" id="L89" title="All 4 branches covered.">            return (this.getIteracoes()==a.getIteracoes()&amp;&amp;this.getAtividade().equals(a.getAtividade()));</span>
+<span class="nc bnc" id="L86" title="All 2 branches missed.">            if (this==o) return true;</span>
+<span class="nc bnc" id="L87" title="All 4 branches missed.">            if ((o==null)||(this.getClass()!=o.getClass())) return false;</span>
+<span class="nc" id="L88">            AtividadeIteracoes a = (AtividadeIteracoes) o;</span>
+<span class="nc bnc" id="L89" title="All 4 branches missed.">            return (this.getIteracoes()==a.getIteracoes()&amp;&amp;this.getAtividade().equals(a.getAtividade()));</span>
         }
     }
 
     /**
      * Construtor vazio
      */
-<span class="fc" id="L96">    public PlanoTreino()</span>
-    {
-<span class="fc" id="L98">        this.codPlano = 0;</span>
-<span class="fc" id="L99">        this.dataRealizacao = LocalDate.now();</span>
-<span class="fc" id="L100">        this.atividades = new ArrayList&lt;&gt;();</span>
-<span class="fc" id="L101">    }</span>
+    public PlanoTreino()
+<span class="nc" id="L97">    {</span>
+<span class="nc" id="L98">        this.codPlano = 0;</span>
+<span class="nc" id="L99">        this.dataRealizacao = LocalDate.now();</span>
+<span class="nc" id="L100">        this.atividades = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L101">    }</span>
 
     /**
      * Construtor parameterizado
      */
-<span class="fc" id="L106">    public PlanoTreino(LocalDate dataRealizacao)</span>
-    {
-<span class="fc" id="L108">        this.codPlano = PlanoTreino.proximoCodigo++;</span>
-<span class="fc" id="L109">        this.dataRealizacao = dataRealizacao;</span>
-<span class="fc" id="L110">        this.atividades = new ArrayList&lt;&gt;();</span>
-<span class="fc" id="L111">    }</span>
+    public PlanoTreino(LocalDate dataRealizacao)
+<span class="nc" id="L107">    {</span>
+<span class="nc" id="L108">        this.codPlano = PlanoTreino.proximoCodigo++;</span>
+<span class="nc" id="L109">        this.dataRealizacao = dataRealizacao;</span>
+<span class="nc" id="L110">        this.atividades = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L111">    }</span>
 
     /**
      * Construtor de cópia
      */
-<span class="fc" id="L116">    public PlanoTreino(PlanoTreino planoTreino)</span>
-    {
-<span class="fc" id="L118">        this.codPlano = planoTreino.getCodPlano();</span>
-<span class="fc" id="L119">        this.dataRealizacao = planoTreino.getDataRealizacao();</span>
-<span class="fc" id="L120">        this.atividades = planoTreino.getAtividades();</span>
-<span class="fc" id="L121">    }</span>
+    public PlanoTreino(PlanoTreino planoTreino)
+<span class="nc" id="L117">    {</span>
+<span class="nc" id="L118">        this.codPlano = planoTreino.getCodPlano();</span>
+<span class="nc" id="L119">        this.dataRealizacao = planoTreino.getDataRealizacao();</span>
+<span class="nc" id="L120">        this.atividades = planoTreino.getAtividades();</span>
+<span class="nc" id="L121">    }</span>
     
-<span class="fc" id="L123">    public PlanoTreino(PlanoTreino planoTreino, LocalDate inicio, LocalDate fim) {</span>
-<span class="fc" id="L124">        this.codPlano = planoTreino.getCodPlano();</span>
-<span class="fc" id="L125">        this.dataRealizacao = planoTreino.getDataRealizacao();</span>
-<span class="fc" id="L126">        this.atividades = planoTreino.getAtividadesNumPeriodo(inicio,fim);</span>
-<span class="fc" id="L127">    }</span>
+<span class="nc" id="L123">    public PlanoTreino(PlanoTreino planoTreino, LocalDate inicio, LocalDate fim) {</span>
+<span class="nc" id="L124">        this.codPlano = planoTreino.getCodPlano();</span>
+<span class="nc" id="L125">        this.dataRealizacao = planoTreino.getDataRealizacao();</span>
+<span class="nc" id="L126">        this.atividades = planoTreino.getAtividadesNumPeriodo(inicio,fim);</span>
+<span class="nc" id="L127">    }</span>
     
     public void setProximoCodigo(int proximoCodigo) {
-<span class="fc" id="L130">        PlanoTreino.proximoCodigo = proximoCodigo;</span>
-<span class="fc" id="L131">    }</span>
+<span class="nc" id="L130">        PlanoTreino.proximoCodigo = proximoCodigo;</span>
+<span class="nc" id="L131">    }</span>
     // Getters e setters
     public List&lt;AtividadeIteracoes&gt; getAtividadesNumPeriodo(LocalDate inicio, LocalDate fim) {
-<span class="fc" id="L134">        LocalDateTime i2 = LocalDateTime.of(inicio, LocalTime.MIDNIGHT);</span>
-<span class="fc" id="L135">        LocalDateTime f2 = LocalDateTime.of(fim, LocalTime.MIDNIGHT);</span>
-<span class="fc" id="L136">        List&lt;AtividadeIteracoes&gt; atividades = new ArrayList&lt;AtividadeIteracoes&gt;();</span>
-<span class="fc bfc" id="L137" title="All 2 branches covered.">        for(AtividadeIteracoes a : this.atividades) {</span>
-<span class="pc bpc" id="L138" title="2 of 4 branches missed.">            if (a.getAtividade().getDataRealizacao().compareTo(i2) &gt;= 0 &amp;&amp; a.getAtividade().getDataRealizacao().compareTo(f2) &lt;= 0) atividades.add((AtividadeIteracoes) a.clone());</span>
-        }
-<span class="fc" id="L140">        return atividades;</span>
+<span class="nc" id="L134">        LocalDateTime i2 = LocalDateTime.of(inicio, LocalTime.MIDNIGHT);</span>
+<span class="nc" id="L135">        LocalDateTime f2 = LocalDateTime.of(fim, LocalTime.MIDNIGHT);</span>
+<span class="nc" id="L136">        List&lt;AtividadeIteracoes&gt; atividades = new ArrayList&lt;AtividadeIteracoes&gt;();</span>
+<span class="nc bnc" id="L137" title="All 2 branches missed.">        for(AtividadeIteracoes a : this.atividades) {</span>
+<span class="nc bnc" id="L138" title="All 4 branches missed.">            if (a.getAtividade().getDataRealizacao().compareTo(i2) &gt;= 0 &amp;&amp; a.getAtividade().getDataRealizacao().compareTo(f2) &lt;= 0) atividades.add((AtividadeIteracoes) a.clone());</span>
+<span class="nc" id="L139">        }</span>
+<span class="nc" id="L140">        return atividades;</span>
     }
     public int getCodPlano(){
-<span class="fc" id="L143">        return this.codPlano;</span>
+<span class="nc" id="L143">        return this.codPlano;</span>
     }
     
     public List&lt;AtividadeIteracoes&gt; getAtividades() {
-<span class="fc" id="L147">        List&lt;AtividadeIteracoes&gt; atividades = new ArrayList&lt;AtividadeIteracoes&gt;();</span>
-<span class="fc bfc" id="L148" title="All 2 branches covered.">        for(AtividadeIteracoes a : this.atividades) {</span>
-<span class="fc" id="L149">            atividades.add((AtividadeIteracoes) a.clone());</span>
-        }
-<span class="fc" id="L151">        return atividades;</span>
+<span class="nc" id="L147">        List&lt;AtividadeIteracoes&gt; atividades = new ArrayList&lt;AtividadeIteracoes&gt;();</span>
+<span class="nc bnc" id="L148" title="All 2 branches missed.">        for(AtividadeIteracoes a : this.atividades) {</span>
+<span class="nc" id="L149">            atividades.add((AtividadeIteracoes) a.clone());</span>
+<span class="nc" id="L150">        }</span>
+<span class="nc" id="L151">        return atividades;</span>
     }
     
     public LocalDate getDataRealizacao(){
-<span class="fc" id="L155">        return this.dataRealizacao;</span>
+<span class="nc" id="L155">        return this.dataRealizacao;</span>
     }
 
     public void setDataRealizacao(LocalDate dataRealizacao){
-<span class="fc" id="L159">        this.dataRealizacao = dataRealizacao;</span>
-<span class="fc" id="L160">    }</span>
+<span class="nc" id="L159">        this.dataRealizacao = dataRealizacao;</span>
+<span class="nc" id="L160">    }</span>
 
     public List&lt;Atividade&gt; atividadesQueRespeitamP(LocalDate ii, LocalDate f, Predicate&lt;Atividade&gt; p) {
-<span class="fc" id="L163">        LocalDateTime i2 = LocalDateTime.of(ii, LocalTime.MIDNIGHT);</span>
-<span class="fc" id="L164">        LocalDateTime f2 = LocalDateTime.of(f, LocalTime.MIDNIGHT);</span>
-<span class="fc" id="L165">        List&lt;Atividade&gt; atividades = new ArrayList&lt;Atividade&gt;();</span>
-<span class="fc bfc" id="L166" title="All 2 branches covered.">        for (AtividadeIteracoes atividadeIter : this.atividades) {</span>
-<span class="fc" id="L167">            int iteracoes = atividadeIter.getIteracoes();</span>
-<span class="fc bfc" id="L168" title="All 2 branches covered.">            for (int i = 0; i &lt; iteracoes; i++) {</span>
-<span class="fc" id="L169">                Atividade atividade = atividadeIter.getAtividade();</span>
-<span class="pc bpc" id="L170" title="5 of 6 branches missed.">                if (p.test(atividade) &amp;&amp; atividade.getDataRealizacao().compareTo(i2) &gt;= 0 &amp;&amp; atividade.getDataRealizacao().compareTo(f2) &lt;= 0) atividades.add((Atividade)atividade.clone());</span>
+<span class="nc" id="L163">        LocalDateTime i2 = LocalDateTime.of(ii, LocalTime.MIDNIGHT);</span>
+<span class="nc" id="L164">        LocalDateTime f2 = LocalDateTime.of(f, LocalTime.MIDNIGHT);</span>
+<span class="nc" id="L165">        List&lt;Atividade&gt; atividades = new ArrayList&lt;Atividade&gt;();</span>
+<span class="nc bnc" id="L166" title="All 2 branches missed.">        for (AtividadeIteracoes atividadeIter : this.atividades) {</span>
+<span class="nc" id="L167">            int iteracoes = atividadeIter.getIteracoes();</span>
+<span class="nc bnc" id="L168" title="All 2 branches missed.">            for (int i = 0; i &lt; iteracoes; i++) {</span>
+<span class="nc" id="L169">                Atividade atividade = atividadeIter.getAtividade();</span>
+<span class="nc bnc" id="L170" title="All 6 branches missed.">                if (p.test(atividade) &amp;&amp; atividade.getDataRealizacao().compareTo(i2) &gt;= 0 &amp;&amp; atividade.getDataRealizacao().compareTo(f2) &lt;= 0) atividades.add((Atividade)atividade.clone());</span>
             }
-        }
-<span class="fc" id="L173">        return atividades;</span>
+<span class="nc" id="L172">        }</span>
+<span class="nc" id="L173">        return atividades;</span>
     }
     
     /**
@@ -180,71 +180,71 @@ public class PlanoTreino implements Comparable&lt;PlanoTreino&gt;, Serializable
      * @return calorias dispendidas durante o plano de treino
      */
     public double caloriasDispendidas(Utilizador utilizador){
-<span class="fc" id="L183">        double calorias = 0;</span>
-<span class="fc bfc" id="L184" title="All 2 branches covered.">        for (AtividadeIteracoes a : this.atividades) {</span>
-<span class="fc" id="L185">            calorias += a.getIteracoes() * a.getAtividade().consumoCalorias(utilizador);</span>
-        }
-<span class="fc" id="L187">        return calorias;</span>
+<span class="nc" id="L183">        double calorias = 0;</span>
+<span class="nc bnc" id="L184" title="All 2 branches missed.">        for (AtividadeIteracoes a : this.atividades) {</span>
+<span class="nc" id="L185">            calorias += a.getIteracoes() * a.getAtividade().consumoCalorias(utilizador);</span>
+<span class="nc" id="L186">        }</span>
+<span class="nc" id="L187">        return calorias;</span>
     }
     
     public void addAtividade(Atividade atividade, int iteracoes){
-<span class="fc" id="L191">        AtividadeIteracoes adicionar = new AtividadeIteracoes(iteracoes,(Atividade) atividade.clone());</span>
-<span class="fc" id="L192">        this.atividades.add(adicionar);</span>
-<span class="fc" id="L193">    }</span>
+<span class="nc" id="L191">        AtividadeIteracoes adicionar = new AtividadeIteracoes(iteracoes,(Atividade) atividade.clone());</span>
+<span class="nc" id="L192">        this.atividades.add(adicionar);</span>
+<span class="nc" id="L193">    }</span>
 
     public List&lt;PlanoTreino&gt; geraPlanoTreino(Utilizador utilizador, List&lt;Atividade&gt; atividades, int maxAtivDia, int ativPorSemana, double consumoCaloricoMinimo, LocalDate inicio){
-<span class="fc" id="L196">        List&lt;PlanoTreino&gt; planos = new ArrayList&lt;PlanoTreino&gt;();</span>
-<span class="fc" id="L197">        int i = 0, j = 0, size = atividades.size();</span>
-<span class="fc" id="L198">        int salto = 2;</span>
-<span class="fc" id="L199">        List&lt;Atividade&gt; ativsHard = atividades.stream().filter(a -&gt; a instanceof Hard).collect(Collectors.toList());</span>
-<span class="fc bfc" id="L200" title="All 2 branches covered.">        List&lt;Atividade&gt; ativsNormal = atividades.stream().filter(a -&gt; !(a instanceof Hard)).collect(Collectors.toList());</span>
-<span class="fc" id="L201">        int hard = ativsHard.size();</span>
-<span class="fc" id="L202">        int sizeHard = hard, sizeNormal = ativsNormal.size();</span>
-<span class="fc" id="L203">        int[] semana = new int[]{0, 0, 0, 0, 0, 0, 0}; // array auxiliar para gerir dias em que há atividades</span>
-<span class="fc bfc" id="L204" title="All 2 branches covered.">        if (ativPorSemana % 2 == 0) i = 0;</span>
-<span class="fc" id="L205">        else i = 1;</span>
-<span class="pc bpc" id="L206" title="1 of 2 branches missed.">        if (hard &gt; 3) hard = 3; // não pode haver mais que 3 atividades hard por semana</span>
-<span class="pc bpc" id="L207" title="1 of 2 branches missed.">        if (hard &lt; 3) salto = 3;</span>
-<span class="pc bpc" id="L208" title="1 of 4 branches missed.">        if (hard == 1) i = ativPorSemana%2 == 0 ? 4 : 6;</span>
+<span class="nc" id="L196">        List&lt;PlanoTreino&gt; planos = new ArrayList&lt;PlanoTreino&gt;();</span>
+<span class="nc" id="L197">        int i = 0, j = 0, size = atividades.size();</span>
+<span class="nc" id="L198">        int salto = 2;</span>
+<span class="nc" id="L199">        List&lt;Atividade&gt; ativsHard = atividades.stream().filter(a -&gt; a instanceof Hard).collect(Collectors.toList());</span>
+<span class="nc bnc" id="L200" title="All 2 branches missed.">        List&lt;Atividade&gt; ativsNormal = atividades.stream().filter(a -&gt; !(a instanceof Hard)).collect(Collectors.toList());</span>
+<span class="nc" id="L201">        int hard = ativsHard.size();</span>
+<span class="nc" id="L202">        int sizeHard = hard, sizeNormal = ativsNormal.size();</span>
+<span class="nc" id="L203">        int[] semana = new int[]{0, 0, 0, 0, 0, 0, 0}; // array auxiliar para gerir dias em que há atividades</span>
+<span class="nc bnc" id="L204" title="All 2 branches missed.">        if (ativPorSemana % 2 == 0) i = 0;</span>
+<span class="nc" id="L205">        else i = 1;</span>
+<span class="nc bnc" id="L206" title="All 2 branches missed.">        if (hard &gt; 3) hard = 3; // não pode haver mais que 3 atividades hard por semana</span>
+<span class="nc bnc" id="L207" title="All 2 branches missed.">        if (hard &lt; 3) salto = 3;</span>
+<span class="nc bnc" id="L208" title="All 4 branches missed.">        if (hard == 1) i = ativPorSemana%2 == 0 ? 4 : 6;</span>
         //atividades hard
-<span class="pc bpc" id="L210" title="1 of 4 branches missed.">        while (hard &gt; 0 &amp;&amp; ativPorSemana &gt; 0) {</span>
-<span class="fc" id="L211">            semana[i] = -1;</span>
-<span class="fc" id="L212">            i+=salto;</span>
-<span class="fc" id="L213">            hard--;</span>
-<span class="fc" id="L214">            ativPorSemana--;</span>
+<span class="nc bnc" id="L210" title="All 4 branches missed.">        while (hard &gt; 0 &amp;&amp; ativPorSemana &gt; 0) {</span>
+<span class="nc" id="L211">            semana[i] = -1;</span>
+<span class="nc" id="L212">            i+=salto;</span>
+<span class="nc" id="L213">            hard--;</span>
+<span class="nc" id="L214">            ativPorSemana--;</span>
         }
-<span class="fc" id="L216">        i = 0;</span>
+<span class="nc" id="L216">        i = 0;</span>
         //atividades normais
-<span class="fc bfc" id="L218" title="All 2 branches covered.">        while (ativPorSemana &gt; 0) {</span>
-<span class="fc bfc" id="L219" title="All 4 branches covered.">            if (semana[i] &gt;= 0 &amp;&amp; semana[i] &lt; maxAtivDia) {</span>
-<span class="fc" id="L220">                semana[i]++;</span>
-<span class="fc" id="L221">                ativPorSemana--;</span>
+<span class="nc bnc" id="L218" title="All 2 branches missed.">        while (ativPorSemana &gt; 0) {</span>
+<span class="nc bnc" id="L219" title="All 4 branches missed.">            if (semana[i] &gt;= 0 &amp;&amp; semana[i] &lt; maxAtivDia) {</span>
+<span class="nc" id="L220">                semana[i]++;</span>
+<span class="nc" id="L221">                ativPorSemana--;</span>
             }
-<span class="fc" id="L223">            i=(i+1)%7;</span>
+<span class="nc" id="L223">            i=(i+1)%7;</span>
         }
-<span class="fc" id="L225">        LocalDate dia = inicio;</span>
-<span class="fc" id="L226">        double caloriasCadaAtividade = consumoCaloricoMinimo/ativPorSemana;</span>
-<span class="fc" id="L227">        hard = 0;</span>
+<span class="nc" id="L225">        LocalDate dia = inicio;</span>
+<span class="nc" id="L226">        double caloriasCadaAtividade = consumoCaloricoMinimo/ativPorSemana;</span>
+<span class="nc" id="L227">        hard = 0;</span>
         Atividade a;
-<span class="fc" id="L229">        int iteracoes = 1;</span>
-<span class="fc bfc" id="L230" title="All 2 branches covered.">        for (i=0; i&lt;7; i++) {</span>
+<span class="nc" id="L229">        int iteracoes = 1;</span>
+<span class="nc bnc" id="L230" title="All 2 branches missed.">        for (i=0; i&lt;7; i++) {</span>
             //adiciona atividades normais
-<span class="fc bfc" id="L232" title="All 2 branches covered.">            if (semana[i] &gt; 0) {</span>
-<span class="fc" id="L233">                PlanoTreino p = new PlanoTreino(dia.plusDays(i));</span>
-<span class="fc bfc" id="L234" title="All 2 branches covered.">                while (semana[i] &gt; 0) {</span>
-<span class="fc" id="L235">                    a = ativsNormal.get(j);</span>
-<span class="pc bpc" id="L236" title="1 of 2 branches missed.">                    if (a instanceof AtivRepeticoes)</span>
-<span class="fc" id="L237">                        iteracoes = ((i % 5) * sizeNormal * (j + 1)) % 10;</span>
-<span class="fc" id="L238">                    a.geraAtividade(utilizador, caloriasCadaAtividade/iteracoes);</span>
-<span class="fc" id="L239">                    p.addAtividade(a, iteracoes);</span>
-<span class="fc" id="L240">                    iteracoes = 1;</span>
-<span class="fc" id="L241">                    j=(j+1)%sizeNormal;</span>
-<span class="fc" id="L242">                    semana[i]--;</span>
+<span class="nc bnc" id="L232" title="All 2 branches missed.">            if (semana[i] &gt; 0) {</span>
+<span class="nc" id="L233">                PlanoTreino p = new PlanoTreino(dia.plusDays(i));</span>
+<span class="nc bnc" id="L234" title="All 2 branches missed.">                while (semana[i] &gt; 0) {</span>
+<span class="nc" id="L235">                    a = ativsNormal.get(j);</span>
+<span class="nc bnc" id="L236" title="All 2 branches missed.">                    if (a instanceof AtivRepeticoes)</span>
+<span class="nc" id="L237">                        iteracoes = ((i % 5) * sizeNormal * (j + 1)) % 10;</span>
+<span class="nc" id="L238">                    a.geraAtividade(utilizador, caloriasCadaAtividade/iteracoes);</span>
+<span class="nc" id="L239">                    p.addAtividade(a, iteracoes);</span>
+<span class="nc" id="L240">                    iteracoes = 1;</span>
+<span class="nc" id="L241">                    j=(j+1)%sizeNormal;</span>
+<span class="nc" id="L242">                    semana[i]--;</span>
                 }
-<span class="fc" id="L244">                planos.add(p);</span>
+<span class="nc" id="L244">                planos.add(p);</span>
             }
             //adiciona atividades hard
-<span class="pc bpc" id="L247" title="1 of 2 branches missed.">            if (semana[i] &lt; 0) {</span>
+<span class="nc bnc" id="L247" title="All 2 branches missed.">            if (semana[i] &lt; 0) {</span>
 <span class="nc" id="L248">                PlanoTreino p = new PlanoTreino(dia.plusDays(i));</span>
 <span class="nc" id="L249">                a = ativsHard.get(hard);</span>
 <span class="nc" id="L250">                a.geraAtividade(utilizador, caloriasCadaAtividade);</span>
@@ -253,45 +253,45 @@ public class PlanoTreino implements Comparable&lt;PlanoTreino&gt;, Serializable
 <span class="nc" id="L253">                semana[i] = 0;</span>
 <span class="nc" id="L254">                planos.add(p);</span>
             }
-<span class="fc" id="L256">            dia = inicio;</span>
+<span class="nc" id="L256">            dia = inicio;</span>
         }
-<span class="fc" id="L258">        return planos;</span>
+<span class="nc" id="L258">        return planos;</span>
     }
     
     public String toString() {
-<span class="fc" id="L262">        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(&quot;dd/MM/yyyy&quot;);</span>
-<span class="fc" id="L263">        StringBuilder sb = new StringBuilder();</span>
-<span class="fc" id="L264">        sb.append(&quot;Plano de Treino\nCodigo de Plano de Treino: &quot;);</span>
-<span class="fc" id="L265">        sb.append(this.codPlano);</span>
-<span class="fc" id="L266">        sb.append(&quot;\nData de realizaçao: &quot;);</span>
-<span class="fc" id="L267">        sb.append(this.dataRealizacao);</span>
-<span class="fc" id="L268">        sb.append(&quot;\nAtividades e suas iteraçoes: \n&quot;);</span>
-<span class="fc bfc" id="L269" title="All 2 branches covered.">        for (AtividadeIteracoes a : this.atividades){</span>
-<span class="fc" id="L270">            sb.append(a.toString());</span>
-        }
-<span class="fc" id="L272">        return (sb.toString());</span>
+<span class="nc" id="L262">        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(&quot;dd/MM/yyyy&quot;);</span>
+<span class="nc" id="L263">        StringBuilder sb = new StringBuilder();</span>
+<span class="nc" id="L264">        sb.append(&quot;Plano de Treino\nCodigo de Plano de Treino: &quot;);</span>
+<span class="nc" id="L265">        sb.append(this.codPlano);</span>
+<span class="nc" id="L266">        sb.append(&quot;\nData de realizaçao: &quot;);</span>
+<span class="nc" id="L267">        sb.append(this.dataRealizacao);</span>
+<span class="nc" id="L268">        sb.append(&quot;\nAtividades e suas iteraçoes: \n&quot;);</span>
+<span class="nc bnc" id="L269" title="All 2 branches missed.">        for (AtividadeIteracoes a : this.atividades){</span>
+<span class="nc" id="L270">            sb.append(a.toString());</span>
+<span class="nc" id="L271">        }</span>
+<span class="nc" id="L272">        return (sb.toString());</span>
     }
     
     /**
      * Método compareTo
      */
     public int compareTo(PlanoTreino p){
-<span class="fc" id="L279">        int res = this.dataRealizacao.compareTo(p.getDataRealizacao());</span>
-<span class="fc bfc" id="L280" title="All 2 branches covered.">        if (res == 0) res = this.codPlano - p.getCodPlano();</span>
-<span class="fc" id="L281">        return res;</span>
+<span class="nc" id="L279">        int res = this.dataRealizacao.compareTo(p.getDataRealizacao());</span>
+<span class="nc bnc" id="L280" title="All 2 branches missed.">        if (res == 0) res = this.codPlano - p.getCodPlano();</span>
+<span class="nc" id="L281">        return res;</span>
     }
     
     /**
      * clone
      */
     public Object clone() {
-<span class="fc" id="L288">        PlanoTreino c = new PlanoTreino(this);</span>
-<span class="fc" id="L289">        return c;</span>
+<span class="nc" id="L288">        PlanoTreino c = new PlanoTreino(this);</span>
+<span class="nc" id="L289">        return c;</span>
     }
     
     public Object planoTreinoNumPeriodo(LocalDate dataInicio, LocalDate dataFim) {
-<span class="fc" id="L293">        PlanoTreino t = new PlanoTreino (this, dataInicio, dataFim);</span>
-<span class="fc" id="L294">        return t;</span>
+<span class="nc" id="L293">        PlanoTreino t = new PlanoTreino (this, dataInicio, dataFim);</span>
+<span class="nc" id="L294">        return t;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

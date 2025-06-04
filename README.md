@@ -10,7 +10,7 @@
 
 | Nome             | Número  |
 | ---------------- | ------- |
-| ??               | A?????  |
+| Simão Pereira    | A104535 |
 | Oleksii Tantsura | A102131 |
 | Tiago Guedes     | A97369  |
 

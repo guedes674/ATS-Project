@@ -18,13 +18,13 @@ public class Menu
     /**
      * Construtor de Menu, recebe a lista com as opções e o nome do menu
      */
-<span class="fc" id="L21">    public Menu(String[] opcoes){</span>
-<span class="fc" id="L22">        this.opcoes = Arrays.asList(opcoes);</span>
-<span class="fc" id="L23">        this.op=-1;</span>
-<span class="fc" id="L24">    }</span>
+<span class="nc" id="L21">    public Menu(String[] opcoes){</span>
+<span class="nc" id="L22">        this.opcoes = Arrays.asList(opcoes);</span>
+<span class="nc" id="L23">        this.op=-1;</span>
+<span class="nc" id="L24">    }</span>
     
     public int getOpcao(){
-<span class="fc" id="L27">        return this.op;</span>
+<span class="nc" id="L27">        return this.op;</span>
     }
     
     /**
@@ -32,52 +32,52 @@ public class Menu
      */
     private void mostraMenu(){
         //limpa a tela
-<span class="fc" id="L35">        System.out.println(&quot;\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n&quot;);</span>
+<span class="nc" id="L35">        System.out.println(&quot;\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n&quot;);</span>
         //imprime o nome do menu
-<span class="fc" id="L37">        System.out.print(&quot;-------------&quot;);</span>
-<span class="fc" id="L38">        System.out.print(this.opcoes.get(0));</span>
-<span class="fc" id="L39">        System.out.print(&quot;-------------\n&quot;);</span>
+<span class="nc" id="L37">        System.out.print(&quot;-------------&quot;);</span>
+<span class="nc" id="L38">        System.out.print(this.opcoes.get(0));</span>
+<span class="nc" id="L39">        System.out.print(&quot;-------------\n&quot;);</span>
         int i;
-<span class="fc bfc" id="L41" title="All 2 branches covered.">        for (i=1; i&lt;this.opcoes.size()-1; i++){</span>
-<span class="fc" id="L42">            System.out.print(&quot;Opção &quot;);</span>
-<span class="fc" id="L43">            System.out.print(i);</span>
-<span class="fc" id="L44">            System.out.print(&quot;: &quot;);</span>
-<span class="fc" id="L45">            System.out.println(this.opcoes.get(i));</span>
+<span class="nc bnc" id="L41" title="All 2 branches missed.">        for (i=1; i&lt;this.opcoes.size()-1; i++){</span>
+<span class="nc" id="L42">            System.out.print(&quot;Opção &quot;);</span>
+<span class="nc" id="L43">            System.out.print(i);</span>
+<span class="nc" id="L44">            System.out.print(&quot;: &quot;);</span>
+<span class="nc" id="L45">            System.out.println(this.opcoes.get(i));</span>
         }
-<span class="fc" id="L47">        System.out.print(&quot;Opção 0: &quot;);</span>
-<span class="fc" id="L48">        System.out.println(this.opcoes.get(i));</span>
-<span class="fc" id="L49">    }</span>
+<span class="nc" id="L47">        System.out.print(&quot;Opção 0: &quot;);</span>
+<span class="nc" id="L48">        System.out.println(this.opcoes.get(i));</span>
+<span class="nc" id="L49">    }</span>
     
     /**
      * Método lerOpcao, que lê a opção selecionada
      */
     private int lerOpcao(){
         int op;
-<span class="fc" id="L56">        Scanner scan = new Scanner(System.in);</span>
-<span class="fc" id="L57">        System.out.print(&quot;Opção: &quot;);</span>
+<span class="nc" id="L56">        Scanner scan = new Scanner(System.in);</span>
+<span class="nc" id="L57">        System.out.print(&quot;Opção: &quot;);</span>
         try{
-<span class="fc" id="L59">            op = scan.nextInt();</span>
-<span class="fc" id="L60">        }</span>
-<span class="fc" id="L61">        catch (InputMismatchException e){</span>
-<span class="fc" id="L62">            op = -1;</span>
+<span class="nc" id="L59">            op = scan.nextInt();</span>
         }
-<span class="pc bpc" id="L64" title="1 of 4 branches missed.">        if(op&lt;0 || op&gt;this.opcoes.size()-2){</span>
+<span class="nc" id="L61">        catch (InputMismatchException e){</span>
+<span class="nc" id="L62">            op = -1;</span>
+<span class="nc" id="L63">        }</span>
+<span class="nc bnc" id="L64" title="All 4 branches missed.">        if(op&lt;0 || op&gt;this.opcoes.size()-2){</span>
 <span class="nc" id="L65">            pedeString(&quot;Opção inválida.\nEnter para continuar&quot;);</span>
 <span class="nc" id="L66">            op=-1;</span>
         }
-<span class="fc" id="L68">        return op;</span>
+<span class="nc" id="L68">        return op;</span>
     }
     
     /**
      * Método runMenu, que mostra o menu e lê uma opção
      */
     public void runMenu(){
-<span class="fc" id="L75">        this.op = -1;</span>
-<span class="fc bfc" id="L76" title="All 2 branches covered.">        while (this.op == -1){</span>
-<span class="fc" id="L77">            this.mostraMenu();</span>
-<span class="fc" id="L78">            this.op = this.lerOpcao();</span>
+<span class="nc" id="L75">        this.op = -1;</span>
+<span class="nc bnc" id="L76" title="All 2 branches missed.">        while (this.op == -1){</span>
+<span class="nc" id="L77">            this.mostraMenu();</span>
+<span class="nc" id="L78">            this.op = this.lerOpcao();</span>
         }
-<span class="fc" id="L80">    }</span>
+<span class="nc" id="L80">    }</span>
     
     /**
     * Método pedeString
@@ -85,11 +85,11 @@ public class Menu
     * @returns próxima linha inserida
     */
     public String pedeString(String mensagem){
-<span class="fc" id="L88">        System.out.println(mensagem);</span>
+<span class="nc" id="L88">        System.out.println(mensagem);</span>
         String input;
-<span class="fc" id="L90">        Scanner scan = new Scanner(System.in);</span>
-<span class="fc" id="L91">        input = scan.nextLine();</span>
-<span class="fc" id="L92">        return input;</span>
+<span class="nc" id="L90">        Scanner scan = new Scanner(System.in);</span>
+<span class="nc" id="L91">        input = scan.nextLine();</span>
+<span class="nc" id="L92">        return input;</span>
     }
     
     /**
@@ -98,19 +98,19 @@ public class Menu
     * @returns próximo inteiro inserido
     */
     public int pedeInt(String mensagem){
-<span class="fc" id="L101">        System.out.println(mensagem);</span>
-<span class="fc" id="L102">        int input = -1;</span>
+<span class="nc" id="L101">        System.out.println(mensagem);</span>
+<span class="nc" id="L102">        int input = -1;</span>
         Scanner scan;
-<span class="fc bfc" id="L104" title="All 2 branches covered.">        while(input == -1){</span>
+<span class="nc bnc" id="L104" title="All 2 branches missed.">        while(input == -1){</span>
         try{
-<span class="fc" id="L106">            scan = new Scanner(System.in);</span>
-<span class="fc" id="L107">            input = scan.nextInt();</span>
-<span class="fc" id="L108">        }</span>
-<span class="fc" id="L109">        catch (InputMismatchException e){</span>
-<span class="fc" id="L110">            System.out.println(&quot;Inserir um número inteiro&quot;);</span>
+<span class="nc" id="L106">            scan = new Scanner(System.in);</span>
+<span class="nc" id="L107">            input = scan.nextInt();</span>
         }
+<span class="nc" id="L109">        catch (InputMismatchException e){</span>
+<span class="nc" id="L110">            System.out.println(&quot;Inserir um número inteiro&quot;);</span>
+<span class="nc" id="L111">        }</span>
         }
-<span class="fc" id="L113">        return input;</span>
+<span class="nc" id="L113">        return input;</span>
     }
     
     /**
@@ -119,17 +119,17 @@ public class Menu
     * @returns próximo número inserido
     */
     public double pedeDouble(String mensagem){
-<span class="fc" id="L122">        System.out.println(mensagem);</span>
-<span class="fc" id="L123">        double input = -1;</span>
+<span class="nc" id="L122">        System.out.println(mensagem);</span>
+<span class="nc" id="L123">        double input = -1;</span>
         Scanner scan;
-<span class="pc bpc" id="L125" title="1 of 2 branches missed.">        while(input == -1){</span>
+<span class="nc bnc" id="L125" title="All 2 branches missed.">        while(input == -1){</span>
         try{
-<span class="fc" id="L127">            scan = new Scanner(System.in);</span>
+<span class="nc" id="L127">            scan = new Scanner(System.in);</span>
 <span class="nc" id="L128">            input = scan.nextDouble();</span>
-<span class="nc" id="L129">        }</span>
-<span class="fc" id="L130">        catch (InputMismatchException e){</span>
-<span class="fc" id="L131">            System.out.println(&quot;Inserir um número&quot;);</span>
         }
+<span class="nc" id="L130">        catch (InputMismatchException e){</span>
+<span class="nc" id="L131">            System.out.println(&quot;Inserir um número&quot;);</span>
+<span class="nc" id="L132">        }</span>
         }
 <span class="nc" id="L134">        return input;</span>
     }
@@ -140,18 +140,18 @@ public class Menu
     * @returns próxima data inserida
     */
     public LocalDate pedeData(String mensagem){
-<span class="fc" id="L143">        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(&quot;dd/MM/yyyy&quot;);</span>
-<span class="fc" id="L144">        System.out.println(mensagem);</span>
-<span class="fc" id="L145">        LocalDate input = null;</span>
+<span class="nc" id="L143">        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(&quot;dd/MM/yyyy&quot;);</span>
+<span class="nc" id="L144">        System.out.println(mensagem);</span>
+<span class="nc" id="L145">        LocalDate input = null;</span>
         Scanner scan;
-<span class="pc bpc" id="L147" title="1 of 2 branches missed.">        while(input == null){</span>
+<span class="nc bnc" id="L147" title="All 2 branches missed.">        while(input == null){</span>
         try{
-<span class="fc" id="L149">            scan = new Scanner(System.in);</span>
+<span class="nc" id="L149">            scan = new Scanner(System.in);</span>
 <span class="nc" id="L150">            input = LocalDate.parse(scan.nextLine(), formatter);</span>
-<span class="nc" id="L151">        }</span>
-<span class="fc" id="L152">        catch (Exception e){</span>
-<span class="fc" id="L153">            System.out.println(&quot;Inserir uma data no formato dia/mês/ano&quot;);</span>
         }
+<span class="nc" id="L152">        catch (Exception e){</span>
+<span class="nc" id="L153">            System.out.println(&quot;Inserir uma data no formato dia/mês/ano&quot;);</span>
+<span class="nc" id="L154">        }</span>
         }
 <span class="nc" id="L156">        return input;</span>
     }
@@ -162,17 +162,17 @@ public class Menu
     * @returns próximo tempo inserido
     */
     public LocalTime pedeTempo(String mensagem){
-<span class="fc" id="L165">        System.out.println(mensagem);</span>
-<span class="fc" id="L166">        LocalTime input = null;</span>
+<span class="nc" id="L165">        System.out.println(mensagem);</span>
+<span class="nc" id="L166">        LocalTime input = null;</span>
         Scanner scan;
-<span class="pc bpc" id="L168" title="1 of 2 branches missed.">        while(input == null){</span>
+<span class="nc bnc" id="L168" title="All 2 branches missed.">        while(input == null){</span>
         try{
-<span class="fc" id="L170">            scan = new Scanner(System.in);</span>
+<span class="nc" id="L170">            scan = new Scanner(System.in);</span>
 <span class="nc" id="L171">            input = LocalTime.parse(scan.nextLine());</span>
-<span class="nc" id="L172">        }</span>
-<span class="fc" id="L173">        catch (Exception e){</span>
-<span class="fc" id="L174">            System.out.println(&quot;Inserir uma duração no formato horas:minutos ou horas:minutos:segundos&quot;);</span>
         }
+<span class="nc" id="L173">        catch (Exception e){</span>
+<span class="nc" id="L174">            System.out.println(&quot;Inserir uma duração no formato horas:minutos ou horas:minutos:segundos&quot;);</span>
+<span class="nc" id="L175">        }</span>
         }
 <span class="nc" id="L177">        return input;</span>
     }
@@ -183,18 +183,18 @@ public class Menu
     * @returns próxima data com hora inserida
     */
     public LocalDateTime pedeDataHora(String mensagem){
-<span class="fc" id="L186">        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(&quot;dd/MM/yyyy HH:mm:ss&quot;);</span>
-<span class="fc" id="L187">        System.out.println(mensagem);</span>
-<span class="fc" id="L188">        LocalDateTime input = null;</span>
+<span class="nc" id="L186">        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(&quot;dd/MM/yyyy HH:mm:ss&quot;);</span>
+<span class="nc" id="L187">        System.out.println(mensagem);</span>
+<span class="nc" id="L188">        LocalDateTime input = null;</span>
         Scanner scan;
-<span class="pc bpc" id="L190" title="1 of 2 branches missed.">        while(input == null){</span>
+<span class="nc bnc" id="L190" title="All 2 branches missed.">        while(input == null){</span>
         try{
-<span class="fc" id="L192">            scan = new Scanner(System.in);</span>
+<span class="nc" id="L192">            scan = new Scanner(System.in);</span>
 <span class="nc" id="L193">            input = LocalDateTime.parse(scan.nextLine(), formatter);</span>
-<span class="nc" id="L194">        }</span>
-<span class="fc" id="L195">        catch (Exception e){</span>
-<span class="fc" id="L196">            System.out.println(&quot;Inserir data e hora no formato dia/mês/ano horas:minutos:segundos&quot;);</span>
         }
+<span class="nc" id="L195">        catch (Exception e){</span>
+<span class="nc" id="L196">            System.out.println(&quot;Inserir data e hora no formato dia/mês/ano horas:minutos:segundos&quot;);</span>
+<span class="nc" id="L197">        }</span>
         }
 <span class="nc" id="L199">        return input;</span>
     }

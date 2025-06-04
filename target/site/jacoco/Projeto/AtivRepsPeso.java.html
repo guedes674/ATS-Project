@@ -25,37 +25,37 @@ public abstract class AtivRepsPeso extends AtivRepeticoes
      */
     public AtivRepsPeso()
     {
-<span class="fc" id="L28">        super();</span>
-<span class="fc" id="L29">        this.peso = 0.0;</span>
-<span class="fc" id="L30">    }</span>
+<span class="nc" id="L28">        super();</span>
+<span class="nc" id="L29">        this.peso = 0.0;</span>
+<span class="nc" id="L30">    }</span>
 
     /**
      * Construtor parametrizado
      */
     public AtivRepsPeso(LocalDateTime realizacao, LocalTime tempo, int freqCardiaca, int repeticoes, double peso)
     {
-<span class="fc" id="L37">        super(realizacao, tempo, freqCardiaca, repeticoes);</span>
-<span class="fc" id="L38">        this.peso = peso;</span>
-<span class="fc" id="L39">    }</span>
+<span class="nc" id="L37">        super(realizacao, tempo, freqCardiaca, repeticoes);</span>
+<span class="nc" id="L38">        this.peso = peso;</span>
+<span class="nc" id="L39">    }</span>
 
     /**
      * Construtor de cópia
      */
     public AtivRepsPeso(AtivRepsPeso umaAtivRepsPeso)
     {
-<span class="fc" id="L46">        super(umaAtivRepsPeso);</span>
-<span class="fc" id="L47">        this.peso = umaAtivRepsPeso.getPeso();</span>
-<span class="fc" id="L48">    }</span>
+<span class="nc" id="L46">        super(umaAtivRepsPeso);</span>
+<span class="nc" id="L47">        this.peso = umaAtivRepsPeso.getPeso();</span>
+<span class="nc" id="L48">    }</span>
     
     //Getters e setters
 
     public double getPeso() {
-<span class="fc" id="L53">        return this.peso;</span>
+<span class="nc" id="L53">        return this.peso;</span>
     }
 
     public void setPeso(double peso) {
-<span class="fc" id="L57">        this.peso = peso;</span>
-<span class="fc" id="L58">    }</span>
+<span class="nc" id="L57">        this.peso = peso;</span>
+<span class="nc" id="L58">    }</span>
 
     /**
      * Método que calcula o fator de intensidade pelo peso utilizado na atividade
@@ -67,30 +67,30 @@ public abstract class AtivRepsPeso extends AtivRepeticoes
      * @return fator de intensidade da velocidade a que é realizada a atividade
      */
     public double getFatorPeso(Utilizador utilizador, double valorNulo, double valorIncremento){
-<span class="fc" id="L70">        double razaoPeso = this.peso / utilizador.getPeso();</span>
-<span class="fc" id="L71">        return (razaoPeso - valorNulo) * valorIncremento;</span>
+<span class="nc" id="L70">        double razaoPeso = this.peso / utilizador.getPeso();</span>
+<span class="nc" id="L71">        return (razaoPeso - valorNulo) * valorIncremento;</span>
     }
 
     /**
      * Método equals
      */
     public boolean equals(Object o) {
-<span class="pc bpc" id="L78" title="1 of 2 branches missed.">        if (this==o) return true;</span>
-<span class="pc bpc" id="L79" title="2 of 4 branches missed.">        if ((o==null) || (this.getClass() != o.getClass())) return false;</span>
-<span class="fc" id="L80">        AtivRepsPeso a = (AtivRepsPeso) o;</span>
-<span class="fc bfc" id="L81" title="All 4 branches covered.">        return ((super.equals(a)) &amp;&amp; (this.peso == a.getPeso()));</span>
+<span class="nc bnc" id="L78" title="All 2 branches missed.">        if (this==o) return true;</span>
+<span class="nc bnc" id="L79" title="All 4 branches missed.">        if ((o==null) || (this.getClass() != o.getClass())) return false;</span>
+<span class="nc" id="L80">        AtivRepsPeso a = (AtivRepsPeso) o;</span>
+<span class="nc bnc" id="L81" title="All 4 branches missed.">        return ((super.equals(a)) &amp;&amp; (this.peso == a.getPeso()));</span>
     }
     
     /**
      * Método toString, deve ser implementado pelas sub-classes
      */
     public String toString() {
-<span class="fc" id="L88">        StringBuilder sb = new StringBuilder();</span>
-<span class="fc" id="L89">        sb.append(super.toString());</span>
-<span class="fc" id="L90">        sb.append(&quot;\nPeso: &quot;);</span>
-<span class="fc" id="L91">        sb.append(this.peso);</span>
-<span class="fc" id="L92">        sb.append(&quot; kilos&quot;);</span>
-<span class="fc" id="L93">        return (sb.toString());</span>
+<span class="nc" id="L88">        StringBuilder sb = new StringBuilder();</span>
+<span class="nc" id="L89">        sb.append(super.toString());</span>
+<span class="nc" id="L90">        sb.append(&quot;\nPeso: &quot;);</span>
+<span class="nc" id="L91">        sb.append(this.peso);</span>
+<span class="nc" id="L92">        sb.append(&quot; kilos&quot;);</span>
+<span class="nc" id="L93">        return (sb.toString());</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

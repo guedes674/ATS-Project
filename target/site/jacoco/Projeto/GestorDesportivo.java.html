@@ -23,24 +23,24 @@ public class GestorDesportivo implements Serializable
     private Map&lt;Integer, Atividade&gt; atividades;
     private Map&lt;Integer, PlanoTreino&gt; planos;
     
-<span class="fc" id="L26">    public GestorDesportivo(){</span>
-<span class="fc" id="L27">        this.dataAtual = LocalDate.now();</span>
-<span class="fc" id="L28">        this.utilizadores = new HashMap&lt;Integer, Utilizador&gt;();</span>
-<span class="fc" id="L29">        this.utilizadoresNumPeriodo = new HashMap&lt;Integer, Utilizador&gt;();</span>
-<span class="fc" id="L30">        this.atividades = new HashMap&lt;Integer,Atividade&gt;();</span>
-<span class="fc" id="L31">        this.planos = new HashMap&lt;Integer,PlanoTreino&gt;();</span>
-<span class="fc" id="L32">    }</span>
+<span class="nc" id="L26">    public GestorDesportivo(){</span>
+<span class="nc" id="L27">        this.dataAtual = LocalDate.now();</span>
+<span class="nc" id="L28">        this.utilizadores = new HashMap&lt;Integer, Utilizador&gt;();</span>
+<span class="nc" id="L29">        this.utilizadoresNumPeriodo = new HashMap&lt;Integer, Utilizador&gt;();</span>
+<span class="nc" id="L30">        this.atividades = new HashMap&lt;Integer,Atividade&gt;();</span>
+<span class="nc" id="L31">        this.planos = new HashMap&lt;Integer,PlanoTreino&gt;();</span>
+<span class="nc" id="L32">    }</span>
     
     public void guardaEstado(String nome) throws IOException {
-<span class="fc" id="L35">        FileOutputStream file = new FileOutputStream(nome);</span>
-<span class="fc" id="L36">        ObjectOutputStream oos = new ObjectOutputStream(file);</span>
+<span class="nc" id="L35">        FileOutputStream file = new FileOutputStream(nome);</span>
+<span class="nc" id="L36">        ObjectOutputStream oos = new ObjectOutputStream(file);</span>
 <span class="nc" id="L37">        oos.writeObject(this);</span>
 <span class="nc" id="L38">        oos.flush();</span>
 <span class="nc" id="L39">        oos.close();</span>
 <span class="nc" id="L40">    } </span>
     
     public GestorDesportivo carregaEstado(String nome) throws ClassNotFoundException, IOException {
-<span class="fc" id="L43">        FileInputStream file = new FileInputStream(nome);</span>
+<span class="nc" id="L43">        FileInputStream file = new FileInputStream(nome);</span>
 <span class="nc" id="L44">        ObjectInputStream ois = new ObjectInputStream(file);</span>
 <span class="nc" id="L45">        GestorDesportivo model = (GestorDesportivo) ois.readObject();</span>
 <span class="nc" id="L46">        ois.close();</span>
@@ -48,45 +48,45 @@ public class GestorDesportivo implements Serializable
     }
     
     public void estadoAtualizado () {
-<span class="fc bfc" id="L51" title="All 2 branches covered.">        if (!this.utilizadores.isEmpty()) {</span>
-<span class="fc" id="L52">            int maiorChaveU = Collections.max(this.utilizadores.keySet());</span>
+<span class="nc bnc" id="L51" title="All 2 branches missed.">        if (!this.utilizadores.isEmpty()) {</span>
+<span class="nc" id="L52">            int maiorChaveU = Collections.max(this.utilizadores.keySet());</span>
 <span class="nc" id="L53">            utilizadores.get(1).setProximoCodigo(maiorChaveU + 1);</span>
         }
-<span class="fc bfc" id="L55" title="All 2 branches covered.">        if (!this.atividades.isEmpty()) {</span>
-<span class="fc" id="L56">            int maiorChaveA = Collections.max(this.atividades.keySet());</span>
+<span class="nc bnc" id="L55" title="All 2 branches missed.">        if (!this.atividades.isEmpty()) {</span>
+<span class="nc" id="L56">            int maiorChaveA = Collections.max(this.atividades.keySet());</span>
 <span class="nc" id="L57">            atividades.get(1).setProximoCodigo(maiorChaveA + 1);</span>
         }
-<span class="fc bfc" id="L59" title="All 2 branches covered.">        if (!this.planos.isEmpty()) {</span>
-<span class="fc" id="L60">            int maiorChaveP = Collections.max(this.planos.keySet());</span>
+<span class="nc bnc" id="L59" title="All 2 branches missed.">        if (!this.planos.isEmpty()) {</span>
+<span class="nc" id="L60">            int maiorChaveP = Collections.max(this.planos.keySet());</span>
 <span class="nc" id="L61">            planos.get(1).setProximoCodigo(maiorChaveP + 1);</span>
         }
-<span class="fc" id="L63">    }</span>
+<span class="nc" id="L63">    }</span>
 
     public void atualizaInfo (LocalDate datafim) {
-<span class="fc" id="L66">        this.utilizadoresNumPeriodo = new HashMap&lt;Integer, Utilizador&gt;();</span>
-<span class="fc" id="L67">        List&lt;Utilizador&gt; utilizadores = new ArrayList&lt;Utilizador&gt;();</span>
-<span class="fc bfc" id="L68" title="All 2 branches covered.">        for (Utilizador u : this.utilizadores.values()) {</span>
-<span class="fc" id="L69">            Utilizador value = (Utilizador) u.utilizadorNumPeriodo(LocalDate.MIN,datafim);</span>
-<span class="fc" id="L70">            int chave = value.getCodUtilizador();</span>
-<span class="fc" id="L71">            this.utilizadoresNumPeriodo.put(chave,value);</span>
-        }
-<span class="fc" id="L73">    }</span>
+<span class="nc" id="L66">        this.utilizadoresNumPeriodo = new HashMap&lt;Integer, Utilizador&gt;();</span>
+<span class="nc" id="L67">        List&lt;Utilizador&gt; utilizadores = new ArrayList&lt;Utilizador&gt;();</span>
+<span class="nc bnc" id="L68" title="All 2 branches missed.">        for (Utilizador u : this.utilizadores.values()) {</span>
+<span class="nc" id="L69">            Utilizador value = (Utilizador) u.utilizadorNumPeriodo(LocalDate.MIN,datafim);</span>
+<span class="nc" id="L70">            int chave = value.getCodUtilizador();</span>
+<span class="nc" id="L71">            this.utilizadoresNumPeriodo.put(chave,value);</span>
+<span class="nc" id="L72">        }</span>
+<span class="nc" id="L73">    }</span>
     
         /**
      * Requisitos 3.2
      * ponto 6
      */
     public PlanoTreino planoTreinoMaisCalorias (LocalDate f) {
-<span class="fc" id="L80">        double maxCal = 0;</span>
-<span class="fc" id="L81">        PlanoTreino b = null;</span>
-<span class="pc bpc" id="L82" title="1 of 2 branches missed.">        for (Utilizador u : this.utilizadoresNumPeriodo.values()) {</span>
+<span class="nc" id="L80">        double maxCal = 0;</span>
+<span class="nc" id="L81">        PlanoTreino b = null;</span>
+<span class="nc bnc" id="L82" title="All 2 branches missed.">        for (Utilizador u : this.utilizadoresNumPeriodo.values()) {</span>
 <span class="nc" id="L83">            PlanoTreino a = u.planoTreinoMaisCalorias(LocalDate.MIN, f);</span>
 <span class="nc bnc" id="L84" title="All 2 branches missed.">            if (a.caloriasDispendidas(u) &gt;= maxCal) {</span>
 <span class="nc" id="L85">                b = a;</span>
 <span class="nc" id="L86">                maxCal = a.caloriasDispendidas(u);</span>
             }
-        }
-<span class="fc" id="L89">        return b;</span>
+<span class="nc" id="L88">        }</span>
+<span class="nc" id="L89">        return b;</span>
     }
     
     /**
@@ -94,28 +94,28 @@ public class GestorDesportivo implements Serializable
      * ponto 3
      */
     public String atividadeMaisRealizada () {
-<span class="fc" id="L97">        List&lt;Atividade&gt; atividades = new ArrayList&lt;Atividade&gt;();</span>
-<span class="pc" id="L98">        Predicate&lt;Atividade&gt; p = atividade -&gt; true;</span>
-<span class="pc" id="L99">        this.utilizadoresNumPeriodo.values().forEach(u -&gt; atividades.addAll(u.atividadesNumPeriodoQueRespeitamP(LocalDate.MIN, LocalDate.MAX, p)));</span>
+<span class="nc" id="L97">        List&lt;Atividade&gt; atividades = new ArrayList&lt;Atividade&gt;();</span>
+<span class="nc" id="L98">        Predicate&lt;Atividade&gt; p = atividade -&gt; true;</span>
+<span class="nc" id="L99">        this.utilizadoresNumPeriodo.values().forEach(u -&gt; atividades.addAll(u.atividadesNumPeriodoQueRespeitamP(LocalDate.MIN, LocalDate.MAX, p)));</span>
         
-<span class="fc" id="L101">        Map&lt;String,Integer&gt; tipoAtividadeQuantidade = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L101">        Map&lt;String,Integer&gt; tipoAtividadeQuantidade = new HashMap&lt;&gt;();</span>
         
-<span class="pc bpc" id="L103" title="1 of 2 branches missed.">        for (Atividade atividade : atividades) {</span>
+<span class="nc bnc" id="L103" title="All 2 branches missed.">        for (Atividade atividade : atividades) {</span>
 <span class="nc" id="L104">            String tipo = atividade.getClass().getSimpleName();</span>
 <span class="nc" id="L105">            tipoAtividadeQuantidade.put(tipo, tipoAtividadeQuantidade.getOrDefault(tipo, 0) + 1);</span>
-        }
+<span class="nc" id="L106">        }</span>
         
-<span class="fc" id="L108">        String atividadeMaisRealizada = null;</span>
-<span class="fc" id="L109">        int contagemMaisFrequente = 0;</span>
+<span class="nc" id="L108">        String atividadeMaisRealizada = null;</span>
+<span class="nc" id="L109">        int contagemMaisFrequente = 0;</span>
         
-<span class="pc bpc" id="L111" title="1 of 2 branches missed.">        for (Map.Entry&lt;String, Integer&gt; entry : tipoAtividadeQuantidade.entrySet()) {</span>
+<span class="nc bnc" id="L111" title="All 2 branches missed.">        for (Map.Entry&lt;String, Integer&gt; entry : tipoAtividadeQuantidade.entrySet()) {</span>
 <span class="nc bnc" id="L112" title="All 2 branches missed.">            if (entry.getValue() &gt;= contagemMaisFrequente) {</span>
 <span class="nc" id="L113">                atividadeMaisRealizada = entry.getKey();</span>
 <span class="nc" id="L114">                contagemMaisFrequente = entry.getValue();</span>
             }
-        }
+<span class="nc" id="L116">        }</span>
 
-<span class="fc" id="L118">        return atividadeMaisRealizada;</span>
+<span class="nc" id="L118">        return atividadeMaisRealizada;</span>
     }
     
     /** 
@@ -139,167 +139,167 @@ public class GestorDesportivo implements Serializable
     
     public int addUtilizador(String nome, String morada, String email, int freqCardiaca, int peso, int altura, LocalDate dataNascimento, char genero, int tipo){
          Utilizador novoUtilizador;
-<span class="fc bfc" id="L142" title="All 2 branches covered.">         if(tipo==1){</span>
-<span class="fc" id="L143">             novoUtilizador = new UtilizadorAmador(nome, morada, email, freqCardiaca, peso, altura, dataNascimento, genero);</span>
-<span class="fc" id="L144">         }</span>
-<span class="fc bfc" id="L145" title="All 2 branches covered.">         else if(tipo==3){</span>
-<span class="fc" id="L146">             novoUtilizador = new UtilizadorProfissional(nome, morada, email, freqCardiaca, peso, altura, dataNascimento, genero);</span>
-<span class="fc" id="L147">         }</span>
-         else{
-<span class="fc" id="L149">             novoUtilizador = new UtilizadorPraticanteOcasional(nome, morada, email, freqCardiaca, peso, altura, dataNascimento, genero);</span>
+<span class="nc bnc" id="L142" title="All 2 branches missed.">         if(tipo==1){</span>
+<span class="nc" id="L143">             novoUtilizador = new UtilizadorAmador(nome, morada, email, freqCardiaca, peso, altura, dataNascimento, genero);</span>
          }
-<span class="fc" id="L151">         this.utilizadores.put(novoUtilizador.getCodUtilizador(), novoUtilizador);</span>
-<span class="fc" id="L152">         return novoUtilizador.getCodUtilizador();</span>
+<span class="nc bnc" id="L145" title="All 2 branches missed.">         else if(tipo==3){</span>
+<span class="nc" id="L146">             novoUtilizador = new UtilizadorProfissional(nome, morada, email, freqCardiaca, peso, altura, dataNascimento, genero);</span>
+         }
+         else{
+<span class="nc" id="L149">             novoUtilizador = new UtilizadorPraticanteOcasional(nome, morada, email, freqCardiaca, peso, altura, dataNascimento, genero);</span>
+         }
+<span class="nc" id="L151">         this.utilizadores.put(novoUtilizador.getCodUtilizador(), novoUtilizador);</span>
+<span class="nc" id="L152">         return novoUtilizador.getCodUtilizador();</span>
     }
     
     public String showUtilizador(int codigo) {
-<span class="pc bpc" id="L156" title="1 of 2 branches missed.">        if (this.utilizadores.containsKey(codigo)) {</span>
+<span class="nc bnc" id="L156" title="All 2 branches missed.">        if (this.utilizadores.containsKey(codigo)) {</span>
 <span class="nc" id="L157">            return this.utilizadores.get(codigo).toString();</span>
         } else {
-<span class="fc" id="L159">            return &quot;Nao existe utilizador com este codigo\n&quot;;</span>
+<span class="nc" id="L159">            return &quot;Nao existe utilizador com este codigo\n&quot;;</span>
         }
     }
     
     public String showAtividade(int codigo) {
-<span class="pc bpc" id="L164" title="1 of 2 branches missed.">        if (this.atividades.containsKey(codigo)) {</span>
+<span class="nc bnc" id="L164" title="All 2 branches missed.">        if (this.atividades.containsKey(codigo)) {</span>
 <span class="nc" id="L165">            return this.atividades.get(codigo).toString();</span>
         } else {
-<span class="fc" id="L167">            return &quot;Nao existe atividade com este codigo\n&quot;;</span>
+<span class="nc" id="L167">            return &quot;Nao existe atividade com este codigo\n&quot;;</span>
         }
     }
     
     public String showPlanoTreino(int codigo) {
-<span class="pc bpc" id="L172" title="1 of 2 branches missed.">        if (this.planos.containsKey(codigo)) {</span>
+<span class="nc bnc" id="L172" title="All 2 branches missed.">        if (this.planos.containsKey(codigo)) {</span>
 <span class="nc" id="L173">            return this.planos.get(codigo).toString();</span>
         } else {
-<span class="fc" id="L175">            return &quot;Nao existe plano de treino com este codigo\n&quot;;</span>
+<span class="nc" id="L175">            return &quot;Nao existe plano de treino com este codigo\n&quot;;</span>
         }
     }
     
     public boolean existeUtilizador(int codUtilizador){
-<span class="fc" id="L180">        return this.utilizadores.containsKey(codUtilizador);</span>
+<span class="nc" id="L180">        return this.utilizadores.containsKey(codUtilizador);</span>
     }
     
     public boolean existeAtividade(int codAtividade){
-<span class="fc" id="L184">        return this.atividades.containsKey(codAtividade);</span>
+<span class="nc" id="L184">        return this.atividades.containsKey(codAtividade);</span>
     }
     
     public boolean existePlano(int codPlano){
-<span class="fc" id="L188">        return this.planos.containsKey(codPlano);</span>
+<span class="nc" id="L188">        return this.planos.containsKey(codPlano);</span>
     }
     
     public int addAtivDist(LocalDateTime realizacao, LocalTime tempo, int freqCardiaca, double distancia, int tipo){
          Atividade novaAtividade;
-<span class="fc bfc" id="L193" title="All 2 branches covered.">         if(tipo==1){</span>
-<span class="fc" id="L194">             novaAtividade = new Corrida(realizacao, tempo, freqCardiaca, distancia);</span>
-<span class="fc" id="L195">         }</span>
-         else{
-<span class="fc" id="L197">             novaAtividade = new Ciclismo(realizacao, tempo, freqCardiaca, distancia);</span>
+<span class="nc bnc" id="L193" title="All 2 branches missed.">         if(tipo==1){</span>
+<span class="nc" id="L194">             novaAtividade = new Corrida(realizacao, tempo, freqCardiaca, distancia);</span>
          }
-<span class="fc" id="L199">         this.atividades.put(novaAtividade.getCodAtividade(), novaAtividade);</span>
-<span class="fc" id="L200">         return novaAtividade.getCodAtividade();</span>
+         else{
+<span class="nc" id="L197">             novaAtividade = new Ciclismo(realizacao, tempo, freqCardiaca, distancia);</span>
+         }
+<span class="nc" id="L199">         this.atividades.put(novaAtividade.getCodAtividade(), novaAtividade);</span>
+<span class="nc" id="L200">         return novaAtividade.getCodAtividade();</span>
     }
     
     public int addAtivDistAlt(LocalDateTime realizacao, LocalTime tempo, int freqCardiaca, double distancia, double altimetria, int tipo){
          Atividade novaAtividade;
-<span class="pc bpc" id="L205" title="1 of 2 branches missed.">         if(tipo==3){</span>
+<span class="nc bnc" id="L205" title="All 2 branches missed.">         if(tipo==3){</span>
 <span class="nc" id="L206">             novaAtividade = new Trail(realizacao, tempo, freqCardiaca, distancia, altimetria);</span>
-<span class="nc" id="L207">         }</span>
-         else{
-<span class="fc" id="L209">             novaAtividade = new Btt(realizacao, tempo, freqCardiaca, distancia, altimetria);</span>
          }
-<span class="fc" id="L211">         this.atividades.put(novaAtividade.getCodAtividade(), novaAtividade);</span>
-<span class="fc" id="L212">         return novaAtividade.getCodAtividade();</span>
+         else{
+<span class="nc" id="L209">             novaAtividade = new Btt(realizacao, tempo, freqCardiaca, distancia, altimetria);</span>
+         }
+<span class="nc" id="L211">         this.atividades.put(novaAtividade.getCodAtividade(), novaAtividade);</span>
+<span class="nc" id="L212">         return novaAtividade.getCodAtividade();</span>
     }
     
     public int addAtivRep(LocalDateTime realizacao, LocalTime tempo, int freqCardiaca, int repeticoes, int tipo){
          Atividade novaAtividade;
-<span class="fc bfc" id="L217" title="All 2 branches covered.">         if(tipo==5){</span>
-<span class="fc" id="L218">             novaAtividade = new Flexoes(realizacao, tempo, freqCardiaca, repeticoes);</span>
-<span class="fc" id="L219">         }</span>
-         else{
-<span class="fc" id="L221">             novaAtividade = new Abdominais(realizacao, tempo, freqCardiaca, repeticoes);</span>
+<span class="nc bnc" id="L217" title="All 2 branches missed.">         if(tipo==5){</span>
+<span class="nc" id="L218">             novaAtividade = new Flexoes(realizacao, tempo, freqCardiaca, repeticoes);</span>
          }
-<span class="fc" id="L223">         this.atividades.put(novaAtividade.getCodAtividade(), novaAtividade);</span>
-<span class="fc" id="L224">         return novaAtividade.getCodAtividade();</span>
+         else{
+<span class="nc" id="L221">             novaAtividade = new Abdominais(realizacao, tempo, freqCardiaca, repeticoes);</span>
+         }
+<span class="nc" id="L223">         this.atividades.put(novaAtividade.getCodAtividade(), novaAtividade);</span>
+<span class="nc" id="L224">         return novaAtividade.getCodAtividade();</span>
     }
     
     public int addAtivRepsPeso(LocalDateTime realizacao, LocalTime tempo, int freqCardiaca, int repeticoes, double peso, int tipo){
          Atividade novaAtividade;
-<span class="fc bfc" id="L229" title="All 2 branches covered.">         if(tipo==7){</span>
-<span class="fc" id="L230">             novaAtividade = new LegPress(realizacao, tempo, freqCardiaca, repeticoes, peso);</span>
+<span class="nc bnc" id="L229" title="All 2 branches missed.">         if(tipo==7){</span>
+<span class="nc" id="L230">             novaAtividade = new LegPress(realizacao, tempo, freqCardiaca, repeticoes, peso);</span>
          }
-<span class="pc bpc" id="L232" title="1 of 2 branches missed.">         if(tipo==8){</span>
+<span class="nc bnc" id="L232" title="All 2 branches missed.">         if(tipo==8){</span>
 <span class="nc" id="L233">             novaAtividade = new BenchPress(realizacao, tempo, freqCardiaca, repeticoes, peso);</span>
-<span class="nc" id="L234">         }</span>
-         else{
-<span class="fc" id="L236">             novaAtividade = new BicepCurls(realizacao, tempo, freqCardiaca, repeticoes, peso);</span>
          }
-<span class="fc" id="L238">         this.atividades.put(novaAtividade.getCodAtividade(), novaAtividade);</span>
-<span class="fc" id="L239">         return novaAtividade.getCodAtividade();</span>
+         else{
+<span class="nc" id="L236">             novaAtividade = new BicepCurls(realizacao, tempo, freqCardiaca, repeticoes, peso);</span>
+         }
+<span class="nc" id="L238">         this.atividades.put(novaAtividade.getCodAtividade(), novaAtividade);</span>
+<span class="nc" id="L239">         return novaAtividade.getCodAtividade();</span>
     }
     
     public void registaAtividade(int codUtilizador, int codAtividade){
-<span class="fc" id="L243">        Atividade ativ =  this.atividades.get(codAtividade);</span>
+<span class="nc" id="L243">        Atividade ativ =  this.atividades.get(codAtividade);</span>
 <span class="nc" id="L244">        this.utilizadores.get(codUtilizador).addAtividade((Atividade) ativ.clone());</span>
 <span class="nc" id="L245">    }</span>
     
     public void addAtivDistPlano(int codPlano, int iteracoes, LocalDateTime realizacao, LocalTime tempo, int freqCardiaca, double distancia, int tipo){
          Atividade novaAtividade;
-<span class="fc bfc" id="L249" title="All 2 branches covered.">         if(tipo==1){</span>
-<span class="fc" id="L250">             novaAtividade = new Corrida(realizacao, tempo, freqCardiaca, distancia);</span>
-<span class="fc" id="L251">         }</span>
+<span class="nc bnc" id="L249" title="All 2 branches missed.">         if(tipo==1){</span>
+<span class="nc" id="L250">             novaAtividade = new Corrida(realizacao, tempo, freqCardiaca, distancia);</span>
+         }
          else{
-<span class="fc" id="L253">             novaAtividade = new Ciclismo(realizacao, tempo, freqCardiaca, distancia);</span>
+<span class="nc" id="L253">             novaAtividade = new Ciclismo(realizacao, tempo, freqCardiaca, distancia);</span>
          }
 <span class="nc" id="L255">         this.planos.get(codPlano).addAtividade(novaAtividade, iteracoes);</span>
 <span class="nc" id="L256">    }</span>
     
     public void addAtivDistAltPlano(int codPlano, int iteracoes, LocalDateTime realizacao, LocalTime tempo, int freqCardiaca, double distancia, double altimetria, int tipo){
          Atividade novaAtividade;
-<span class="pc bpc" id="L260" title="1 of 2 branches missed.">         if(tipo==3){</span>
+<span class="nc bnc" id="L260" title="All 2 branches missed.">         if(tipo==3){</span>
 <span class="nc" id="L261">             novaAtividade = new Trail(realizacao, tempo, freqCardiaca, distancia, altimetria);</span>
-<span class="nc" id="L262">         }</span>
+         }
          else{
-<span class="fc" id="L264">             novaAtividade = new Btt(realizacao, tempo, freqCardiaca, distancia, altimetria);</span>
+<span class="nc" id="L264">             novaAtividade = new Btt(realizacao, tempo, freqCardiaca, distancia, altimetria);</span>
          }
 <span class="nc" id="L266">         this.planos.get(codPlano).addAtividade(novaAtividade, iteracoes);</span>
 <span class="nc" id="L267">    }</span>
     
     public void addAtivRepPlano(int codPlano, int iteracoes, LocalDateTime realizacao, LocalTime tempo, int freqCardiaca, int repeticoes, int tipo){
          Atividade novaAtividade;
-<span class="fc bfc" id="L271" title="All 2 branches covered.">         if(tipo==5){</span>
-<span class="fc" id="L272">             novaAtividade = new Flexoes(realizacao, tempo, freqCardiaca, repeticoes);</span>
-<span class="fc" id="L273">         }</span>
+<span class="nc bnc" id="L271" title="All 2 branches missed.">         if(tipo==5){</span>
+<span class="nc" id="L272">             novaAtividade = new Flexoes(realizacao, tempo, freqCardiaca, repeticoes);</span>
+         }
          else{
-<span class="fc" id="L275">             novaAtividade = new Abdominais(realizacao, tempo, freqCardiaca, repeticoes);</span>
+<span class="nc" id="L275">             novaAtividade = new Abdominais(realizacao, tempo, freqCardiaca, repeticoes);</span>
          }
 <span class="nc" id="L277">         this.planos.get(codPlano).addAtividade(novaAtividade, iteracoes);</span>
 <span class="nc" id="L278">    }</span>
     
     public void addAtivRepsPesoPlano(int codPlano, int iteracoes, LocalDateTime realizacao, LocalTime tempo, int freqCardiaca, int repeticoes, double peso, int tipo){
          Atividade novaAtividade;
-<span class="pc bpc" id="L282" title="1 of 2 branches missed.">         if(tipo==7){</span>
+<span class="nc bnc" id="L282" title="All 2 branches missed.">         if(tipo==7){</span>
 <span class="nc" id="L283">             novaAtividade = new LegPress(realizacao, tempo, freqCardiaca, repeticoes, peso);</span>
          }
-<span class="pc bpc" id="L285" title="1 of 2 branches missed.">         if(tipo==8){</span>
+<span class="nc bnc" id="L285" title="All 2 branches missed.">         if(tipo==8){</span>
 <span class="nc" id="L286">             novaAtividade = new BenchPress(realizacao, tempo, freqCardiaca, repeticoes, peso);</span>
-<span class="nc" id="L287">         }</span>
+         }
          else{
-<span class="fc" id="L289">             novaAtividade = new BicepCurls(realizacao, tempo, freqCardiaca, repeticoes, peso);</span>
+<span class="nc" id="L289">             novaAtividade = new BicepCurls(realizacao, tempo, freqCardiaca, repeticoes, peso);</span>
          }
 <span class="nc" id="L291">         this.planos.get(codPlano).addAtividade(novaAtividade, iteracoes);</span>
 <span class="nc" id="L292">    }</span>
     
     public void registaPlanoTreino(int codUtilizador, int codPlano){
-<span class="fc" id="L295">        PlanoTreino plano =  this.planos.get(codPlano);</span>
+<span class="nc" id="L295">        PlanoTreino plano =  this.planos.get(codPlano);</span>
 <span class="nc" id="L296">        this.utilizadores.get(codUtilizador).addPlanoTreino((PlanoTreino) plano.clone());</span>
 <span class="nc" id="L297">    }</span>
     
     public int addPlanoTreino(LocalDate data){
-<span class="fc" id="L300">        PlanoTreino plano = new PlanoTreino(data);</span>
-<span class="fc" id="L301">        this.planos.put(plano.getCodPlano(), plano);</span>
-<span class="fc" id="L302">        return plano.getCodPlano();</span>
+<span class="nc" id="L300">        PlanoTreino plano = new PlanoTreino(data);</span>
+<span class="nc" id="L301">        this.planos.put(plano.getCodPlano(), plano);</span>
+<span class="nc" id="L302">        return plano.getCodPlano();</span>
     }
     
     public double kmsPercorridos(int codUtilizador, LocalDate dataInicio, LocalDate dataFim){
@@ -311,149 +311,149 @@ public class GestorDesportivo implements Serializable
     }
     
     public String atividadesExecutadasUtilizador(int codUtilizador){
-<span class="fc" id="L314">        StringBuilder sb = new StringBuilder();</span>
+<span class="nc" id="L314">        StringBuilder sb = new StringBuilder();</span>
 <span class="nc bnc" id="L315" title="All 2 branches missed.">        for (Atividade a : this.utilizadoresNumPeriodo.get(codUtilizador).allAtividades(LocalDate.MIN,LocalDate.MAX)){</span>
 <span class="nc" id="L316">            sb.append(a.toString());</span>
-        }
+<span class="nc" id="L317">        }</span>
 <span class="nc" id="L318">        return sb.toString();</span>
     }
     
     public String atividadesUtilizador(int codUtilizador){
-<span class="fc" id="L322">        StringBuilder sb = new StringBuilder();</span>
+<span class="nc" id="L322">        StringBuilder sb = new StringBuilder();</span>
 <span class="nc bnc" id="L323" title="All 2 branches missed.">        for (Atividade a : this.utilizadores.get(codUtilizador).allAtividades(LocalDate.MIN,LocalDate.MAX)){</span>
 <span class="nc" id="L324">            sb.append(a.toString());</span>
-        }
+<span class="nc" id="L325">        }</span>
 <span class="nc" id="L326">        return sb.toString();</span>
     }
     
     public String mostraInfo(){
-<span class="fc" id="L330">        StringBuilder sb = new StringBuilder();</span>
-<span class="pc bpc" id="L331" title="1 of 2 branches missed.">        for(Utilizador u : this.utilizadoresNumPeriodo.values()){</span>
+<span class="nc" id="L330">        StringBuilder sb = new StringBuilder();</span>
+<span class="nc bnc" id="L331" title="All 2 branches missed.">        for(Utilizador u : this.utilizadoresNumPeriodo.values()){</span>
 <span class="nc" id="L332">            sb.append(u.toString());</span>
-        }
-<span class="fc" id="L334">        return sb.toString();</span>
+<span class="nc" id="L333">        }</span>
+<span class="nc" id="L334">        return sb.toString();</span>
     }
 
     public double recordMaisPeso(Class&lt;?&gt; tipo){
         double peso;
-<span class="pc" id="L339">        peso = recordDouble(tipo, a -&gt; ((AtivRepsPeso)a).getPeso());</span>
-<span class="fc" id="L340">        return peso;</span>
+<span class="nc" id="L339">        peso = recordDouble(tipo, a -&gt; ((AtivRepsPeso)a).getPeso());</span>
+<span class="nc" id="L340">        return peso;</span>
     }
 
     public int recordMaisRepeticoes(Class&lt;?&gt; tipo){
         int reps;
-<span class="pc" id="L345">        reps = recordInt(tipo, a -&gt; ((AtivRepeticoes)a).getRepeticoes());</span>
-<span class="fc" id="L346">        return reps;</span>
+<span class="nc" id="L345">        reps = recordInt(tipo, a -&gt; ((AtivRepeticoes)a).getRepeticoes());</span>
+<span class="nc" id="L346">        return reps;</span>
     }
 
     public double recordMaiorAltimetria(Class&lt;?&gt; tipo){
         double altimetria;
-<span class="pc" id="L351">        altimetria = recordDouble(tipo, a -&gt; ((AtivDistAltimetria)a).getAltimetria());</span>
-<span class="fc" id="L352">        return altimetria;</span>
+<span class="nc" id="L351">        altimetria = recordDouble(tipo, a -&gt; ((AtivDistAltimetria)a).getAltimetria());</span>
+<span class="nc" id="L352">        return altimetria;</span>
     }
 
     public double recordMaisVelocidade(Class&lt;?&gt; tipo){
         double velocidade;
-<span class="pc" id="L357">        velocidade = recordDouble(tipo, a -&gt; ((AtivDistancia)a).getVelocidade());</span>
-<span class="fc" id="L358">        return velocidade;</span>
+<span class="nc" id="L357">        velocidade = recordDouble(tipo, a -&gt; ((AtivDistancia)a).getVelocidade());</span>
+<span class="nc" id="L358">        return velocidade;</span>
     }
 
     public int recordMaisTempo(Class&lt;?&gt; tipo){
         int tempo;
-<span class="pc" id="L363">        tempo = recordInt(tipo, a -&gt; ((Atividade)a).getTempo().toSecondOfDay());</span>
-<span class="fc" id="L364">        return tempo;</span>
+<span class="nc" id="L363">        tempo = recordInt(tipo, a -&gt; ((Atividade)a).getTempo().toSecondOfDay());</span>
+<span class="nc" id="L364">        return tempo;</span>
     }
 
     public double recordMaisDistancia(Class&lt;?&gt; tipo){
         double distancia;
-<span class="pc" id="L369">        distancia = recordDouble(tipo, a -&gt; ((AtivDistancia)a).getDistancia());</span>
-<span class="fc" id="L370">        return distancia;</span>
+<span class="nc" id="L369">        distancia = recordDouble(tipo, a -&gt; ((AtivDistancia)a).getDistancia());</span>
+<span class="nc" id="L370">        return distancia;</span>
     }
 
     public double recordMaisCalorias(Class&lt;?&gt; tipo){
-<span class="fc" id="L374">        LocalDate inicio = LocalDate.MIN;</span>
-<span class="fc" id="L375">        LocalDate fim = LocalDate.MAX;</span>
-<span class="pc" id="L376">        Predicate&lt;Atividade&gt; p = a -&gt; tipo.isInstance(a);</span>
-<span class="pc" id="L377">        BiFunction&lt;Atividade,Utilizador,Double&gt; f = (a,u) -&gt; ((Atividade)a).consumoCalorias((Utilizador)u);</span>
-<span class="fc" id="L378">        return this.utilizadores.values().stream()</span>
-<span class="pc" id="L379">                                .flatMap(u -&gt; u.infoDasAtividadesUtilizadorNumPeriodoQueRespeitamP(inicio, fim, p, f, u).stream())</span>
-<span class="pc bnc" id="L380" title="All 2 branches missed.">                                .reduce((n1, n2) -&gt; n1 &gt; n2 ? n1 : n2)</span>
-<span class="fc" id="L381">                                .orElse(0.0);</span>
+<span class="nc" id="L374">        LocalDate inicio = LocalDate.MIN;</span>
+<span class="nc" id="L375">        LocalDate fim = LocalDate.MAX;</span>
+<span class="nc" id="L376">        Predicate&lt;Atividade&gt; p = a -&gt; tipo.isInstance(a);</span>
+<span class="nc" id="L377">        BiFunction&lt;Atividade,Utilizador,Double&gt; f = (a,u) -&gt; ((Atividade)a).consumoCalorias((Utilizador)u);</span>
+<span class="nc" id="L378">        return this.utilizadores.values().stream()</span>
+<span class="nc" id="L379">                                .flatMap(u -&gt; u.infoDasAtividadesUtilizadorNumPeriodoQueRespeitamP(inicio, fim, p, f, u).stream())</span>
+<span class="nc bnc" id="L380" title="All 2 branches missed.">                                .reduce((n1, n2) -&gt; n1 &gt; n2 ? n1 : n2)</span>
+<span class="nc" id="L381">                                .orElse(0.0);</span>
     }
 
     public double recordDouble(Class&lt;?&gt; tipo, Function&lt;Atividade,Double&gt; f){
-<span class="fc" id="L385">        LocalDate inicio = LocalDate.MIN;</span>
-<span class="fc" id="L386">        LocalDate fim = LocalDate.MAX;</span>
-<span class="pc" id="L387">        Predicate&lt;Atividade&gt; p = a -&gt; tipo.isInstance(a);</span>
-<span class="fc" id="L388">        return this.utilizadores.values().stream()</span>
-<span class="pc" id="L389">                                .flatMap(u -&gt; u.infoDasAtividadesNumPeriodoQueRespeitamP(inicio, fim, p, f).stream())</span>
-<span class="pc bnc" id="L390" title="All 2 branches missed.">                                .reduce((n1, n2) -&gt; n1 &gt; n2 ? n1 : n2)</span>
-<span class="fc" id="L391">                                .orElse(0.0);</span>
+<span class="nc" id="L385">        LocalDate inicio = LocalDate.MIN;</span>
+<span class="nc" id="L386">        LocalDate fim = LocalDate.MAX;</span>
+<span class="nc" id="L387">        Predicate&lt;Atividade&gt; p = a -&gt; tipo.isInstance(a);</span>
+<span class="nc" id="L388">        return this.utilizadores.values().stream()</span>
+<span class="nc" id="L389">                                .flatMap(u -&gt; u.infoDasAtividadesNumPeriodoQueRespeitamP(inicio, fim, p, f).stream())</span>
+<span class="nc bnc" id="L390" title="All 2 branches missed.">                                .reduce((n1, n2) -&gt; n1 &gt; n2 ? n1 : n2)</span>
+<span class="nc" id="L391">                                .orElse(0.0);</span>
     }
 
     public int recordInt(Class&lt;?&gt; tipo, Function&lt;Atividade,Integer&gt; f){
-<span class="fc" id="L395">        LocalDate inicio = LocalDate.MIN;</span>
-<span class="fc" id="L396">        LocalDate fim = LocalDate.MAX;</span>
-<span class="pc" id="L397">        Predicate&lt;Atividade&gt; p = a -&gt; tipo.isInstance(a);</span>
-<span class="fc" id="L398">        return this.utilizadores.values().stream()</span>
-<span class="pc" id="L399">                                .flatMap(u -&gt; u.infoDasAtividadesNumPeriodoQueRespeitamP(inicio, fim, p, f).stream())</span>
-<span class="pc bnc" id="L400" title="All 2 branches missed.">                                .reduce((n1, n2) -&gt; n1 &gt; n2 ? n1 : n2)</span>
-<span class="fc" id="L401">                                .orElse(0);</span>
+<span class="nc" id="L395">        LocalDate inicio = LocalDate.MIN;</span>
+<span class="nc" id="L396">        LocalDate fim = LocalDate.MAX;</span>
+<span class="nc" id="L397">        Predicate&lt;Atividade&gt; p = a -&gt; tipo.isInstance(a);</span>
+<span class="nc" id="L398">        return this.utilizadores.values().stream()</span>
+<span class="nc" id="L399">                                .flatMap(u -&gt; u.infoDasAtividadesNumPeriodoQueRespeitamP(inicio, fim, p, f).stream())</span>
+<span class="nc bnc" id="L400" title="All 2 branches missed.">                                .reduce((n1, n2) -&gt; n1 &gt; n2 ? n1 : n2)</span>
+<span class="nc" id="L401">                                .orElse(0);</span>
     }
 
     public List&lt;Atividade&gt; listaAtividades(int[] atividades){
-<span class="fc" id="L405">        int size = atividades.length;</span>
-<span class="fc" id="L406">        List&lt;Atividade&gt; a = new ArrayList&lt;&gt;();</span>
-<span class="fc" id="L407">        int i = 0;</span>
+<span class="nc" id="L405">        int size = atividades.length;</span>
+<span class="nc" id="L406">        List&lt;Atividade&gt; a = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L407">        int i = 0;</span>
         Atividade at;
-<span class="fc bfc" id="L409" title="All 2 branches covered.">        for (i=0; i&lt;size; i++) {</span>
-<span class="fc bfc" id="L410" title="All 2 branches covered.">            if (atividades[i] == 1) { //Abdominais</span>
-<span class="fc" id="L411">                at = new Abdominais();</span>
-<span class="fc" id="L412">            }</span>
-<span class="fc bfc" id="L413" title="All 2 branches covered.">            else if (atividades[i] == 2) { //BenchPress</span>
-<span class="fc" id="L414">                at = new BenchPress();</span>
-<span class="fc" id="L415">            }</span>
-<span class="fc bfc" id="L416" title="All 2 branches covered.">            else if (atividades[i] == 3) { //BicepCurls</span>
-<span class="fc" id="L417">                at = new BicepCurls();</span>
-<span class="fc" id="L418">            }</span>
-<span class="fc bfc" id="L419" title="All 2 branches covered.">            else if (atividades[i] == 4) { //Btt</span>
-<span class="fc" id="L420">                at = new Btt();</span>
-<span class="fc" id="L421">            }</span>
-<span class="fc bfc" id="L422" title="All 2 branches covered.">            else if (atividades[i] == 5) { //Ciclismo</span>
-<span class="fc" id="L423">                at = new Ciclismo();</span>
-<span class="fc" id="L424">            }</span>
-<span class="fc bfc" id="L425" title="All 2 branches covered.">            else if (atividades[i] == 6) { //Corrida</span>
-<span class="fc" id="L426">                at = new Corrida();</span>
-<span class="fc" id="L427">            }</span>
-<span class="fc bfc" id="L428" title="All 2 branches covered.">            else if (atividades[i] == 7) { //Flexoes</span>
-<span class="fc" id="L429">                at = new Flexoes();</span>
-<span class="fc" id="L430">            }</span>
-<span class="fc bfc" id="L431" title="All 2 branches covered.">            else if (atividades[i] == 8) { //LegPress</span>
-<span class="fc" id="L432">                at = new LegPress();</span>
-<span class="fc" id="L433">            }</span>
-<span class="pc bpc" id="L434" title="1 of 2 branches missed.">            else if (atividades[i] == 9) { //Trail</span>
+<span class="nc bnc" id="L409" title="All 2 branches missed.">        for (i=0; i&lt;size; i++) {</span>
+<span class="nc bnc" id="L410" title="All 2 branches missed.">            if (atividades[i] == 1) { //Abdominais</span>
+<span class="nc" id="L411">                at = new Abdominais();</span>
+            }
+<span class="nc bnc" id="L413" title="All 2 branches missed.">            else if (atividades[i] == 2) { //BenchPress</span>
+<span class="nc" id="L414">                at = new BenchPress();</span>
+            }
+<span class="nc bnc" id="L416" title="All 2 branches missed.">            else if (atividades[i] == 3) { //BicepCurls</span>
+<span class="nc" id="L417">                at = new BicepCurls();</span>
+            }
+<span class="nc bnc" id="L419" title="All 2 branches missed.">            else if (atividades[i] == 4) { //Btt</span>
+<span class="nc" id="L420">                at = new Btt();</span>
+            }
+<span class="nc bnc" id="L422" title="All 2 branches missed.">            else if (atividades[i] == 5) { //Ciclismo</span>
+<span class="nc" id="L423">                at = new Ciclismo();</span>
+            }
+<span class="nc bnc" id="L425" title="All 2 branches missed.">            else if (atividades[i] == 6) { //Corrida</span>
+<span class="nc" id="L426">                at = new Corrida();</span>
+            }
+<span class="nc bnc" id="L428" title="All 2 branches missed.">            else if (atividades[i] == 7) { //Flexoes</span>
+<span class="nc" id="L429">                at = new Flexoes();</span>
+            }
+<span class="nc bnc" id="L431" title="All 2 branches missed.">            else if (atividades[i] == 8) { //LegPress</span>
+<span class="nc" id="L432">                at = new LegPress();</span>
+            }
+<span class="nc bnc" id="L434" title="All 2 branches missed.">            else if (atividades[i] == 9) { //Trail</span>
 <span class="nc" id="L435">                at = new Trail();</span>
-<span class="nc" id="L436">            }</span>
+            }
             else
-<span class="fc" id="L438">                at = new Corrida();</span>
-<span class="fc" id="L439">            a.add(at);</span>
+<span class="nc" id="L438">                at = new Corrida();</span>
+<span class="nc" id="L439">            a.add(at);</span>
         }
-<span class="fc" id="L441">        return a;</span>
+<span class="nc" id="L441">        return a;</span>
     }
 
     public void geraPlanoTreinoUtilizador(int codUtilizador, int[] atividades, int maxAtivDia, int ativPorSemana, double consumoCaloricoMinimo, LocalDate inicioSemana){
-<span class="fc" id="L445">            List&lt;Atividade&gt; a = listaAtividades(atividades);</span>
-<span class="fc" id="L446">            List&lt;PlanoTreino&gt; p = new ArrayList&lt;&gt;();</span>
-<span class="fc" id="L447">            PlanoTreino plano = new PlanoTreino();</span>
-<span class="fc" id="L448">            System.out.println(&quot;Ok\n&quot;);</span>
-<span class="fc" id="L449">            p = plano.geraPlanoTreino(this.utilizadores.get(codUtilizador), a, maxAtivDia, ativPorSemana, consumoCaloricoMinimo, inicioSemana);</span>
-<span class="fc" id="L450">            int size = p.size();</span>
-<span class="fc" id="L451">            int i = 0;</span>
-<span class="fc" id="L452">            int res[] = new int[size];</span>
-<span class="pc bpc" id="L453" title="1 of 2 branches missed.">            for (i=0; i&lt;size; i++) {</span>
+<span class="nc" id="L445">            List&lt;Atividade&gt; a = listaAtividades(atividades);</span>
+<span class="nc" id="L446">            List&lt;PlanoTreino&gt; p = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L447">            PlanoTreino plano = new PlanoTreino();</span>
+<span class="nc" id="L448">            System.out.println(&quot;Ok\n&quot;);</span>
+<span class="nc" id="L449">            p = plano.geraPlanoTreino(this.utilizadores.get(codUtilizador), a, maxAtivDia, ativPorSemana, consumoCaloricoMinimo, inicioSemana);</span>
+<span class="nc" id="L450">            int size = p.size();</span>
+<span class="nc" id="L451">            int i = 0;</span>
+<span class="nc" id="L452">            int res[] = new int[size];</span>
+<span class="nc bnc" id="L453" title="All 2 branches missed.">            for (i=0; i&lt;size; i++) {</span>
 <span class="nc" id="L454">                this.utilizadores.get(codUtilizador).addPlanoTreino(p.get(i));</span>
 <span class="nc" id="L455">                res[i] = p.get(i).getCodPlano();</span>
             }
-<span class="fc" id="L457">        }</span>
+<span class="nc" id="L457">        }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

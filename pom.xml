@@ -1,138 +1,4 @@
-<!-- VERSAO ANTERIOR
 
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-         http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-
-  <groupId>ATS-Project</groupId>
-  <artifactId>ATS-Project</artifactId>
-  <version>1.0-SNAPSHOT</version>
-
-  <properties>
-    <maven.compiler.source>17</maven.compiler.source>
-    <maven.compiler.target>17</maven.compiler.target>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
-    <java8.home>/usr/lib/jvm/java-8-openjdk</java8.home>
-  </properties>
-
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>org.junit</groupId>
-        <artifactId>junit-bom</artifactId>
-        <version>5.10.0</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
-
-  <dependencies>
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter</artifactId>
-      <scope>test</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.12</version>
-      <scope>test</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>org.junit.vintage</groupId>
-      <artifactId>junit-vintage-engine</artifactId>
-      <version>5.9.1</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.evosuite</groupId>
-      <artifactId>evosuite-standalone-runtime</artifactId>
-      <version>1.0.6</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
-
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.10.1</version>
-        <configuration>
-          <source>17</source>
-          <target>17</target>
-        </configuration>
-      </plugin>
-
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>3.1.2</version>
-      </plugin>
-
-      <plugin>
-        <groupId>org.evosuite.plugins</groupId>
-        <artifactId>evosuite-maven-plugin</artifactId>
-        <version>1.0.6</version>
-        <configuration>
-          <jvm>${java8.home}/bin/java</jvm>
-        </configuration>
-      </plugin>
-
-      <plugin>
-        <groupId>org.jacoco</groupId>
-        <artifactId>jacoco-maven-plugin</artifactId>
-        <version>0.8.10</version>
-        <executions>
-          <execution>
-            <goals>
-              <goal>prepare-agent</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>report</id>
-            <phase>test</phase>
-            <goals>
-              <goal>report</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-
-      <plugin>
-        <groupId>org.pitest</groupId>
-        <artifactId>pitest-maven</artifactId>
-        <version>1.15.8</version>
-        <configuration>
-          <jvmPath>${java8.home}/bin/java</jvmPath>
-        </configuration>
-        <dependencies>
-          <dependency>
-            <groupId>org.pitest</groupId>
-            <artifactId>pitest-junit5-plugin</artifactId>
-            <version>1.2.1</version>
-          </dependency>
-        </dependencies>
-      </plugin>
-    </plugins>
-  </build>
-
-  <pluginRepositories>
-    <pluginRepository>
-      <id>EvoSuite</id>
-      <name>EvoSuite Repository</name>
-      <url>http://www.evosuite.org/m2</url>
-    </pluginRepository>
-  </pluginRepositories>
-</project>
-
-!-->
 
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -246,7 +112,28 @@
             <version>1.2.1</version>
           </dependency>
         </dependencies>
+        <configuration>
+        <verbose>true</verbose>
+          <targetClasses>
+            <!-- Ajusta conforme necessário: -->
+            <param>Projeto.*</param>
+          </targetClasses>
+          <targetTests>
+            <param>Projeto.*Test</param>
+          </targetTests>
+          <timeoutConst>30000</timeoutConst>       <!-- tempo base em ms -->
+          <timeoutFactor>3.0</timeoutFactor>      <!-- ajusta com base no tamanho dos testes -->
+          <mutators>
+            <mutator>STRONGER</mutator>           <!-- opcional: pode usar DEFAULT, ALL, etc. -->
+          </mutators>
+          <outputFormats>
+            <param>HTML</param>
+            <param>XML</param>
+          </outputFormats>
+          <failWhenNoMutations>false</failWhenNoMutations> <!-- evita erro se nada for mutado -->
+        </configuration>
       </plugin>
+
     </plugins>
   </build>
 

@@ -44,7 +44,7 @@ def st_local_date_time(draw):
 
 @st.composite
 def st_local_time(draw):
-    t = draw(st.times(min_value=datetime.time(0, 0, 30), max_value=(0, 8, 0))) # make sure time is greater than 30 seconds and less than 8 hours
+    t = draw(st.times(min_value=datetime.time(0, 0, 30), max_value=datetime.time(0, 8, 0))) # make sure time is greater than 30 seconds and less than 8 hours
     return f"LocalTime.of({t.hour}, {t.minute}, {t.second})"
 
 @st.composite
@@ -395,7 +395,8 @@ def collect(m):
 
 if __name__ == "__main__":
     CLASS_NAME = "AtividadePropertyBasedTests"
-    OUTPUT_FILE = "../java/Projeto/AtividadePropertyBasedTests.java"
+    project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", ".."))
+    OUTPUT_FILE = os.path.join(project_root, "src", "test", "java", "Projeto", f"{CLASS_NAME}.java")
 
     collect()
 
