@@ -4,3 +4,4 @@
 .vscode
 .hypothesis
 /venv
+.env
